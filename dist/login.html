@@ -4,35 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2Due Login Page</title>
+    <title>2Due 3.0!</title>
     <link rel="stylesheet" href="./sass/login.css">
     <script src="https://kit.fontawesome.com/a3fa4c138f.js" crossorigin="anonymous"></script> <!--? font awesome  -->
 </head>
 <body>
-    <div class="mainCont"> 
-        <div class="loginCont">
-            <div class="textCont">
-                <h1 class="loginHeader">2Due 3.0</h1>
-                <p class="loginSubHeader">Log In</p>
-            </div>
-            <form> 
-                <div>
-                    <label>Email:</label>
-                    <i class="fa-solid fa-envelope"></i><input class="regEinput" type="email" required placeholder="example@example.domain">
+   <div class="mainCont">
+    <div class="bgContLeft">
+        <h1>unlock the magic of a clean schedule</h1>
+    </div>
+    <div class="contRight">
+        <div class="todoTextCont">
+            <h1>2Due 3.0</h1>
+            <p>Log In</p>
+        </div>
+        <form>
+            
+            <div>
+                <label>Email:</label>
+                <i class="fa-solid fa-envelope"></i><input class="logEinput" type="email" required placeholder="example@example.domain">
                 </div>
                 <div>
                     <label>Password:</label>
-                    <i class="fa-solid fa-lock"></i><input class="regPassInput" type="password" placeholder="secret...secret...secret">
+                    <i class="fa-solid fa-lock"></i><input class="logPassInput" type="password" placeholder="secret...secret...secret">
                 </div>
                 <div class="btnCont">
-                    <button class="regBtn">Log In</button>
+                    <button class="logInBtn">Sign Up</button>
                 </div>
-            </form>
-            <div class="regTextCont">
-                <h2>Dont Have An Account? <a class="loginRegLink" href="./register.html">Click Here To Register Today!</a></h2>
-            </div>
-        </div>
+                <div class="userTextCont">
+                    <h1>Don't Have An Account?<a href="./register.html"> Click Here To Sign Up!</a></h1>
+                </div>
+        </form>
     </div>
-    <script src="./bundle.js" defer></script>
+   </div>
+    <script src="./bundle.js"></script>
 </body>
 </html>

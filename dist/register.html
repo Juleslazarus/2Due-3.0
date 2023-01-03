@@ -9,34 +9,37 @@
     <script src="https://kit.fontawesome.com/a3fa4c138f.js" crossorigin="anonymous"></script> <!--? font awesome  -->
 </head>
 <body>
-    <div class="mainCont"> 
-        <div class="registerCont">
-            <div class="textCont">
-                <h1 class="registerHeader">2Due 3.0</h1>
-                <p class="registerSubHeader">Sign Up</p>
+   <div class="mainCont">
+    <div class="bgContLeft">
+        <h1>unlock the magic of a clean schedule</h1>
+    </div>
+    <div class="contRight">
+        <div class="todoTextCont">
+            <h1>2Due 3.0</h1>
+            <p>Sign Up</p>
+        </div>
+        <form>
+            <div>
+                <label>First Name:</label>
+                <i class="fa-solid fa-user"></i><input class="regFNInput" type="text" required placeholder="John Doe / Jane Doe">
             </div>
-            <form> 
-                <div> 
-                    <label>First Name:</label>
-                    <i class="fa-solid fa-user regFNIcon"></i><input class="regFNInput" type="text" required placeholder="John Doe / Jane Doe">
-                </div>
-                <div>
-                    <label>Email:</label>
-                    <i class="fa-solid fa-envelope"></i><input class="regEinput" type="email" required placeholder="example@example.domain">
+            <div>
+                <label>Email:</label>
+                <i class="fa-solid fa-envelope"></i><input class="regEinput" type="email" required placeholder="example@example.domain">
                 </div>
                 <div>
                     <label>Password:</label>
                     <i class="fa-solid fa-lock"></i><input class="regPassInput" type="password" placeholder="secret...secret...secret">
                 </div>
                 <div class="btnCont">
-                    <button class="regBtn">Register</button>
+                    <button class="signUpBtn">Sign Up</button>
                 </div>
-            </form>
-            <div class="loginTextCont">
-                <h2>Already Have An Account? <a class="regLoginLink" href="./login.html">Click Here To Log In!</a></h2>
-            </div>
-        </div>
+                <div class="userTextCont">
+                    <h1>Already Have An Account?<a href="./login.html"> Click Here To Log In!</a></h1>
+                </div>
+        </form>
     </div>
-    <script src="./bundle.js" defer></script>
+   </div>
+    <script src="./bundle.js"></script>
 </body>
 </html>

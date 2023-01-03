@@ -13,8 +13,73 @@ body {
     background: $primaryColor; 
 }
 
+.bgCont {
+    background-image: url(../images/macbookToUse.png); 
+    background-size: cover;
+    background-position: center;
+    height: 100vh; 
+    width: 100vw; 
+    position: absolute; 
+    animation: bgFadeIn 2s running ease-in-out; 
+    z-index: -1; 
+}
+@keyframes bgFadeIn {
+    0% {
+        transform: translateY(-200px); 
+        opacity: 0; 
+    }
+    40% {
+        opacity: 0; 
+    }
+    80% {
+        transform: translateY(0px); 
+    }
+    100% {
+        transform: translateY(0px); 
+    }
+}
+@media all and (max-width: 1020px) {
+    .bgCont {
+        background-image: url(../images/ipadtouse.png);
+        background-size: 100em; 
+        background-repeat: no-repeat;
+    }
+    .todoTextCont {
+        p {
+            padding: none !important; 
+        }
+    }
+}
+@media all and (max-width: 650px) {
+    .bgCont {
+        background-image: url(../images/iphone1.png); 
+        background-size: 20em; 
+        z-index: -1 !important; 
+    }
+    .todoTextCont {
+        p {
+            padding: 1em;
+            text-align: center !important; 
+            padding: none !important; 
+        }
+    }
+}
+@media all and (max-width: 295px) {
+    .bgCont {
+        background-size: 15em; 
+    }
+    .todoTextCont {
+        p {
+            padding: none !important; 
+        }
+    }
+    .appCont {
+        margin-top: 0em !important; 
+    }
+}
 //! index.html (landing page): 
 .mainSection {
+    z-index: 2; 
     height: 100vh; 
     width: 100vw; 
     display: flex; 
@@ -26,26 +91,35 @@ body {
         margin-top: 5rem; 
         h1 {
             text-align: center; 
-            font-size: 2.5rem; 
+            font-size: 4rem; 
             animation: headerFadeIn 1.5s running ease-in-out; 
         }
         p {
+                z-index: 2; 
             text-align: center; 
             margin-top: 1rem; 
-            font-size: 1.3rem; 
+            font-size: 2.5rem; 
             animation: textFadeIn 1.5s running ease-in-out; 
+            padding-left: 1em; 
+            padding-right: 1em; 
         }
         .btnCont {
             display: flex; 
             justify-content: center;
             margin-top: 1rem;
             button {
+                z-index: 2; 
                 font-size: 1.5rem;
                 background: rgb(0, 94, 255); 
                 border: none; 
                 padding: .5rem 1rem; 
                 border-radius: 5px; 
                 animation: textFadeIn 1.5s running ease-in-out; 
+                cursor: pointer; 
+                transition: all .3s; 
+                &:hover {
+                    transform: translateY(-5px); 
+                }
             }
         }
     }
@@ -55,10 +129,6 @@ body {
     0% {
         opacity: 0; 
         transform: translateY(-8px); 
-    }
-    50% {
-        opacity: .5; 
-        // transform: translateY(0px); 
     }
     100% {
         opacity: 1; 
@@ -70,10 +140,6 @@ body {
     0% {
         opacity: 0; 
         transform: translateY(-8px); 
-    }
-    50% {
-        opacity: .5; 
-        // transform: translateY(0px); 
     }
     100% {
         opacity: 1; 

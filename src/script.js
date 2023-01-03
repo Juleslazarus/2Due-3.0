@@ -16,28 +16,45 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getDatabase(app); 
-const auth = getAuth(app); 
+const db = getDatabase(); 
+const auth = getAuth(); 
 
-//! index.html: 
 
-let getStartedBtn = document.querySelector('.getStartedBtn'); 
-
-getStartedBtn.addEventListener('click', () => {
-    auth.onAuthStateChanged((user) => {
-        if (user) {
-            location.href = 'user.html'; 
-        } else {
-            location.href = 'register.html'
-        }
-    })
-})
-
-//! register.html: 
+//! -------------------register.html: -------------------------------------------------------------------------------------------------------------------------
 //? these are the input elements we'll need for user auth: 
 let regFNInput = document.querySelector('.regFNInput'); //? reg=register FN=first-name
 let regEinput = document.querySelector('.regEinput'); 
 let regPassInput = document.querySelector('.regPassInput'); 
 
 //? this is the register btn for register.html: 
-let regBtn = document.querySelector('.regBtn'); 
+const signUpBtn = document.querySelector('.signUpBtn'); 
+
+signUpBtn.addEventListener('click', () => {
+    let email = regEinput.value; 
+    let password = regPassInput.value; 
+    createUserWithEmailAndPassword(auth, email, password) 
+    .then((user) => {
+        console.log(user)
+        console.log(user.user.uid)
+    })
+    .catch((err) => {
+        console.log(err.message); 
+    }) 
+})
+
+
+//!-----------------------login.html:----------------------------------------------------------------------- 
+//? these are input elements for the login page: 
+let logEinput = document.querySelector('.logEinput'); 
+let logPassInput = document.querySelector('.logPassInput')
+
+//? this is the btn to login the user: 
+let logInBtn = document.querySelector('.logInBtn'); 
+
+function setData() {
+    set(ref(db, 'users/'), {
+        name: 'julian', 
+        age: '21'
+    })
+}
+setData(); 
