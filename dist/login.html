@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2Due Login Page</title>
+    <link rel="stylesheet" href="./sass/login.css">
+    <script src="https://kit.fontawesome.com/a3fa4c138f.js" crossorigin="anonymous"></script> <!--? font awesome  -->
+</head>
+<body>
+    <div class="mainCont"> 
+        <div class="loginCont">
+            <div class="textCont">
+                <h1 class="loginHeader">2Due 3.0</h1>
+                <p class="loginSubHeader">Log In</p>
+            </div>
+            <form> 
+                <div>
+                    <label>Email:</label>
+                    <i class="fa-solid fa-envelope"></i><input class="regEinput" type="email" required placeholder="example@example.domain">
+                </div>
+                <div>
+                    <label>Password:</label>
+                    <i class="fa-solid fa-lock"></i><input class="regPassInput" type="password" placeholder="secret...secret...secret">
+                </div>
+                <div class="btnCont">
+                    <button class="regBtn">Log In</button>
+                </div>
+            </form>
+            <div class="regTextCont">
+                <h2>Dont Have An Account? <a class="loginRegLink" href="./register.html">Click Here To Register Today!</a></h2>
+            </div>
+        </div>
+    </div>
+    <script src="./bundle.js" defer></script>
+</body>
+</html>

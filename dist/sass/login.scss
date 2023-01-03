@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import './variablesMixins.scss'; 
+
+
+* {
+    @include global; 
+}
+
+body {
+    background: $primaryColor; 
+    height: 100vh; 
+    width: 100vw; 
+    display: grid; 
+    justify-content: center;
+}
+
+.mainCont {
+    height: 60vh; 
+    width: 90vw; 
+    margin-top: 1rem;
+    justify-content: center;
+    .loginCont {
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; 
+        width: 100%;
+        text-align: center; 
+        background: white; 
+        .textCont {
+            h1 {
+                padding: 1rem; 
+                color: $primaryColor; 
+                font-size: 3rem; 
+            }
+            p {
+                font-size: 1.3rem; 
+            }
+        }
+        .regTextCont {
+            margin-top: .5rem;
+            h2 {
+                font-size: 1rem; 
+                color: rgba(0, 0, 0, 0.569); 
+                a {
+                    color: $accentColor; 
+                }
+            }
+        }
+    }
+}
+
+.loginCont {
+    justify-content: start;
+    align-items: center;
+}
+form {
+    width: 100%; 
+    margin-top: 3rem;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    div {
+        display: flex; 
+        flex-direction: column;
+        position: relative; 
+        label {
+            font-weight: 600; 
+        }
+        i {
+            position: absolute; 
+            padding-top: 1.9rem; 
+            padding-left: 1rem;
+        }
+        input {
+            padding: .5em 2.8rem; 
+            text-align: center; 
+            font-size: 20px; 
+            &:valid {
+                border: 2px solid blue; 
+            }
+            &:invalid {
+                border: 2px solid red; 
+            }
+        }
+        ::placeholder {
+            color: rgba(0, 0, 0, 0.162); 
+        }
+    }
+}
+    .btnCont {
+        margin-top: 1rem;
+        button {
+            padding: .5rem; 
+            font-size: 1.5rem; 
+            border: none; 
+            background-color: $accentColor;
+            color: white; 
+            border-radius: 5px; 
+        }
+    }

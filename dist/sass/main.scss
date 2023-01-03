@@ -1,0 +1,83 @@
+* {
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0;
+    font-family: 'Roboto', sans-serif;  
+    color: white; 
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import './variablesMixins.scss'; 
+
+body {
+    background: $primaryColor; 
+}
+
+//! index.html (landing page): 
+.mainSection {
+    height: 100vh; 
+    width: 100vw; 
+    display: flex; 
+    justify-content: center;
+    .appCont {
+        display: flex; 
+        flex-direction: column;
+        justify-content: start;
+        margin-top: 5rem; 
+        h1 {
+            text-align: center; 
+            font-size: 2.5rem; 
+            animation: headerFadeIn 1.5s running ease-in-out; 
+        }
+        p {
+            text-align: center; 
+            margin-top: 1rem; 
+            font-size: 1.3rem; 
+            animation: textFadeIn 1.5s running ease-in-out; 
+        }
+        .btnCont {
+            display: flex; 
+            justify-content: center;
+            margin-top: 1rem;
+            button {
+                font-size: 1.5rem;
+                background: rgb(0, 94, 255); 
+                border: none; 
+                padding: .5rem 1rem; 
+                border-radius: 5px; 
+                animation: textFadeIn 1.5s running ease-in-out; 
+            }
+        }
+    }
+}
+
+@keyframes headerFadeIn {
+    0% {
+        opacity: 0; 
+        transform: translateY(-8px); 
+    }
+    50% {
+        opacity: .5; 
+        // transform: translateY(0px); 
+    }
+    100% {
+        opacity: 1; 
+        transform: translateY(0px); 
+    }
+}
+
+@keyframes textFadeIn {
+    0% {
+        opacity: 0; 
+        transform: translateY(-8px); 
+    }
+    50% {
+        opacity: .5; 
+        // transform: translateY(0px); 
+    }
+    100% {
+        opacity: 1; 
+        transform: translateY(0px); 
+    }
+}
+
