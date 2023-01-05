@@ -9,3 +9,30 @@ module.exports = {
     }, 
     watch: true
 }
+module.exports = {
+    mode: 'development', 
+    entry: './src/login.js', 
+    output: {
+        path: path.resolve(__dirname, 'dist'), 
+        filename: 'login.js'
+    },
+    watch: true
+}
+module.exports = {
+    mode: 'development', 
+    entry: './src/app.js', 
+    output: {
+        path: path.resolve(__dirname, 'dist'), 
+        filename: 'app.js'
+    }, 
+    watch: true
+}
+module.exports = {
+    mode: "development", 
+    entry: './src/register.js', 
+    output: {
+        path: path.resolve(__dirname, 'dist'), 
+        filename: 'register.js'
+    }, 
+    watch: true
+}

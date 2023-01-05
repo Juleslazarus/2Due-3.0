@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2Due 3.0!</title>
-    <link rel="stylesheet" href="./sass/register.css">
+    <link rel="stylesheet" href="../sass/register.css">
     <script src="https://kit.fontawesome.com/a3fa4c138f.js" crossorigin="anonymous"></script> <!--? font awesome  -->
 </head>
 <body>
@@ -24,15 +24,16 @@
                 <i class="fa-solid fa-user"></i><input class="regFNInput" type="text" required placeholder="John Doe / Jane Doe">
             </div>
             <div>
-                <label>Email:</label>
-                <i class="fa-solid fa-envelope"></i><input class="regEinput" type="email" required placeholder="example@example.domain">
-                </div>
+                <label>Email:</label> 
+                <i class="fa-solid fa-envelope"></i><input class="regEInput" type="email" required placeholder="example@example.domain">
+            </div>
                 <div>
                     <label>Password:</label>
                     <i class="fa-solid fa-lock"></i><input class="regPassInput" type="password" placeholder="secret...secret...secret">
                 </div>
-                <div class="btnCont">
-                    <button class="signUpBtn">Sign Up</button>
+                <h1 class="errorText"></h1>
+                <div class="btnCont"> 
+                    <button id="signup" class="signUpBtn">Sign Up</button>
                 </div>
                 <div class="userTextCont">
                     <h1>Already Have An Account?<a href="./login.html"> Click Here To Log In!</a></h1>
@@ -40,6 +41,6 @@
         </form>
     </div>
    </div>
-    <script src="./bundle.js"></script>
+   <script src="../dist/register.js"></script>
 </body>
 </html>

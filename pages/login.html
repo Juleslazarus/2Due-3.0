@@ -5,15 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2Due 3.0!</title>
-    <link rel="stylesheet" href="./sass/login.css">
+    <link rel="stylesheet" href="../sass/login.css">
     <script src="https://kit.fontawesome.com/a3fa4c138f.js" crossorigin="anonymous"></script> <!--? font awesome  -->
 </head>
 <body>
+    <div class="promptWindow">
+        <h1 class="promptText">hello!</h1>
+    </div>
    <div class="mainCont">
     <div class="bgContLeft">
         <h1>unlock the magic of a clean schedule</h1>
     </div>
     <div class="contRight">
+        <h1 class="errorText"></h1>
         <div class="todoTextCont">
             <h1>2Due 3.0</h1>
             <p>Log In</p>
@@ -22,14 +26,14 @@
             
             <div>
                 <label>Email:</label>
-                <i class="fa-solid fa-envelope"></i><input class="logEinput" type="email" required placeholder="example@example.domain">
+                <i class="fa-solid fa-envelope"></i><input class="loginEInput" type="email" required placeholder="example@example.domain">
                 </div>
                 <div>
                     <label>Password:</label>
-                    <i class="fa-solid fa-lock"></i><input class="logPassInput" type="password" placeholder="secret...secret...secret">
+                    <i class="fa-solid fa-lock"></i><input class="loginPInput" type="password" placeholder="secret...secret...secret">
                 </div>
                 <div class="btnCont">
-                    <button class="logInBtn">Sign Up</button>
+                    <button class="loginBtn">Log In</button>
                 </div>
                 <div class="userTextCont">
                     <h1>Don't Have An Account?<a href="./register.html"> Click Here To Sign Up!</a></h1>
@@ -37,6 +41,6 @@
         </form>
     </div>
    </div>
-    <script src="./bundle.js"></script>
+   <script src="../dist/login.js"></script>
 </body>
 </html>

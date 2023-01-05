@@ -107,7 +107,8 @@ body {
             display: flex; 
             justify-content: center;
             margin-top: 1rem;
-            button {
+            .startBtn {
+                text-decoration: none;
                 z-index: 2; 
                 font-size: 1.5rem;
                 background: rgb(0, 94, 255); 

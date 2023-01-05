@@ -17,18 +17,26 @@ body {
     color: rgba(0, 0, 0, 0.148);
 }
 
+.errorText {
+    color: red; 
+    font-weight: bold;
+    font-size: 1rem; 
+    text-align: center;
+    width: 100%; 
+}
 
 .mainCont {
     display: grid; 
     grid-template-columns: repeat(2,45vw);
-    height: 90vh; 
+    height: 95vh; 
     width: 90vw; 
     gap: 1em; 
     background: white; 
     .bgContLeft {
         background-image: url(../images/macbookToUse.png); 
-        background-size: 80em; 
+        background-size: 75em; 
         background-position: center; 
+        background-repeat: no-repeat; 
         overflow: hidden; 
         background-color: $accentColor; 
         position: relative; 
@@ -55,6 +63,7 @@ body {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        padding-bottom: 2em; 
         .todoTextCont {
             text-align: center; 
             h1 {

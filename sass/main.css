@@ -112,7 +112,8 @@ body {
   margin-top: 1rem;
 }
 
-.mainSection .appCont .btnCont button {
+.mainSection .appCont .btnCont .startBtn {
+  text-decoration: none;
   z-index: 2;
   font-size: 1.5rem;
   background: #005eff;
@@ -124,7 +125,7 @@ body {
   transition: all .3s;
 }
 
-.mainSection .appCont .btnCont button:hover {
+.mainSection .appCont .btnCont .startBtn:hover {
   transform: translateY(-5px);
 }
 

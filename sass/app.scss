@@ -1,0 +1,188 @@
+@import './variablesMixins'; 
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+::-webkit-scrollbar {
+    background:rgba(0, 0, 0, 0.292); 
+    width: .4rem; 
+}
+::-webkit-scrollbar-thumb {
+    background: $accentColor; 
+}
+
+* {
+    @include global; 
+}
+
+body {
+    background: $thirdColor; 
+}
+
+//! style for the landingPage component: 
+.landingPageSection {
+    display: inline-block; 
+    height: 100vh; 
+    width: 100%; 
+    overflow: hidden; 
+    .headerCont {
+        width: 100%; 
+        height: 5rem; 
+        display: flex; 
+        justify-content: space-around;
+        color: white; 
+        align-items: center;
+        background-color: $fourthColor;
+        .textCont {
+            display: flex; 
+            gap: .8rem;
+        }
+        .navCont {
+            display: flex; 
+            gap: 10px; 
+            button {
+                border: none; 
+                background: transparent; 
+                color: white; 
+                font-weight: 600;
+                font-size: 1rem;
+                cursor: pointer; 
+            }
+        }
+    }
+    .landingHeroCont {
+        display: flex; 
+        justify-content: start;
+        align-items: center;
+        height: 100%; 
+        flex-direction: column;
+        gap: 10em;
+        .heroCont {
+            margin-top: 3rem;
+            display: flex; 
+            gap: 1em; 
+            h1 {
+                font-size: 4rem; 
+                color: white; 
+            }
+        }
+        .heroBtnCont {
+            margin-top: 5em; 
+            button {
+                padding: 1.5rem 2.5rem; 
+                font-size: 1.5rem;
+                font-weight: 600; 
+                color: white; 
+                background: $accentColor; 
+                border: none; 
+                border-radius: 5px; 
+                transition: all .2s; 
+                cursor: pointer; 
+                box-shadow: 0px 15px 15px 1px rgba(0, 0, 0, 0.292);
+                &:hover {
+                    transform: translateY(-4px); 
+                    box-shadow: 0px 20px 15px 1px rgba(0, 0, 0, 0.549);
+                }
+            }
+        }
+    }
+}
+
+
+//! this is for the dashboard component: 
+
+.dashboardSection {
+    display: none; 
+    height: 100vh; 
+    width: 100%; 
+    overflow: hidden; 
+    .headerCont {
+        width: 100%; 
+        height: 5rem; 
+        display: flex; 
+        justify-content: space-around;
+        color: white; 
+        align-items: center;
+        background-color: $fourthColor;
+        .textCont {
+            display: flex; 
+            gap: .8rem;
+            .goBackBtn {
+                border: none; 
+                background: transparent;
+                color: white; 
+                font-size: 2rem;
+                cursor: pointer; 
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+        .navCont {
+            display: flex; 
+            gap: 10px; 
+            button {
+                border: none; 
+                background: transparent; 
+                color: white; 
+                font-weight: 600;
+                font-size: 1rem;
+                cursor: pointer; 
+            }
+        }
+    }
+    .collectionsCont {
+        display: flex; 
+        justify-content: start;
+        align-items: center;
+        height: 80%; 
+        flex-direction: column;
+        gap: 1em;
+        margin-top: 1em;
+        .colHeroCont {
+            display: grid; 
+            grid-template-columns: repeat(3, auto);
+            gap: 5em; 
+            overflow-y: scroll;
+            text-align: center;
+            .colCont {
+                h1 {
+                    color: white; 
+                }
+            }
+            i {
+                height: 9vw;
+                width: 20vw;
+                color: white;  
+                font-size: 10rem;
+                // background: $secondAccent;
+                cursor: pointer; 
+            }
+        }
+        .addColCont {
+            // margin-top: 5em; 
+            text-align: center; 
+            display: flex; 
+            flex-direction: column;
+            gap: 3rem;
+            button {
+                padding: 1.5rem 2.5rem; 
+                font-size: 1.5rem;
+                font-weight: 600; 
+                color: white; 
+                background: $accentColor; 
+                border: none; 
+                border-radius: 5px; 
+                transition: all .2s; 
+                cursor: pointer; 
+                box-shadow: 0px 15px 15px 1px rgba(0, 0, 0, 0.292);
+                &:hover {
+                    transform: translateY(-4px); 
+                    box-shadow: 0px 20px 15px 1px rgba(0, 0, 0, 0.549);
+                }
+            }
+            p {
+                font-size: 1.5rem; 
+                color: white;   
+            }
+        }
+    }
+}

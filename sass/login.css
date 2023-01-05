@@ -7,6 +7,14 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.errorText {
+  color: red;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: left;
+  width: 100%;
+}
+
 body {
   background: #1c1c32;
   height: 100vh;
@@ -17,6 +25,51 @@ body {
 
 ::placeholder {
   color: rgba(0, 0, 0, 0.148);
+}
+
+body {
+  position: relative;
+}
+
+.promptWindow {
+  position: absolute;
+  top: -20%;
+  opacity: 1;
+  z-index: 5;
+  height: 10rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #005eff;
+  transition: all .3s;
+}
+
+.promptWindow h1 {
+  text-align: center;
+}
+
+.promptAnimation {
+  animation: promptAnimation 3s running ease-in-out;
+}
+
+@keyframes promptAnimation {
+  0% {
+    top: -20%;
+    opacity: 0;
+  }
+  20% {
+    top: 5%;
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+    top: 5%;
+  }
+  100% {
+    top: -20%;
+    opacity: 0;
+  }
 }
 
 .mainCont {
@@ -30,8 +83,9 @@ body {
 
 .mainCont .bgContLeft {
   background-image: url(../images/macbookToUse.png);
-  background-size: 80em;
+  background-size: 75em;
   background-position: center;
+  background-repeat: no-repeat;
   overflow: hidden;
   background-color: #005eff;
   position: relative;
@@ -138,7 +192,7 @@ body {
 @media all and (max-width: 1020px) {
   .bgContLeft {
     background-image: url(../images/ipadtouse.png) !important;
-    background-size: 50em !important;
+    background-size: 45em !important;
     background-position: center !important;
     background-repeat: no-repeat;
     width: 85%;
@@ -176,7 +230,7 @@ body {
   }
 }
 
-@media all and (max-width: 400px) {
+@media all and (max-width: 550px) {
   .mainCont {
     display: flex;
     flex-direction: column;
