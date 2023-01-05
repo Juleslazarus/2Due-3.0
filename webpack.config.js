@@ -11,13 +11,16 @@ module.exports = {
 }
 module.exports = {
     mode: 'development', 
-    entry: './src/login.js', 
+    entry: './src/userLogin.js', 
     output: {
         path: path.resolve(__dirname, 'dist'), 
-        filename: 'login.js'
+        filename: 'userLogin.js'
     },
     watch: true
 }
+
+
+
 module.exports = {
     mode: 'development', 
     entry: './src/app.js', 

@@ -43,4 +43,3 @@ auth.onAuthStateChanged((cred) => {
         location.href = '../pages/app.html'
     }
 })
-
