@@ -10,8 +10,8 @@
 .errorText {
   color: red;
   font-weight: bold;
-  font-size: 1.5rem;
-  text-align: left;
+  font-size: 1rem;
+  text-align: center;
   width: 100%;
 }
 
@@ -190,6 +190,9 @@ body {
 }
 
 @media all and (max-width: 1020px) {
+  .errorText {
+    text-align: left !important;
+  }
   .bgContLeft {
     background-image: url(../images/ipadtouse.png) !important;
     background-size: 45em !important;
@@ -231,6 +234,9 @@ body {
 }
 
 @media all and (max-width: 550px) {
+  .errorText {
+    text-align: center !important;
+  }
   .mainCont {
     display: flex;
     flex-direction: column;

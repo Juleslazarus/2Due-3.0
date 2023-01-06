@@ -1,7 +1,7 @@
 
-import { initializeApp } from "firebase/app";
-import { getDatabase, set, get, ref, remove, update, child } from 'firebase/database'; 
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'; 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+import { getDatabase, set, get, ref, remove, update, child } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"; 
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js"; 
 
 
 const firebaseConfig = {
@@ -33,11 +33,11 @@ let goToDashBtn = document.querySelector('.goToDashBtn');
 goToDashBtn.addEventListener('click', () => {
     auth.onAuthStateChanged((cred) => {
         if (cred) {
-            location.href = './pages/dashboard.html'
+            location.href = './dashboard.html'
         }
         else {
             alert('Your Session Has Expired Or You Have Logged Out. Log Back In To Continue'); 
-            window.location.href = './pages/login.html'; 
+            window.location.href = './login.html'; 
         }
     })
 })

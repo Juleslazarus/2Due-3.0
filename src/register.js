@@ -1,8 +1,8 @@
-//! firebase config section: 
 
-import { initializeApp } from "firebase/app";
-import { getDatabase, set, get, ref, remove, update, child } from 'firebase/database'; 
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth'; 
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+import { getDatabase, set, get, ref, remove, update, child } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"; 
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js"; 
 
 
 const firebaseConfig = {
@@ -19,35 +19,40 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(); 
 const auth = getAuth(); 
 
-//? these are the input elements we'll need for user auth: 
-let regFNInput = document.querySelector('.regFNInput'); //? reg=register FN=first-name
+//? dom elements needed for user registration: 
+let regFNInput = document.querySelector('.regFNInput')
 let regEInput = document.querySelector('.regEInput'); 
 let regPassInput = document.querySelector('.regPassInput'); 
-
-//? this is the register btn for register.html: 
 let signUpBtn = document.querySelector('.signUpBtn'); 
-let signup = document.getElementById('signup'); 
-
-//? dom element to display errors: 
+//? this will display the error message: 
 let errorText = document.querySelector('.errorText'); 
 
-function registerNewUser(event) {
-    event.preventDefault(); 
+//? user sign up logic: 
+signUpBtn.addEventListener("click", (e) => {
+    e.preventDefault(); 
     let name = regFNInput.value; 
     let email = regEInput.value; 
     let password = regPassInput.value; 
-    createUserWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password) 
     .then((cred) => {
+        let uid = cred.user.uid; 
+        console.log(uid)
         console.log(cred)
-        set(ref(db, 'users/' + cred.user.uid), {
-            name: regFNInput.value, 
-            email: regEInput.value
+        set(ref(db, 'users/' + uid), {
+            name: name, 
+            email: email
         })
-        errorText.textContent = ''; 
     })
     .catch((err) => {
+        console.log(err.message); 
         errorText.textContent = err.message; 
     })
-}
+})
 
-signup.addEventListener('click', registerNewUser); 
+//? this will redirect you to the app if you're loged in already 
+//? so you don't have to navigate from sign up to login to app 
+auth.onAuthStateChanged((cred) => {
+    if (cred) {
+        location.href = './app.html'
+    }
+})
