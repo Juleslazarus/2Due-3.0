@@ -18,6 +18,8 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(); 
 const auth = getAuth(); 
 
+let userText = document.querySelector('.userText'); 
+
 
 //! check if user is logged in to allow them on the page: 
 auth.onAuthStateChanged((cred) => {
@@ -33,7 +35,7 @@ let goToDashBtn = document.querySelector('.goToDashBtn');
 goToDashBtn.addEventListener('click', () => {
     auth.onAuthStateChanged((cred) => {
         if (cred) {
-            location.href = './dashboard.html'
+            location.href = './collections.html'
         }
         else {
             alert('Your Session Has Expired Or You Have Logged Out. Log Back In To Continue'); 
@@ -47,7 +49,15 @@ let logoutBtn = document.querySelector('.logoutBtn');
 logoutBtn.addEventListener('click', () => {
     auth.signOut() 
     .then(() => {
-        alert('user signed out'); 
     })
 })
-
+auth.onAuthStateChanged((cred) => {
+    if (cred) {
+        let uid = cred.uid; 
+        let dbRef = ref(db, 'users/' + uid)
+        get(dbRef)
+        .then((user_name) => {
+            userText.textContent = user_name.val().name; 
+        })
+    }
+})

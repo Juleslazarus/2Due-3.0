@@ -29,12 +29,12 @@ loginBtn.addEventListener('click', (e) => {
     e.preventDefault(); 
     let email = loginEInput.value; 
     let password = loginPInput.value; 
-    
+    errorText.textContent = ''; 
     signInWithEmailAndPassword(auth, email, password)
     .then(() => {
         location.href = './app.html'; 
         errorText.textContent = ''; 
-    })
+    })  
     .catch((err) => {
         console.log(err.message); 
         errorText.textContent = err.message; 
@@ -43,7 +43,7 @@ loginBtn.addEventListener('click', (e) => {
 
 //? this will check to make sure the user isn't already signed 
 //? in to make UX run smoother
-onAuthStateChanged((cred) => {
+auth.onAuthStateChanged((cred) => {
     if (cred) {
         location.href = './app.html'
     }

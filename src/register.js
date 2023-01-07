@@ -18,6 +18,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(); 
 const auth = getAuth(); 
+//? this will check if the user is already logged in to avoid the need to go through various pages 
+//? to access the app 
+auth.onAuthStateChanged((cred) => {
+    if (cred) {
+        location.href = './app.html'; 
+    }
+})
+
 
 //? dom elements needed for user registration: 
 let regFNInput = document.querySelector('.regFNInput')
@@ -33,6 +41,7 @@ signUpBtn.addEventListener("click", (e) => {
     let name = regFNInput.value; 
     let email = regEInput.value; 
     let password = regPassInput.value; 
+    errorText.textContent = ''; 
     createUserWithEmailAndPassword(auth, email, password) 
     .then((cred) => {
         let uid = cred.user.uid; 
@@ -41,6 +50,14 @@ signUpBtn.addEventListener("click", (e) => {
         set(ref(db, 'users/' + uid), {
             name: name, 
             email: email
+        })
+        .then(() => {
+            auth.onAuthStateChanged((cred) => {
+                if (cred) {
+                    location.href = './app.html'
+                }
+})
+
         })
     })
     .catch((err) => {
@@ -51,8 +68,3 @@ signUpBtn.addEventListener("click", (e) => {
 
 //? this will redirect you to the app if you're loged in already 
 //? so you don't have to navigate from sign up to login to app 
-auth.onAuthStateChanged((cred) => {
-    if (cred) {
-        location.href = './app.html'
-    }
-})

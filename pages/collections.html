@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2Due 3.0 Dashboard</title>
+    <link rel="stylesheet" href="../sass/collections.css">
+    <script src="https://kit.fontawesome.com/a3fa4c138f.js" crossorigin="anonymous"></script> <!--? font awesome  -->
+</head>
+<body>
+    <div class="createColMenu">
+        <button class="closeColMenu">X</button>
+        <form>
+            <label>Label:</label>
+            <input class="colLabelInput" type="text" required placeholder="Work, School, etc">
+            <div> 
+                <button class="createColBtn">Create Collection</button>
+            </div>
+        </form>
+    </div>
+     <div class="headerCont">
+        <div class="textCont">
+            <i id="returnPage" class=" fa-solid fa-circle-arrow-left"></i> <!-- this will be needed later -->
+            <h1 class="headerText">Collections</h1>
+        </div>
+        <div class="navCont">
+            <button class="accBtn">Account</button>
+            <a href="./app.html" class="dashBtn">Dashboard</a>
+            <button class="logoutBtn">Log Out</button>
+        </div>
+        <div class="heroCont"></div>
+    </div>
+    <h1 class="errorText"></h1>
+    <div class="colsSection">
+        <div class="collectionsCont">
+            <!-- this is where collections will be stored -->
+            <!-- this is a test section to see how itll look -->
+            <!-- eventually i want to add a preview feature -->
+<!--             
+            <div class="collection">
+                <h1 class="collectionTitle">work</h1>
+            </div> -->
+        </div>
+        <div class="addColsCont">
+            <button class="addColBtn">Add A Collection</button>
+        </div>
+    </div>
+    <script src="../src/collections.js" type="module"></script>
+</body>
+</html>
