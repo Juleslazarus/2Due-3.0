@@ -75,11 +75,35 @@ auth.onAuthStateChanged((cred) => {
                 let closeTodoList = document.createElement('button'); 
                 closeTodoList.classList.add('closeTodoList'); 
                 closeTodoList.textContent = 'X'; 
+                let todoInputCont = document.createElement('div'); 
+                todoInputCont.classList.add('todoInputCont'); 
+                let todoListInput = document.createElement('input'); 
+                todoListInput.classList.add('todoInput'); 
+                let addTodoItem = document.createElement('button'); 
+                addTodoItem.classList.add('addTodoItem'); 
+                addTodoItem.textContent = 'New Todo'; 
+                let todoItemCont = document.createElement('div'); 
+                todoItemCont.classList.add('todoItemCont'); 
                 todoHeader.appendChild(todoListTitle); 
                 todoHeader.appendChild(closeTodoList); 
                 todoList.appendChild(todoHeader); 
-                body.appendChild(todoList); 
+                todoInputCont.appendChild(todoListInput); 
+                todoInputCont.appendChild(addTodoItem); 
+                todoList.appendChild(todoInputCont)
+                todoList.appendChild(todoItemCont); 
 
+                body.appendChild(todoList); 
+                console.log('this works'); 
+                    
+                let todoItem = todoListInput.value; 
+                console.log(todoItem); 
+                set(ref(db, `users/${uid}/collections/${colToDisplay}/todos/` , todoItem), {
+                    
+                })
+                .then(() => {
+
+                })
+                    
                 //? closeTodoListBtn
                 closeTodoList.addEventListener('click', () => {
                     todoList.style.display = 'none'; 
@@ -93,7 +117,6 @@ auth.onAuthStateChanged((cred) => {
     })
 
 
-
 returnPage.addEventListener('click', () => {
     auth.onAuthStateChanged((cred) => {
         if (cred) {
@@ -105,10 +128,21 @@ returnPage.addEventListener('click', () => {
     })
 })
 
+//? display users name as hero Text
+let userText = document.querySelector('.userText'); 
+
+auth.onAuthStateChanged((cred) => {
+    let uid = cred.uid; 
+    let dbRef = ref(db, 'users/' + uid) 
+    get(dbRef)
+    .then((user_name) => {
+        userText.textContent = user_name.val().name + "'s" + " Collections"; 
+    })
+})
+
 //? these buttons open and close the menu that creates collections
 addColBtn.addEventListener('click', openCreateMenu)
 closeColMenu.addEventListener('click', closeCreateMenu)
-
 
 //? the process that creates the collections and then displays them. this will also include the section that 
 //? creates users ability to post to dos
@@ -141,11 +175,13 @@ createColBtn.addEventListener('click', (e) => {
                 let closeTodoList = document.createElement('button'); 
                 closeTodoList.classList.add('closeTodoList'); 
                 closeTodoList.textContent = 'X'; 
+                let todoListInput = document.createElement('input'); 
+                todoList.appendChild(todoListInput)
                 todoHeader.appendChild(todoListTitle); 
                 todoHeader.appendChild(closeTodoList); 
                 todoList.appendChild(todoHeader); 
                 body.appendChild(todoList); 
-
+                console.log('this works'); 
                 //? closeTodoListBtn
                 closeTodoList.addEventListener('click', () => {
                     todoList.style.display = 'none'; 
@@ -165,3 +201,4 @@ logoutBtn.addEventListener('click', () => {
     .then(() => {
     })  
 })
+
