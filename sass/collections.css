@@ -12,7 +12,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #005eff;
+  background: #494b6e;
 }
 
 .errorText {
@@ -210,7 +210,9 @@ body {
   left: 0%;
   background: #1c1c32;
   color: white;
+  display: none;
   opacity: 1;
+  z-index: 10;
 }
 
 .todoList .todoHeader {
@@ -240,7 +242,6 @@ body {
 }
 
 .todoList .todoInputCont {
-  border: solid white;
   height: 8vh;
   display: flex;
   align-items: center;
@@ -280,4 +281,43 @@ body {
   font-weight: 600;
   color: white;
   font-size: 2vh;
+}
+
+.todoItemCont {
+  background: #1c1c32;
+  height: 80%;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.todoItemCont .todo {
+  height: 8vh;
+  width: 100%;
+  background: #3f3f75;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  padding: 1vh;
+  margin: 1rem 0rem;
+  word-wrap: normal;
+  position: relative;
+}
+
+.todoItemCont .todo:hover {
+  text-decoration: line-through 5px black;
+  cursor: pointer;
+}
+
+.todoItemCont .todo:hover::before {
+  content: "X";
+  height: 50%;
+  width: 2%;
+  position: absolute;
+  top: 1%;
+  right: 1%;
+  background: #1c1c32;
+  color: white;
+  text-align: center;
+  text-decoration: none;
 }

@@ -48,6 +48,14 @@ let collectionsCont = document.querySelector('.collectionsCont');
 //? body element to append the collection todo 
 let body = document.querySelector('body'); 
 
+let todoList = document.querySelector('.todoList'); 
+let todoHeader = document.querySelector('.todoHeader'); 
+let todoListTitle = document.querySelector('.todoListTitle'); 
+let closeTodoList = document.querySelector('.closeTodoList'); 
+let todoInputCont = document.querySelector('todoInputCont'); 
+let todoListInput = document.querySelector('.todoListInput'); 
+let addTodoItem = document.querySelector('.addTodoItem'); 
+let todoItemCont = document.querySelector('todoItemCont'); 
 //? database listener 
 auth.onAuthStateChanged((cred) => {
     let uid = cred.uid; 
@@ -64,44 +72,49 @@ auth.onAuthStateChanged((cred) => {
             // console.log(colArr[0]);
             collection.addEventListener('click', (e) => {
                 let colToDisplay = e.target.innerText; 
-                console.log(colToDisplay)
-                let todoList = document.createElement('div'); 
-                todoList.classList.add('todoList')
-                let todoHeader = document.createElement('div'); 
-                todoHeader.classList.add('todoHeader'); 
-                let todoListTitle = document.createElement('h1'); 
-                todoListTitle.classList.add('todoListTitle'); 
+                todoList.style.display = 'inline-block';
                 todoListTitle.textContent = colToDisplay; 
-                let closeTodoList = document.createElement('button'); 
-                closeTodoList.classList.add('closeTodoList'); 
-                closeTodoList.textContent = 'X'; 
-                let todoInputCont = document.createElement('div'); 
-                todoInputCont.classList.add('todoInputCont'); 
-                let todoListInput = document.createElement('input'); 
-                todoListInput.classList.add('todoInput'); 
-                let addTodoItem = document.createElement('button'); 
-                addTodoItem.classList.add('addTodoItem'); 
-                addTodoItem.textContent = 'New Todo'; 
-                let todoItemCont = document.createElement('div'); 
-                todoItemCont.classList.add('todoItemCont'); 
-                todoHeader.appendChild(todoListTitle); 
-                todoHeader.appendChild(closeTodoList); 
-                todoList.appendChild(todoHeader); 
-                todoInputCont.appendChild(todoListInput); 
-                todoInputCont.appendChild(addTodoItem); 
-                todoList.appendChild(todoInputCont)
-                todoList.appendChild(todoItemCont); 
 
-                body.appendChild(todoList); 
-                console.log('this works'); 
-                    
-                let todoItem = todoListInput.value; 
-                console.log(todoItem); 
-                set(ref(db, `users/${uid}/collections/${colToDisplay}/todos/` , todoItem), {
-                    
+                get(child(dbRef, `users/${uid}/collections/${colToDisplay}/todos/`))
+                .then((todo_item) => {
+                    todo_item.forEach((todoNode) => {
+                        let todoItemCont = document.querySelector('.todoItemCont')
+                        console.log(todoNode.val().todoItem); 
+                        let getTodoItem = document.createElement('h1'); 
+                        getTodoItem.classList.add('todo'); 
+                        getTodoItem.textContent = todoNode.val().todoItem; 
+                        todoItemCont.appendChild(getTodoItem); 
+                        getTodoItem.addEventListener('click', (e) => {
+                            let removeTodoItem = e.target.innerText; 
+                            remove(ref(db, `users/${uid}/collections/${colToDisplay}/todos/${removeTodoItem}/   `))
+                            todoItemCont.removeChild(getTodoItem); 
+                        })
+                    })
                 })
-                .then(() => {
 
+                addTodoItem.addEventListener('click', () => {
+                    let todoListInput = document.querySelector('.todoListInput')
+                    let todoItem = todoListInput.value;
+                    console.log(todoItem); 
+                    set(ref(db, `users/${uid}/collections/${colToDisplay}/todos/` + todoItem), {
+                        todoItem
+                    })
+                    .then(() => {
+                        let todoItemCont = document.querySelector('.todoItemCont'); 
+                        let todoListInput = document.querySelector('.todoListInput'); 
+                        let todo = document.createElement('h1'); 
+                        todo.classList.add('todo'); 
+                        todo.textContent = todoListInput.value; 
+                        todoItemCont.appendChild(todo); 
+                        todoListInput.value = ''; 
+                        todo.addEventListener('click', (e) => {
+                            console.log(e.target.innerText); 
+                            let removeTodo = e.target.innerText; 
+                            remove(ref(db, `users/${uid}/collections/todos/todoItem/${removeTodo}`))
+                            todoItemCont.removeChild(todo); 
+                            
+                        })
+                    })
                 })
                     
                 //? closeTodoListBtn
@@ -158,30 +171,7 @@ createColBtn.addEventListener('click', (e) => {
             //? this will be the label that displays on the collections.html page and it will hold the 
             //? the todos that are relevant to the collection ie school: do homework. 
         .then(() => {
-            let collection = document.createElement('h1'); 
-            collection.classList.add('collection'); 
-            collection.textContent = colLabelInput.value 
-            collectionsCont.appendChild(collection); 
-            collection.addEventListener('click', (e) => {
-                let colToDisplay = e.target.innerText; 
-                console.log(colToDisplay)
-                let todoList = document.createElement('div'); 
-                todoList.classList.add('todoList')
-                let todoHeader = document.createElement('div'); 
-                todoHeader.classList.add('todoHeader'); 
-                let todoListTitle = document.createElement('h1'); 
-                todoListTitle.classList.add('todoListTitle'); 
-                todoListTitle.textContent = colToDisplay; 
-                let closeTodoList = document.createElement('button'); 
-                closeTodoList.classList.add('closeTodoList'); 
-                closeTodoList.textContent = 'X'; 
-                let todoListInput = document.createElement('input'); 
-                todoList.appendChild(todoListInput)
-                todoHeader.appendChild(todoListTitle); 
-                todoHeader.appendChild(closeTodoList); 
-                todoList.appendChild(todoHeader); 
-                body.appendChild(todoList); 
-                console.log('this works'); 
+            todoList.style.display = 'inline-block'; 
                 //? closeTodoListBtn
                 closeTodoList.addEventListener('click', () => {
                     todoList.style.display = 'none'; 

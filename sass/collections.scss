@@ -11,7 +11,7 @@
     width: .4rem; 
 }
 ::-webkit-scrollbar-thumb {
-    background: $accentColor; 
+    background: $secondAccent; 
 }
 
 .errorText {
@@ -164,7 +164,7 @@ body {
     }
 }
 
-//? 
+//? collections section
 .collection {
             background-color: $secondaryColor; 
             height: 35vh; 
@@ -195,7 +195,9 @@ body {
     left: 0%; 
     background: $primaryColor; 
     color: white; 
+    display: none; 
     opacity: 1; 
+    z-index: 10; 
     .todoHeader {
         display: flex; 
         padding: 1vw; 
@@ -219,7 +221,6 @@ body {
         }
     }
     .todoInputCont {
-        border: solid white; 
         height: 8vh;
         display: flex; 
         align-items: center;
@@ -257,4 +258,40 @@ body {
     font-weight: 600; 
     color: white; 
     font-size: 2vh;
+}
+
+.todoItemCont {
+    background: $primaryColor; 
+    height: 80%; 
+    width: 100%; 
+    overflow-y: scroll; 
+    overflow-x: hidden; 
+    .todo {
+        height: 8vh; 
+        width: 100%; 
+        background: $secondaryColor; 
+        text-align: left;
+        display: flex; 
+        align-items: center;
+        padding: 1vh;
+        margin: 1rem 0rem;
+        word-wrap: normal;
+        position: relative; 
+        &:hover {
+            text-decoration: line-through 5px black;
+            cursor: pointer; 
+            &::before {
+                content: "X"; 
+                height: 50%; 
+                width: 2%; 
+                position: absolute; 
+                top: 1%;
+                right: 1%; 
+                background: $primaryColor; 
+                color: white; 
+                text-align: center; 
+                text-decoration: none; 
+            }
+        }
+    }
 }
