@@ -15,10 +15,14 @@
                 <h1 class="headerText">2Due</h1>
                 <h1 class="headerText">Dashboard</h1>
             </div>
-            <div class="navCont">
-                <button class="accBtn">Account</button>
-                <button class="dashBtn">Dashboard</button>
-                <button class="logoutBtn">Log Out</button>
+            <i id="openNavMenu" class="fa-solid fa-user"></i>
+            <div class="navMenu">
+                <i id="closeNavMenu" class="fa-solid fa-circle-xmark"></i>
+                <div class="navCont">
+                    <h1 class="accBtn">Account:</h1>
+                    <a class="accountText"></a>
+                    <button class="logoutBtn">Log Out</button>
+                </div> 
             </div>
         </div>
         <div class="landingHeroCont">
@@ -28,6 +32,18 @@
             </div>
             <div class="heroBtnCont">
                 <button class="goToDashBtn">View Dashboard</button> <!--! this will be needed later in js -->
+            </div>
+            <div class="quickTodosCont">
+                <h1 class="quickTodosTitle">Add A Quick 2Due!</h1>
+                <form>
+                    <div class="inputCont">
+                        <input class='quickTodoInput' type="text">
+                        <i id="addQuickTodo" class="fa-solid fa-circle-plus"></i>
+                        <div class="todoItemCont">
+    
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

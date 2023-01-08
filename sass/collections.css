@@ -76,6 +76,10 @@
   transition: all .3s;
 }
 
+#returnPage {
+  cursor: pointer;
+}
+
 body {
   background: #2f3148;
 }
@@ -90,33 +94,74 @@ body {
   padding: .5rem;
 }
 
+.headerCont #openNavMenu {
+  font-size: 3vh;
+  cursor: pointer;
+}
+
 .headerCont .textCont {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: .5rem;
   margin-right: auto;
-  font-size: .7rem;
+  font-size: 1.2vh;
 }
 
 .headerCont .textCont i {
-  font-size: 1.5rem !important;
+  font-size: 1.2rem !important;
 }
 
-.headerCont .navCont {
-  display: flex;
+.headerCont .navMenu {
+  position: absolute;
+  height: 30vh;
+  width: 80vw;
+  border: solid white;
+  top: 5%;
+  z-index: 10;
+  background: #2f3148;
+  box-shadow: 0px 20px 30px 1px rgba(0, 0, 0, 0.531);
+  display: none;
+  align-items: center;
+  flex-direction: column;
+  word-wrap: break-word;
+}
+
+.headerCont .navMenu #closeNavMenu {
+  font-size: 2.5vh !important;
+  text-align: center;
+  margin: 1rem 0rem;
+  cursor: pointer;
+}
+
+.headerCont .navMenu .navCont {
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(1, auto);
   gap: .8rem;
+  word-wrap: break-word;
 }
 
-.headerCont .navCont button,
-.headerCont .navCont a {
+.headerCont .navMenu .navCont button,
+.headerCont .navMenu .navCont a,
+.headerCont .navMenu .navCont h1 {
   border: none;
   background: transparent;
   color: white;
   font-weight: 600;
-  font-size: 1.8vh;
+  font-size: 3vh;
   cursor: pointer;
   text-decoration: none;
+}
+
+.headerCont .navMenu .navCont a {
+  cursor: default !important;
+}
+
+.headerCont .navMenu .navCont .logoutBtn {
+  background: #005eff;
+  padding: 1vh;
+  border-radius: 5px;
 }
 
 .colsSection {
@@ -143,7 +188,7 @@ body {
 .colsSection .collectionsCont .collection {
   background-color: #3f3f75;
   height: 35vh;
-  width: 35vw;
+  width: 40vw;
   margin: 1rem;
   display: flex;
   align-items: center;
@@ -320,4 +365,10 @@ body {
   color: white;
   text-align: center;
   text-decoration: none;
+}
+
+@media all and (max-width: 720px) {
+  .accountText {
+    font-size: 2vh !important;
+  }
 }

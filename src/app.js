@@ -20,6 +20,33 @@ const auth = getAuth();
 
 let userText = document.querySelector('.userText'); 
 
+//? logic for opening the navMenu: 
+let openNavMenu = document.querySelector('#openNavMenu'); 
+let navMenu = document.querySelector('.navMenu'); 
+let accountText = document.querySelector('.accountText'); 
+let closeNavMenu = document.querySelector('#closeNavMenu'); 
+
+openNavMenu.addEventListener('click', () => {
+    auth.onAuthStateChanged((cred) => {
+        let uid = cred.uid
+        //? get users name
+        let dbRef = ref(db); 
+        get(child(dbRef, `users/${uid}/`))
+        .then((username) => {
+            accountText.textContent = username.val().email; 
+        })
+    })
+    navMenu.style.display = 'flex'; 
+})
+closeNavMenu.addEventListener('click', () => {
+    navMenu.style.display = 'none'; 
+})
+
+//? logic for logging out: 
+let logoutBtn = document.querySelector('.logoutBtn'); 
+logoutBtn.addEventListener('click', () => {
+    auth.signOut(); 
+})
 
 //! check if user is logged in to allow them on the page: 
 auth.onAuthStateChanged((cred) => {
@@ -44,13 +71,6 @@ goToDashBtn.addEventListener('click', () => {
     })
 })
 
-let logoutBtn = document.querySelector('.logoutBtn'); 
-
-logoutBtn.addEventListener('click', () => {
-    auth.signOut() 
-    .then(() => {
-    })
-})
 auth.onAuthStateChanged((cred) => {
     if (cred) {
         let uid = cred.uid; 

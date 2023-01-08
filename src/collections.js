@@ -25,6 +25,34 @@ auth.onAuthStateChanged((cred) => {
     }
 })
 
+//? logic for opening the navMenu: 
+let openNavMenu = document.querySelector('#openNavMenu'); 
+let navMenu = document.querySelector('.navMenu'); 
+let accountText = document.querySelector('.accountText'); 
+let closeNavMenu = document.querySelector('#closeNavMenu'); 
+
+openNavMenu.addEventListener('click', () => {
+    auth.onAuthStateChanged((cred) => {
+        let uid = cred.uid
+        //? get users name
+        let dbRef = ref(db); 
+        get(child(dbRef, `users/${uid}/`))
+        .then((username) => {
+            accountText.textContent = username.val().email; 
+        })
+    })
+    navMenu.style.display = 'flex'; 
+})
+closeNavMenu.addEventListener('click', () => {
+    navMenu.style.display = 'none'; 
+})
+
+//? logic for logging out: 
+let logoutBtn = document.querySelector('.logoutBtn'); 
+logoutBtn.addEventListener('click', () => {
+    auth.signOut(); 
+})
+
 let returnPage = document.querySelector('#returnPage'); 
 let addColBtn = document.querySelector('.addColBtn'); 
 let closeColMenu = document.querySelector('.closeColMenu')
@@ -33,6 +61,17 @@ let createColBtn = document.querySelector('.createColBtn');
 let colLabelInput = document.querySelector('.colLabelInput'); 
 let colLabel = colLabelInput.value; 
 
+//? logic for returning to app page: 
+returnPage.addEventListener('click', () => {
+    auth.onAuthStateChanged((cred) => {
+        if(cred) {
+            location.href = './app.html'; 
+        } else {
+            alert('Your session has expired or you have logged out. please log back in to continue.')
+            location.href = './login.html'; 
+        }
+    })
+})
 
 //? functions to open and close create collection menu
 function closeCreateMenu() {
@@ -56,139 +95,130 @@ let todoInputCont = document.querySelector('todoInputCont');
 let todoListInput = document.querySelector('.todoListInput'); 
 let addTodoItem = document.querySelector('.addTodoItem'); 
 let todoItemCont = document.querySelector('todoItemCont'); 
-//? database listener 
-auth.onAuthStateChanged((cred) => {
-    let uid = cred.uid; 
-    let dbRef = ref(db);
-    get(child(dbRef, `users/${uid}/collections`))
-    .then((collection_item) => {
-        collection_item.forEach((collectionNode) => {
-            let colArr = []; 
-            colArr.push(collectionNode.val().colLabel) //? sets the response from the data base to an array for each node
-            let collection = document.createElement('h1'); 
-            collection.classList.add('collection'); 
-            collection.textContent = colArr[0]; //? creates DOM element using the db response from above
-            collectionsCont.appendChild(collection)
-            // console.log(colArr[0]);
-            collection.addEventListener('click', (e) => {
-                let colToDisplay = e.target.innerText; 
-                todoList.style.display = 'inline-block';
-                todoListTitle.textContent = colToDisplay; 
 
-                get(child(dbRef, `users/${uid}/collections/${colToDisplay}/todos/`))
-                .then((todo_item) => {
-                    todo_item.forEach((todoNode) => {
-                        let todoItemCont = document.querySelector('.todoItemCont')
-                        console.log(todoNode.val().todoItem); 
-                        let getTodoItem = document.createElement('h1'); 
-                        getTodoItem.classList.add('todo'); 
-                        getTodoItem.textContent = todoNode.val().todoItem; 
-                        todoItemCont.appendChild(getTodoItem); 
-                        getTodoItem.addEventListener('click', (e) => {
-                            let removeTodoItem = e.target.innerText; 
-                            remove(ref(db, `users/${uid}/collections/${colToDisplay}/todos/${removeTodoItem}/   `))
-                            todoItemCont.removeChild(getTodoItem); 
-                        })
-                    })
-                })
+addColBtn.addEventListener('click', openCreateMenu); 
+closeColMenu.addEventListener('click', closeCreateMenu); 
 
-                addTodoItem.addEventListener('click', () => {
-                    let todoListInput = document.querySelector('.todoListInput')
-                    let todoItem = todoListInput.value;
-                    console.log(todoItem); 
-                    set(ref(db, `users/${uid}/collections/${colToDisplay}/todos/` + todoItem), {
-                        todoItem
-                    })
-                    .then(() => {
-                        let todoItemCont = document.querySelector('.todoItemCont'); 
-                        let todoListInput = document.querySelector('.todoListInput'); 
-                        let todo = document.createElement('h1'); 
-                        todo.classList.add('todo'); 
-                        todo.textContent = todoListInput.value; 
-                        todoItemCont.appendChild(todo); 
-                        todoListInput.value = ''; 
-                        todo.addEventListener('click', (e) => {
-                            console.log(e.target.innerText); 
-                            let removeTodo = e.target.innerText; 
-                            remove(ref(db, `users/${uid}/collections/todos/todoItem/${removeTodo}`))
-                            todoItemCont.removeChild(todo); 
-                            
-                        })
-                    })
-                })
-                    
-                //? closeTodoListBtn
-                closeTodoList.addEventListener('click', () => {
-                    todoList.style.display = 'none'; 
-                })
-            })
-            })
-        })
-        .catch((err) => {
-            errorText.textContent = err.message; 
-        })
-    })
-
-
-returnPage.addEventListener('click', () => {
+//!
+//! function for creating collections to the database: 
+//!
+function createCollection() {
     auth.onAuthStateChanged((cred) => {
-        if (cred) {
-            location.href = './app.html'
-        } else {
-            alert('Your Session Has Expired Or You Have Logged Out. Log Back In To Continue'); 
-            location.href = './login.html'; 
-        }
-    })
-})
-
-//? display users name as hero Text
-let userText = document.querySelector('.userText'); 
-
-auth.onAuthStateChanged((cred) => {
-    let uid = cred.uid; 
-    let dbRef = ref(db, 'users/' + uid) 
-    get(dbRef)
-    .then((user_name) => {
-        userText.textContent = user_name.val().name + "'s" + " Collections"; 
-    })
-})
-
-//? these buttons open and close the menu that creates collections
-addColBtn.addEventListener('click', openCreateMenu)
-closeColMenu.addEventListener('click', closeCreateMenu)
-
-//? the process that creates the collections and then displays them. this will also include the section that 
-//? creates users ability to post to dos
-createColBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    auth.onAuthStateChanged((cred) => {
+        colLabel = colLabelInput.value; 
+        console.log(cred.uid); 
         let uid = cred.uid; 
-        let colLabel = colLabelInput.value; 
-        let refUserDB = ref(db, 'users/' + uid); 
-        set(ref(db, `users/${uid}/collections/` + colLabel), {
+        set(ref(db, `users/${uid}/collections/${colLabel}`), {
             colLabel
         })
-            //? this will be the label that displays on the collections.html page and it will hold the 
-            //? the todos that are relevant to the collection ie school: do homework. 
+
+        //!
+        //? this then() will display the collections: 
+        //!
         .then(() => {
-            todoList.style.display = 'inline-block'; 
-                //? closeTodoListBtn
+            let collection = document.createElement('h1'); 
+            collection.classList.add('collection'); 
+            collection.textContent = colLabel; 
+            collectionsCont.appendChild(collection); 
+
+            //!
+            //? next we need to add the logic for opening the collection: 
+            //!
+            collection.addEventListener('click', () => {
+                todoList.style.display = 'inline-block'; //? displays the todo list designated to that collection 
+                todoListTitle.textContent = colLabel;//? sets the title coherent with the collection title
+                //? next is the logic that closes the todo list: 
                 closeTodoList.addEventListener('click', () => {
                     todoList.style.display = 'none'; 
                 })
-                0
+                //? next is the logic to add todo items to the database: 
+                addTodoItem.addEventListener('click', () => {
+                    let todoItemCont = document.querySelector('.todoItemCont'); 
+                    let todoText = todoListInput.value; 
+                    todoListInput.value = ''; //? sets the input to empty
+                    set(ref(db, `users/${uid}/collections/${colLabel}/todos/` + todoText), {
+                        todoText
+                    })
+                    //? next is the logic for appending the todo items to the todo list container: 
+                    let todo = document.createElement('h1'); 
+                    todo.classList.add('todo'); 
+                    todo.textContent = todoText; 
+                    todoItemCont.appendChild(todo); 
+
+                    //? next we have to add the logic for removing todo items. this has to stay nested inside this event listener 
+                    //? where the todo scope is. 
+                    todo.addEventListener('click', (e) => {
+                        let removeTodo = e.target.innerText
+                        remove(ref(db, `users/${uid}/collections/${colLabel}/todos/${removeTodo}`))
+                        todoItemCont.removeChild(todo); 
+                    })
+
+                    //! this ends the needed functions of the app!
+                })
             })
-            closeColMenu.click();
+
+        })
+
+    }) 
+}
+
+//!
+//? this section will be for displaying the collections on page start:
+//!
+auth.onAuthStateChanged((cred) => {
+    let dbRef = ref(db); 
+    let uid = cred.uid; 
+    get(child(dbRef, `users/${uid}/collections/`))
+    .then((collections_item) => {
+        collections_item.forEach((collectionNode) => {
+            let collectionsCont = document.querySelector(".collectionsCont"); 
+            let collection = document.createElement('h1'); 
+            collection.classList.add('collection'); 
+            collection.textContent = collectionNode.val().colLabel; 
+            collectionsCont.appendChild(collection); 
+            collection.addEventListener('click', (e) => {
+                colLabel = e.target.innerText; 
+                todoList.style.display = 'inline-block'; //? displays the todo list designated to that collection 
+                todoListTitle.textContent = colLabel;//? sets the title coherent with the collection title
+                //? next is the logic that closes the todo list: 
+                closeTodoList.addEventListener('click', () => {
+                    todoList.style.display = 'none'; 
+                })
+                //? next is the logic to add todo items to the database: 
+                addTodoItem.addEventListener('click', () => {
+                    let todoItemCont = document.querySelector('.todoItemCont'); 
+                    let todoText = todoListInput.value; 
+                    todoListInput.value = ''; //? sets the input to empty
+                    set(ref(db, `users/${uid}/collections/${colLabel}/todos/` + todoText), {
+                        todoText
+                    })
+                    //? next is the logic for appending the todo items to the todo list container: 
+                    let todo = document.createElement('h1'); 
+                    todo.classList.add('todo'); 
+                    todo.textContent = todoText; 
+                    todoItemCont.appendChild(todo); 
+
+                    //? next we have to add the logic for removing todo items. this has to stay nested inside this event listener 
+                    //? where the todo scope is. 
+                    todo.addEventListener('click', (e) => {
+                        let removeTodo = e.target.innerText
+                        remove(ref(db, `users/${uid}/collections/${colLabel}/todos/${removeTodo}`))
+                        todoItemCont.removeChild(todo); 
+                    })
+
+                    //! this ends the needed functions of the app!
+                })
+            })
+
         })
     })
+    
+    
 })
 
+createColBtn.addEventListener('click', (e) => {
+    e.preventDefault(); 
+    createCollection(); 
+    closeColMenu.click(); 
+}); 
 
-let logoutBtn = document.querySelector('.logoutBtn'); 
-
-logoutBtn.addEventListener('click', () => {
-    auth.signOut() 
-    .then(() => {
-    })  
-})
 

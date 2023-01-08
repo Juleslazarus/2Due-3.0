@@ -14,6 +14,8 @@
     background: $secondAccent; 
 }
 
+
+
 .errorText {
     font-size: 2rem; 
     color: red; 
@@ -68,6 +70,9 @@
     }
 }
 
+#returnPage {
+    cursor: pointer; 
+}
 
 body {
     background: $thirdColor; 
@@ -80,30 +85,66 @@ body {
     align-items: center; 
     justify-content: center;
     padding: .5rem;
+    #openNavMenu {
+        font-size: 3vh;
+        cursor: pointer; 
+    }
     .textCont {
         display: flex; 
         flex-direction: row;
         align-items: center; 
         gap: .5rem;
         margin-right: auto;
-        font-size: .7rem;
+        font-size: 1.2vh;
         i {
-            font-size: 1.5rem !important;
+            font-size: 1.2rem !important;
         }
     }
-    .navCont {
-        display: flex; 
-        gap: .8rem;
-        button, 
-        a {
-                border: none; 
-                background: transparent; 
-                color: white; 
-                font-weight: 600;
-                font-size: 1.8vh;
-                cursor: pointer;
-                text-decoration: none;  
+    .navMenu {
+        position: absolute; 
+        height: 30vh;
+        width: 80vw; 
+        border: solid white; 
+        top: 5%; 
+        z-index: 10; 
+        background: $thirdColor; 
+        box-shadow: 0px 20px 30px 1px rgba(0, 0, 0, 0.531); 
+        display: none; 
+        align-items: center;
+        flex-direction: column;
+        word-wrap: break-word;
+        #closeNavMenu {
+            font-size: 2.5vh !important;
+            text-align: center; 
+            margin: 1rem 0rem;
+            cursor: pointer;
+        }
+        .navCont {
+            text-align: center;
+            display: grid; 
+            grid-template-columns: repeat(1, auto);
+            gap: .8rem;
+            word-wrap: break-word;
+            button, 
+            a, 
+            h1 {
+                    border: none; 
+                    background: transparent; 
+                    color: white; 
+                    font-weight: 600;
+                    font-size: 3vh;
+                    cursor: pointer;
+                    text-decoration: none;  
+                }
+            a {
+                cursor: default !important; 
             }
+            .logoutBtn {
+                background: $accentColor;
+                padding: 1vh; 
+                border-radius: 5px; 
+            }
+        }
     }
 }
 
@@ -127,7 +168,7 @@ body {
         .collection {
             background-color: $secondaryColor; 
             height: 35vh; 
-            width : 35vw; 
+            width : 40vw; 
             margin: 1rem;
             display: flex; 
             align-items: center;
@@ -293,5 +334,11 @@ body {
                 text-decoration: none; 
             }
         }
+    }
+}
+
+@media all and (max-width: 720px) {
+    .accountText {
+        font-size: 2vh !important; 
     }
 }
