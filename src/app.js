@@ -81,3 +81,36 @@ auth.onAuthStateChanged((cred) => {
         })
     }
 })
+
+//!
+//? quick todo logic
+//!
+let todoItemCont = document.querySelector('.todoItemCont'); 
+let quickTodoInput = document.querySelector('.quickTodoInput'); 
+let addQuickTodo = document.querySelector('#addQuickTodo'); 
+//? set todos: 
+auth.onAuthStateChanged((cred) => {
+    let uid = cred.uid; 
+    addQuickTodo.addEventListener('click', (e) => {
+        e.preventDefault(); 
+        let todoText = quickTodoInput.value; 
+        set(ref(db, `users/${uid}/quickTodos/${todoText}/`), {
+            todoText
+        })
+        .then(() => {//? append them to the dom
+            let todo = document.createElement('h1'); 
+            todo.classList.add('todo'); 
+            todo.textContent = todoText; 
+            todoItemCont.appendChild(todo); 
+            quickTodoInput.value = ''; 
+            //!
+            //? next is the remove todo ability: 
+            todo.addEventListener('click', (e) => {
+                let removeTodo = e.target.innerText; 
+                remove(ref(db, `users/${uid}/quickTodos/${removeTodo}`))
+                todoItemCont.removeChild(todo); 
+            })
+
+        })
+    })
+})

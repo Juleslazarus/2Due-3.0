@@ -183,6 +183,26 @@ auth.onAuthStateChanged((cred) => {
                 closeTodoList.addEventListener('click', () => {
                     todoList.style.display = 'none'; 
                 })
+                
+                //? this will retrieve the todo items from the db 
+                get(child(dbRef, `users/${uid}/collections/${colLabel}/todos/`))
+                    .then((todo_item) => {
+                        todo_item.forEach((todoNode) => {
+                            let todoItemCont = document.querySelector('.todoItemCont')
+                            let todo = document.createElement('h1'); 
+                            todo.classList.add('todo'); 
+                            todo.textContent = todoNode.val().todoText; 
+                            todoItemCont.appendChild(todo); //! //? this will append the todo to the screen
+                            //? next we need to add the ability to remove a todo: 
+                            todo.addEventListener('click', (e) => {
+                                let removeTodo = e.target.innerText
+                                remove(ref(db, `users/${uid}/collections/${colLabel}/todos/${removeTodo}`))
+                                todoItemCont.removeChild(todo); 
+                    })
+                        })
+                    } )
+
+                
                 //? next is the logic to add todo items to the database: 
                 addTodoItem.addEventListener('click', () => {
                     let todoItemCont = document.querySelector('.todoItemCont'); 

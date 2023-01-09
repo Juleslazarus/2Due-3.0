@@ -357,7 +357,7 @@ body {
 .todoItemCont .todo:hover::before {
   content: "X";
   height: 50%;
-  width: 2%;
+  width: 10%;
   position: absolute;
   top: 1%;
   right: 1%;

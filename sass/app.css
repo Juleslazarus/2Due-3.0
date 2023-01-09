@@ -187,18 +187,20 @@ body {
   font-weight: 600;
 }
 
-.quickTodosCont form .inputCont {
+.quickTodosCont div .inputCont {
   display: flex;
   gap: 1rem;
   align-items: center;
 }
 
-.quickTodosCont form .inputCont .quickTodoInput {
+.quickTodosCont div .inputCont .quickTodoInput {
   padding: 2vh 3vw;
   font-size: 2.5vh;
+  border-radius: 10px;
+  border: none;
 }
 
-.quickTodosCont form .inputCont #addQuickTodo {
+.quickTodosCont div .inputCont #addQuickTodo {
   font-size: 6.5vh;
   color: #005eff;
   background: white;
@@ -206,4 +208,41 @@ body {
   outline: none;
   border-radius: 100%;
   cursor: pointer;
+}
+
+.quickTodosCont .todoItemCont {
+  display: flex;
+  width: 100%;
+}
+
+.quickTodosCont .todoItemCont .todo {
+  height: 8vh;
+  width: 100%;
+  background: #3f3f75;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  padding: 1vh;
+  margin: 1rem 0rem;
+  word-wrap: normal;
+  position: relative;
+  color: white;
+}
+
+.quickTodosCont .todoItemCont .todo:hover {
+  text-decoration: line-through 5px black;
+  cursor: pointer;
+}
+
+.quickTodosCont .todoItemCont .todo:hover::before {
+  content: "X";
+  height: 50%;
+  width: 10%;
+  position: absolute;
+  top: 1%;
+  right: 1%;
+  background: #1c1c32;
+  color: white;
+  text-align: center;
+  text-decoration: none;
 }
