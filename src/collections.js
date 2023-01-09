@@ -215,7 +215,7 @@ auth.onAuthStateChanged((cred) => {
                         })
                         removeCol.addEventListener('click', () => {
                             let removePrompt = prompt("Are You Sure You'd Like To Remove This Collection?").tolowerCase
-                            if (removePrompt == 'yes'){
+                            if (removePrompt = 'yes'){
                                 console.log(removePrompt); 
                                 remove(ref(db, `users/${uid}/collections/` + colLabel))
                                 .then(() => {

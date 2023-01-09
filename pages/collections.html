@@ -12,7 +12,7 @@
     <div class="todoList">
         <div class="todoHeader">
             <h1 class="todoListTitle"></h1>
-            <button class="closeTodoList">X</button>
+            <a class="closeTodoList"><i class="fa-solid fa-circle-xmark"></i></a>
         </div>
         <div class="todoInputCont">
             <input class="todoListInput">
@@ -26,16 +26,46 @@
         </div>
     </div>
     <div class="createColMenu">
-        <button class="closeColMenu">X</button>
+        <a class="closeColMenu"><i class="fa-solid fa-circle-xmark"></i></a>
         <form>
-            <label>Label:</label>
+            <label>Collection Name:</label>
             <input class="colLabelInput" type="text" required placeholder="Work, School, etc">
             <div> 
                 <button class="createColBtn">Create Collection</button>
             </div>
         </form>
     </div>
-     <div class="headerCont">
+    <div class="createSharedCol">
+        <i id="closeCreateMenu" class="fa-solid fa-circle-xmark"></i>
+        <form>
+            <label>Collection Name:</label>
+            <input class="createColName" type="text" required placeholder="Work, School, etc">
+            <label>Private Key: (will be used for others to join)</label>
+            <input class="createKeyInput" type="text" required placeholder="maryHadALittleLam...">
+            <div> 
+                <button class="createSharedBtn">Create Collection <i class="fa-solid fa-hammer"></i></button>
+            </div>
+        </form>
+    </div>
+    <div class="joinSharedCol">
+        <i id="closeJoinMenu" class="fa-solid fa-circle-xmark"></i>
+        <form>
+            <label>Private Key: (will be used for others to join)</label>
+            <input class="joinKeyInput" type="text" required placeholder="maryHadALittleLam...">
+            <div> 
+                <button class="joinSharedBtn">Join Collection <i class="fa-solid fa-hammer"></i></button>
+            </div>
+        </form>
+    </div>
+    <div class="choiceMenu">
+        <h1 class="choiceText">Would You Like To:</h1>
+        <div class="choicesCont"> 
+                <i id="createIcon" class="fa-solid fa-hammer"></i>
+                <i id="joinIcon" class="fa-solid fa-user-group"></i>
+        </div>
+        <i id="closeChoices" class="fa-solid fa-circle-xmark"></i>
+    </div>
+    <div class="headerCont">
         <div class="textCont">
             <i id="returnPage" class=" fa-solid fa-circle-arrow-left"></i> <!-- this will be needed later -->
             <h1 class="headerText">Collections</h1>
@@ -63,7 +93,14 @@
         </div>
         <div class="addColsCont">
             <button class="addColBtn">Add A Collection</button>
+            <button class="addSharedBtn">Add A Shared Collection</button>
         </div>
+    </div>
+    <div class="sharedColCont">
+        
+    </div>
+    <div class="sharedCollectionsSection">
+
     </div>
     <script src="../src/collections.js" type="module"></script>
 </body>
