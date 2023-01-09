@@ -266,3 +266,45 @@ createColBtn.addEventListener('click', (e) => {
 }); 
 
 
+//! //! //! //!
+
+//? logic for creating and joining online collections:
+
+//* choices menu dom elements: 
+let choiceMenu = document.querySelector('.choiceMenu'); 
+let createIcon = document.querySelector('#createIcon'); 
+let joinIcon = document.querySelector('#joinIcon'); 
+let closeChoices = document.querySelector('#closeChoices');
+
+//* open the choices menu: 
+let addSharedBtn = document.querySelector('.addSharedBtn')
+
+//* create shared collection dom elements: 
+let createSharedCol = document.querySelector('.createSharedCol'); 
+let closeCSharedMenu = document.querySelector('#closeCreateMenu'); 
+let createColName = document.querySelector('.createColName'); 
+let createKeyInput = document.querySelector('.createKeyInput'); 
+let createSharedBtn = document.querySelector('.createSharedBtn'); 
+
+//* join shared collection dom elements: 
+let joinSharedCol = document.querySelector('.joinSharedCol'); 
+let closeJoinMenu = document.querySelector('#closeJoinMenu'); 
+let joinKeyInput = document.querySelector('.joinKeyInput'); 
+let joinSharedBtn = document.querySelector('.joinSharedBtn'); 
+//? first we'll do the logic for creating a shared collection: 
+addSharedBtn.addEventListener('click', () => {
+    choiceMenu.style.display = 'flex'; //! opens the choice menu
+})
+closeChoices.addEventListener('click', () => {
+    choiceMenu.style.display = 'none'; //! closes the choice menu
+})
+
+createIcon.addEventListener('click', () => {
+    createSharedCol.style.display = 'flex'
+    choiceMenu.style.display = 'none'; 
+})
+closeCSharedMenu.addEventListener('click', () => {
+    createSharedCol.style.display = 'none';
+})
+
+//! //! //! //!

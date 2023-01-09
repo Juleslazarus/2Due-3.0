@@ -463,7 +463,52 @@ body {
     background: rgba(13, 16, 59, 0.723); 
     top: 10%; 
     left: 10%; 
-    display: flex; 
+    display: none; //? js will change it to flex; 
+    flex-direction: column;
+    text-align: end;
+    overflow-y: scroll; 
+    i {
+        font-size: 4vh !important; 
+        color: white; 
+        padding: .5rem;
+    }
+    form {
+        display: flex; 
+        flex-direction: column;
+        padding: 2rem; 
+        font-size: 4vh;
+        color: white; 
+        text-align: center;
+        gap: 1rem; 
+        input {
+            padding: 2vh 1vw; 
+            font-size: 3vh;
+            border-radius: 10px; 
+        }
+        button {
+            background: $accentColor; 
+            border: none; 
+            font-size: 2.5vh;
+            color: white; 
+            padding: .5rem; 
+            i {
+                font-size: 3vh;
+                padding: .5rem;
+                cursor: pointer; 
+                color: white; 
+            }
+        }
+    }
+}
+
+.joinSharedCol {
+    position: absolute; 
+    height: 40em; 
+    width: 80vw; 
+    background: rgba(13, 16, 59, 0.723); 
+    top: 10%; 
+    left: 10%; 
+    display: none; //? js will change it to flex
     flex-direction: column;
     text-align: end;
     overflow-y: scroll; 
