@@ -114,3 +114,24 @@ auth.onAuthStateChanged((cred) => {
         })
     })
 })
+
+//!
+//? this is to load the todos on page start 
+auth.onAuthStateChanged((cred) => {
+    let uid = cred.uid; 
+    let dbRef = ref(db); 
+    get(child(dbRef, `users/${uid}/quickTodos/`))
+    .then((todo_item) => {
+        todo_item.forEach((todoNode) => {
+            let todo = document.createElement('h1'); 
+            todo.classList.add('todo'); 
+            todo.textContent = todoNode.val().todoText; 
+            todoItemCont.appendChild(todo); 
+            todo.addEventListener('click', (e) => {
+                let removeTodo = e.target.innerText; 
+                remove(ref(db, `users/${uid}/quickTodos/${removeTodo}`))
+                todoItemCont.removeChild(todo); 
+            })
+        })
+    })
+})

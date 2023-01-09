@@ -60,7 +60,7 @@ let createColMenu = document.querySelector('.createColMenu');
 let createColBtn = document.querySelector('.createColBtn'); 
 let colLabelInput = document.querySelector('.colLabelInput'); 
 let colLabel = colLabelInput.value; 
-
+let removeCol = document.querySelector('.removeCol'); 
 //? logic for returning to app page: 
 returnPage.addEventListener('click', () => {
     auth.onAuthStateChanged((cred) => {
@@ -129,7 +129,19 @@ function createCollection() {
                 //? next is the logic that closes the todo list: 
                 closeTodoList.addEventListener('click', () => {
                     todoList.style.display = 'none'; 
+                    location.reload()
                 })
+                removeCol.addEventListener('click', () => {
+                            let removePrompt = prompt("Are You Sure You'd Like To Remove This Collection?").tolowerCase
+                            if (removePrompt == 'yes'){
+                                console.log(removePrompt); 
+                                remove(ref(db, `users/${uid}/collections/` + colLabel))
+                                .then(() => {
+                                    closeTodoList.click(); 
+                                    location.reload()
+                                })
+                            }
+                        })
                 //? next is the logic to add todo items to the database: 
                 addTodoItem.addEventListener('click', () => {
                     let todoItemCont = document.querySelector('.todoItemCont'); 
@@ -182,8 +194,8 @@ auth.onAuthStateChanged((cred) => {
                 //? next is the logic that closes the todo list: 
                 closeTodoList.addEventListener('click', () => {
                     todoList.style.display = 'none'; 
+                    location.reload(); 
                 })
-                
                 //? this will retrieve the todo items from the db 
                 get(child(dbRef, `users/${uid}/collections/${colLabel}/todos/`))
                     .then((todo_item) => {
@@ -193,12 +205,24 @@ auth.onAuthStateChanged((cred) => {
                             todo.classList.add('todo'); 
                             todo.textContent = todoNode.val().todoText; 
                             todoItemCont.appendChild(todo); //! //? this will append the todo to the screen
+                            
                             //? next we need to add the ability to remove a todo: 
                             todo.addEventListener('click', (e) => {
                                 let removeTodo = e.target.innerText
                                 remove(ref(db, `users/${uid}/collections/${colLabel}/todos/${removeTodo}`))
                                 todoItemCont.removeChild(todo); 
                     })
+                        })
+                        removeCol.addEventListener('click', () => {
+                            let removePrompt = prompt("Are You Sure You'd Like To Remove This Collection?").tolowerCase
+                            if (removePrompt == 'yes'){
+                                console.log(removePrompt); 
+                                remove(ref(db, `users/${uid}/collections/` + colLabel))
+                                .then(() => {
+                                    closeTodoList.click(); 
+                                    location.reload()
+                                })
+                            }
                         })
                     } )
 

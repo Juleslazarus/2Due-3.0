@@ -198,6 +198,7 @@ body {
     }
     .todoItemCont{
         display: flex; 
+        flex-direction: column;
         width: 100%; 
         .todo {
         height: 8vh; 
@@ -211,6 +212,7 @@ body {
         word-wrap: normal;
         position: relative; 
         color: white; 
+        overflow-y: scroll; 
         &:hover {
             text-decoration: line-through 5px black;
             cursor: pointer; 

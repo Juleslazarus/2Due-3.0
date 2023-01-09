@@ -328,6 +328,21 @@ body {
   font-size: 2vh;
 }
 
+.removeColCont {
+  display: flex;
+  justify-content: center;
+}
+
+.removeColCont button {
+  background-color: #494b6e;
+  cursor: pointer;
+  border: none;
+  color: white;
+  font-size: 3vh;
+  padding: 1vh;
+  border-radius: 10px;
+}
+
 .todoItemCont {
   background: #1c1c32;
   height: 80%;

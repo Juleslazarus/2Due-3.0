@@ -301,6 +301,21 @@ body {
     font-size: 2vh;
 }
 
+    .removeColCont {
+        display: flex; 
+        justify-content: center;
+        button {
+            background-color: $secondAccent;
+            cursor: pointer; 
+            border: none; 
+            color: white; 
+            font-size: 3vh; 
+            padding: 1vh;
+            border-radius: 10px; 
+        }
+    }
+
+
 .todoItemCont {
     background: $primaryColor; 
     height: 80%; 

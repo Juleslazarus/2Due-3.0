@@ -212,6 +212,7 @@ body {
 
 .quickTodosCont .todoItemCont {
   display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
@@ -227,6 +228,7 @@ body {
   word-wrap: normal;
   position: relative;
   color: white;
+  overflow-y: scroll;
 }
 
 .quickTodosCont .todoItemCont .todo:hover {
