@@ -78,7 +78,7 @@ function closeCreateMenu() {
     createColMenu.style.display = 'none'; 
 }
 function openCreateMenu() {
-    createColMenu.style.display = 'inline-block'; 
+    createColMenu.style.display = 'flex'; 
     colLabelInput.select()
 }
 //? append all collections from database here: 
@@ -133,7 +133,7 @@ function createCollection() {
                 })
                 removeCol.addEventListener('click', () => {
                             let removePrompt = prompt("Are You Sure You'd Like To Remove This Collection?").tolowerCase
-                            if (removePrompt == 'yes'){
+                            if (removePrompt === 'yes'){
                                 console.log(removePrompt); 
                                 remove(ref(db, `users/${uid}/collections/` + colLabel))
                                 .then(() => {
@@ -145,7 +145,10 @@ function createCollection() {
                 //? next is the logic to add todo items to the database: 
                 addTodoItem.addEventListener('click', () => {
                     let todoItemCont = document.querySelector('.todoItemCont'); 
-                    let todoText = todoListInput.value; 
+                    let todoText = todoListInput.value;
+                    if (todoText == '') {
+                        alert('You Must Use The Input Field To Write Your 2due!')
+                    } 
                     todoListInput.value = ''; //? sets the input to empty
                     set(ref(db, `users/${uid}/collections/${colLabel}/todos/` + todoText), {
                         todoText
@@ -231,23 +234,26 @@ auth.onAuthStateChanged((cred) => {
                 addTodoItem.addEventListener('click', () => {
                     let todoItemCont = document.querySelector('.todoItemCont'); 
                     let todoText = todoListInput.value; 
-                    todoListInput.value = ''; //? sets the input to empty
-                    set(ref(db, `users/${uid}/collections/${colLabel}/todos/` + todoText), {
-                        todoText
-                    })
-                    //? next is the logic for appending the todo items to the todo list container: 
-                    let todo = document.createElement('h1'); 
-                    todo.classList.add('todo'); 
-                    todo.textContent = todoText; 
-                    todoItemCont.appendChild(todo); 
-
-                    //? next we have to add the logic for removing todo items. this has to stay nested inside this event listener 
-                    //? where the todo scope is. 
-                    todo.addEventListener('click', (e) => {
-                        let removeTodo = e.target.innerText
-                        remove(ref(db, `users/${uid}/collections/${colLabel}/todos/${removeTodo}`))
-                        todoItemCont.removeChild(todo); 
-                    })
+                    if (todoText === '') {
+                        alert('You Must Use The Input Field To Write Your 2due!')
+                    } else {
+                        todoListInput.value === ''; //? sets the input to empty
+                        set(ref(db, `users/${uid}/collections/${colLabel}/todos/` + todoText), {
+                            todoText
+                        })
+                        //? next is the logic for appending the todo items to the todo list container: 
+                        let todo = document.createElement('h1'); 
+                        todo.classList.add('todo'); 
+                        todo.textContent = todoText; 
+                        todoItemCont.appendChild(todo); 
+                        //? next we have to add the logic for removing todo items. this has to stay nested inside this event listener 
+                        //? where the todo scope is. 
+                        todo.addEventListener('click', (e) => {
+                            let removeTodo = e.target.innerText
+                            remove(ref(db, `users/${uid}/collections/${colLabel}/todos/${removeTodo}`))
+                            todoItemCont.removeChild(todo); 
+                        })
+                    }
 
                     //! this ends the needed functions of the app!
                 })
@@ -266,7 +272,7 @@ createColBtn.addEventListener('click', (e) => {
 }); 
 
 
-//! //! //! //!
+//! //! //! //!==========================================================================================================
 
 //? logic for creating and joining online collections:
 
@@ -285,13 +291,14 @@ let closeCSharedMenu = document.querySelector('#closeCreateMenu');
 let createColName = document.querySelector('.createColName'); 
 let createKeyInput = document.querySelector('.createKeyInput'); 
 let createSharedBtn = document.querySelector('.createSharedBtn'); 
+let sharedColCont = document.querySelector('.sharedColCont'); 
 
 //* join shared collection dom elements: 
 let joinSharedCol = document.querySelector('.joinSharedCol'); 
 let closeJoinMenu = document.querySelector('#closeJoinMenu'); 
 let joinKeyInput = document.querySelector('.joinKeyInput'); 
 let joinSharedBtn = document.querySelector('.joinSharedBtn'); 
-//? first we'll do the logic for creating a shared collection: 
+//?==== first we'll do the logic for creating a shared collection: ===============================
 addSharedBtn.addEventListener('click', () => {
     choiceMenu.style.display = 'flex'; //! opens the choice menu
 })
@@ -302,9 +309,86 @@ closeChoices.addEventListener('click', () => {
 createIcon.addEventListener('click', () => {
     createSharedCol.style.display = 'flex'
     choiceMenu.style.display = 'none'; 
+    createColName.select(); 
 })
 closeCSharedMenu.addEventListener('click', () => {
     createSharedCol.style.display = 'none';
 })
+//* create the shared collection: ----------------------------
+closeTodoList.addEventListener('click', () => {
+    todoList.style.display = 'none'; 
+    location.reload(); 
+})
+auth.onAuthStateChanged((cred) => {
+    let uid = cred.uid; 
+    createSharedBtn.addEventListener('click', (e) => {
+        e.preventDefault(); 
+        let shareKey = createKeyInput.value; 
+        let colLabel = createColName.value; 
+        if (shareKey == '' ) {
+            alert('You Cannot Create A Public Collection Without A Share Key!')
+        } else {
+            //? for this collections logic ill only do the db creation
+            //? and then ill have the page refresh and load it to the screen 
+            //? with a get() function so i only have to make one logic tree 
+            //? as opposed to one for live creation and db getting like 
+            //? above with the private collections
+            set(ref(db, `public_collections/${shareKey}/${colLabel}/`), {
+                colLabel
+            }),
+            set(ref(db,`users/${uid}/public_collections_keys/${shareKey}/`), { 
+                shareKey
+            })
+            .catch((err) => {
+                console.log(err.message); 
+            })
+            //? this creates a copy of the key to the users db
+            //? for access later
+            location.reload(); 
+        }
+    })
+})
+//* get() from db to display and then the rest of the logic will 
+//* sit here!: 
+auth.onAuthStateChanged((cred) => {
+    let uid = cred.uid; 
+    let dbRef = ref(db); 
+    get(child(dbRef, `users/${uid}/public_collections_keys/`)) //! 1
+    .then((public_key_item) => {
+        public_key_item.forEach((publicKeyNode) => { //! 2
+            let key = publicKeyNode.val().shareKey; 
+            let dbRef = ref(db); 
+            get(child(dbRef, `public_collections/${key}/`))
+            .then((public_collection_item) => { //! 3
+                public_collection_item.forEach((publicCollectionNode) => {
+                    let sharedCollection = document.createElement('h1'); 
+                    sharedCollection.classList.add('sharedCollection'); 
+                    sharedCollection.textContent = publicCollectionNode.val().colLabel; 
+                    sharedColCont.appendChild(sharedCollection); 
+                    //? this is kind of complex but it works. grabs the key from the user @ 1
+                    //? 2 sets each key as a variable and uses that variable to call the public collection
+                    //? db item with that key
+                    //? 3 grabs each collection from the public folder using their respective keys
+                    sharedCollection.addEventListener('click', (e) => {
+                        auth.onAuthStateChanged((cred) => { //! this will allow me to use get() to get all todos on todolist load 
+                            let uid = cred.uid;  
+                            let colLabel = e.target.innerText;
+                            let todoItem = todoListInput.value;  
+                            todoList.style.display = 'inline-block'; 
+                            todoListTitle.textContent = colLabel; 
+                            addTodoItem.addEventListener('click', () => {
+                                if (todoItem == '') {
+                                    alert('You Must Use The Input Field To Write Your 2due!')
+                                } else {
+    
+                                }
+                            })
+                        })
+                    })
 
-//! //! //! //!
+                })
+            })
+        })
+    })
+})
+//! //! //! //!============================================================================

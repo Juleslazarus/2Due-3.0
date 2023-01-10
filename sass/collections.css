@@ -25,13 +25,17 @@
 .createColMenu {
   display: none;
   position: absolute;
-  height: 30em;
-  width: 60vw;
-  top: 10%;
-  left: 19.5%;
-  background: rgba(13, 16, 59, 0.658);
+  height: 100vh;
+  width: 100vw;
+  top: 1%;
+  left: 0%;
+  background: #0d103b;
   border-radius: 10px;
   z-index: 5;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .createColMenu a {
@@ -56,8 +60,9 @@
 }
 
 .createColMenu form input {
-  font-size: 1.5rem;
+  font-size: 2.5vh;
   padding: 1.5rem;
+  border-radius: 10px;
 }
 
 .createColMenu form div {
@@ -77,13 +82,89 @@
   transition: all .3s;
 }
 
+.colsSection {
+  height: 100vh;
+  background: #2f3148;
+}
+
+.colsSection .privColHeader {
+  height: 8%;
+  display: flex;
+  align-items: center;
+  background: #1c1c32;
+  padding: 1rem;
+}
+
+.colsSection .privColHeader .privColText {
+  color: white;
+}
+
+.colsSection .collectionsCont {
+  height: 45%;
+}
+
+.colsSection .collectionsCont .collection {
+  background: #1c1c32;
+  padding: 2vh;
+  margin: 1vh 0vw;
+  text-align: left;
+  color: white;
+  font-weight: 600;
+  transition: all .3s;
+  cursor: pointer;
+}
+
+.colsSection .collectionsCont .collection:hover {
+  background: black;
+}
+
+.colsSection .pubColHeader {
+  height: 8%;
+  display: flex;
+  align-items: center;
+  background: #1c1c32;
+  padding: 1rem;
+}
+
+.colsSection .pubColHeader .sharedColText {
+  color: white;
+}
+
+.colsSection .sharedColCont .sharedCollection {
+  background: #1c1c32;
+  padding: 2vh;
+  margin: 1vh 0vw;
+  text-align: left;
+  color: white;
+  font-weight: 600;
+  transition: all .3s;
+  cursor: pointer;
+}
+
+.colsSection .sharedColCont .sharedCollection:hover {
+  background: black;
+}
+
+.addColBtn,
+.addSharedBtn {
+  background: #005eff;
+  padding: 1.5vh;
+  border-radius: 10px;
+  font-size: 2vh;
+  color: white;
+  border: none;
+  outline: none;
+  margin-left: auto;
+  cursor: pointer;
+}
+
 .choiceMenu {
   position: absolute;
-  top: 10%;
+  top: 35%;
   left: 14.7%;
   height: 50vh;
   width: 70vw;
-  background: rgba(28, 28, 50, 0.718);
+  background: rgba(28, 28, 50, 0.934);
   display: none;
   flex-direction: column;
   border-radius: 10px;
@@ -161,7 +242,7 @@
 }
 
 body {
-  background: #2f3148;
+  background: #1c1c32;
   position: relative;
 }
 
@@ -190,7 +271,7 @@ body {
 }
 
 .headerCont .textCont i {
-  font-size: 1.2rem !important;
+  font-size: 3vh !important;
 }
 
 .headerCont .navMenu {
@@ -245,94 +326,9 @@ body {
   border-radius: 5px;
 }
 
-.colsSection {
-  height: 50rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.colsSection .collectionsCont {
-  background: #494b6e;
-  color: white;
-  height: 80%;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  justify-content: center;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  gap: 1.5rem;
-}
-
-.colsSection .collectionsCont .collection {
-  background-color: #3f3f75;
-  height: 10em;
-  width: 50vw;
-  margin: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0px 10px 30px 1px rgba(0, 0, 0, 0.482);
-  transition: all .3s;
-}
-
-.colsSection .collectionsCont .collection:hover {
-  transform: scale(1.1);
-  box-shadow: 0px 30px 35px 1px rgba(0, 0, 0, 0.327);
-}
-
-.colsSection .addColsCont {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.colsSection .addColsCont button {
-  font-size: 1.5rem;
-  outline: none;
-  border: none;
-  margin: 1rem;
-  padding: 1rem;
-  border-radius: 5px;
-  background: #005eff;
-  color: white;
-  transition: all .3s;
-}
-
-.colsSection .addColsCont button:hover {
-  background: #1c1c32;
-  transform: translateY(-5px);
-  cursor: pointer;
-}
-
-.collection {
-  background-color: #3f3f75;
-  height: 35em;
-  width: 35em;
-  margin: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3vh;
-  word-wrap: normal;
-  cursor: pointer;
-  box-shadow: 0px 10px 30px 1px rgba(0, 0, 0, 0.482);
-  transition: all .3s;
-}
-
-.collection:hover {
-  transform: scale(1.1);
-  box-shadow: 0px 30px 35px 1px rgba(0, 0, 0, 0.327);
-}
-
 .todoList {
-  position: absolute;
-  height: 60vh;
+  position: fixed;
+  height: 80vh;
   width: 100%;
   top: 10%;
   left: 0%;
@@ -358,9 +354,9 @@ body {
   padding: 1rem;
   border-radius: 10px;
   border: none;
-  background: white;
-  font-size: 1.5vh;
+  font-size: 3vh;
   font-weight: bold;
+  color: white;
   cursor: pointer;
   transition: all .3s;
 }
@@ -374,6 +370,7 @@ body {
   display: flex;
   align-items: center;
   padding: .1rem;
+  gap: 1rem;
 }
 
 .todoList .todoInputCont input {
@@ -388,7 +385,7 @@ body {
 }
 
 .todoList .todoInputCont button {
-  padding: 2vh;
+  padding: 1vh;
   border: none;
   border-radius: 5px;
   font-size: 2vh;
@@ -484,10 +481,6 @@ body {
   }
 }
 
-.sharedColCont {
-  height: 45em;
-}
-
 .createSharedCol {
   position: absolute;
   height: 40em;
@@ -526,9 +519,10 @@ body {
 .createSharedCol form button {
   background: #005eff;
   border: none;
-  font-size: 2.5vh;
+  font-size: 2vh;
   color: white;
   padding: .5rem;
+  cursor: pointer;
 }
 
 .createSharedCol form button i {

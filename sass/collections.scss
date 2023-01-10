@@ -25,13 +25,17 @@
 .createColMenu {
     display: none; 
     position: absolute; 
-    height: 30em; 
-    width: 60vw; 
-    top: 10%; 
-    left: 19.5%; 
-    background:rgba(13, 16, 59, 0.658); 
+    height: 100vh; 
+    width: 100vw; 
+    top: 1%; 
+    left: 0%; 
+    background:rgb(13, 16, 59); 
     border-radius: 10px;
     z-index: 5; 
+    text-align: center; 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
     a {
         border: none; 
         background: transparent; 
@@ -50,8 +54,10 @@
             color: white; 
         }
         input {
-            font-size: 1.5rem;
+            font-size: 2.5vh;
             padding: 1.5rem;
+            border-radius: 10px; 
+
         }
         div {
             display: flex; 
@@ -70,13 +76,89 @@
         }
     }
 }
+
+//! ------------------------------------------------------------
+//? collections style section: 
+.colsSection {
+    height: 100vh;
+    background: $thirdColor; 
+    .privColHeader {
+        height: 8%; 
+        display: flex; 
+        align-items: center;
+        background: $primaryColor; 
+        padding: 1rem;
+        .privColText {
+            color: white; 
+        }
+        
+    }
+    .collectionsCont {
+        height: 45%; 
+        .collection {
+            background: $primaryColor; 
+            padding: 2vh;
+            margin: 1vh 0vw; 
+            text-align: left;
+            color: white; 
+            font-weight: 600; 
+            transition: all .3s;
+            cursor: pointer; 
+            &:hover {
+                background: black; 
+            }
+        }
+    }
+    .pubColHeader {
+        height: 8%; 
+        display: flex; 
+        align-items: center;
+        background: $primaryColor; 
+        padding: 1rem;
+        .sharedColText {
+            color: white; 
+        }
+    }
+    .sharedColCont {
+        .sharedCollection {
+            background: $primaryColor; 
+            padding: 2vh;
+            margin: 1vh 0vw; 
+            text-align: left;
+            color: white; 
+            font-weight: 600; 
+            transition: all .3s;
+            cursor: pointer; 
+            &:hover {
+                background: black; 
+            }
+        }
+    }
+    
+}
+
+//? add collection buttons: 
+.addColBtn, 
+.addSharedBtn {
+    background: $accentColor; 
+    padding: 1.5vh;
+    border-radius: 10px; 
+    font-size: 2vh;
+    color: white; 
+    border: none; 
+    outline: none; 
+    margin-left: auto; 
+    cursor: pointer; 
+}
+//!--------------------------------------------------------------
+
 .choiceMenu {
     position: absolute; 
-    top: 10%; 
+    top: 35%; 
     left: 14.7%; 
     height: 50vh; 
     width: 70vw; 
-    background:rgba(28, 28, 50, 0.718); 
+    background:rgba(28, 28, 50, 0.934); 
     display: none; 
     flex-direction: column;
     border-radius: 10px; 
@@ -153,7 +235,7 @@
 }
 
 body {
-    background: $thirdColor; 
+    background: $primaryColor; 
     position: relative; 
 }
 .headerCont {
@@ -176,7 +258,7 @@ body {
         margin-right: auto;
         font-size: 1.2vh;
         i {
-            font-size: 1.2rem !important;
+            font-size: 3vh !important;
         }
     }
     .navMenu {
@@ -227,91 +309,12 @@ body {
     }
 }
 
-.colsSection {
-    height: 50rem; 
-    width: 100%; 
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    .collectionsCont {
-        background: $secondAccent; 
-        color: white; 
-        height: 80%; 
-        width: 100%; 
-        display: grid; 
-        grid-template-columns: repeat(2, auto);
-        justify-content: center;
-        overflow-y: scroll;
-        overflow-x: hidden; 
-        gap: 1.5rem;
-        .collection {
-            background-color: $secondaryColor; 
-            height: 10em; 
-            width : 50vw; 
-            margin: 1rem;
-            display: flex; 
-            align-items: center;
-            justify-content: center;
-            cursor: pointer; 
-            box-shadow: 0px 10px 30px 1px rgba(0, 0, 0, 0.482);
-            transition: all .3s; 
-            &:hover {
-                transform: scale(1.1); 
-                box-shadow: 0px 30px 35px 1px rgba(0, 0, 0, 0.327); 
-            }
-        }
-    }
-    .addColsCont {
-        display: flex; 
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        button {
-            font-size: 1.5rem; 
-            outline: none; 
-            border: none; 
-            margin: 1rem;
-            padding: 1rem; 
-            border-radius: 5px; 
-            background: $accentColor;
-            color: white; 
-            transition: all .3s; 
-            &:hover {
-                background: $primaryColor; 
-                transform: translateY(-5px); 
-                cursor: pointer; 
-            }
-        }
-    }
-}
-
-//? collections section
-.collection {
-            background-color: $secondaryColor; 
-            height: 35em; 
-            width : 35em; 
-            margin: 1rem;
-            display: flex; 
-            align-items: center;
-            justify-content: center;
-            font-size: 3vh;
-            word-wrap:  normal;
-            cursor: pointer; 
-            box-shadow: 0px 10px 30px 1px rgba(0, 0, 0, 0.482);
-            transition: all .3s; 
-            &:hover {
-                transform: scale(1.1); 
-                box-shadow: 0px 30px 35px 1px rgba(0, 0, 0, 0.327); 
-            }
-        }
-
 
 //? 
 //? todolist from collection 
 .todoList {
-    position: absolute; 
-    height: 60vh; 
+    position: fixed; 
+    height: 80vh; 
     width: 100%;
     top: 10%; 
     left: 0%; 
@@ -331,10 +334,10 @@ body {
         .closeTodoList {
             padding: 1rem; 
             border-radius: 10px;
-            border: none; 
-            background: white; 
-            font-size: 1.5vh; 
-            font-weight: bold; 
+            border: none;  
+            font-size: 3vh; 
+            font-weight: bold;
+            color: white; 
             cursor: pointer; 
             transition: all .3s; 
             &:hover {
@@ -347,6 +350,7 @@ body {
         display: flex; 
         align-items: center;
         padding: .1rem; 
+        gap: 1rem;
         input {
             height: 90%; 
             margin-right: auto;
@@ -358,14 +362,15 @@ body {
             width: 90%; 
         }
         button {
-            padding: 2vh;
+            padding: 1vh;
             border: none; 
             border-radius: 5px; 
             font-size: 2vh; 
             background: $accentColor; 
             transition: all .2s; 
             color: white; 
-            font-weight: 600; 
+            font-weight: 600;
+
             &:active {
                 background: $secondAccent 
             }
@@ -452,9 +457,6 @@ body {
     }
 }
 
-.sharedColCont {
-    height: 45em; 
-}
 
 .createSharedCol {
     position: absolute; 
@@ -488,9 +490,10 @@ body {
         button {
             background: $accentColor; 
             border: none; 
-            font-size: 2.5vh;
+            font-size: 2vh;
             color: white; 
             padding: .5rem; 
+            cursor: pointer; 
             i {
                 font-size: 3vh;
                 padding: .5rem;
@@ -544,3 +547,4 @@ body {
         }
     }
 }
+
