@@ -186,7 +186,7 @@ body {
   }
 }
 
-@media all and (max-width: 400px) {
+@media all and (max-width: 635px) {
   .mainCont {
     display: flex;
     flex-direction: column;
