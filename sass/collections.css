@@ -348,6 +348,11 @@ body {
   margin-right: auto;
   font-weight: bold;
   color: white;
+  margin-right: auto;
+}
+
+.todoList .todoHeader .shareKeyTitle {
+  font-size: 2vh;
 }
 
 .todoList .todoHeader .closeTodoList {
@@ -485,7 +490,7 @@ body {
   position: absolute;
   height: 40em;
   width: 80vw;
-  background: rgba(13, 16, 59, 0.723);
+  background: rgba(13, 16, 59, 0.893);
   top: 10%;
   left: 10%;
   display: none;
@@ -536,7 +541,7 @@ body {
   position: absolute;
   height: 40em;
   width: 80vw;
-  background: rgba(13, 16, 59, 0.723);
+  background: rgba(13, 16, 59, 0.893);
   top: 10%;
   left: 10%;
   display: none;

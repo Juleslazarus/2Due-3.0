@@ -330,6 +330,10 @@ body {
             margin-right: auto; 
             font-weight: bold; 
             color: white; 
+            margin-right: auto;     
+        }
+        .shareKeyTitle {
+            font-size: 2vh;
         }
         .closeTodoList {
             padding: 1rem; 
@@ -462,7 +466,7 @@ body {
     position: absolute; 
     height: 40em; 
     width: 80vw; 
-    background: rgba(13, 16, 59, 0.723); 
+    background: rgba(13, 16, 59, 0.893); 
     top: 10%; 
     left: 10%; 
     display: none; //? js will change it to flex; 
@@ -508,7 +512,7 @@ body {
     position: absolute; 
     height: 40em; 
     width: 80vw; 
-    background: rgba(13, 16, 59, 0.723); 
+    background: rgba(13, 16, 59, 0.893); 
     top: 10%; 
     left: 10%; 
     display: none; //? js will change it to flex
