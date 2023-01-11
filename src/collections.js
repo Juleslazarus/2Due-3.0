@@ -326,8 +326,8 @@ auth.onAuthStateChanged((cred) => {
         e.preventDefault(); 
         let shareKey = createKeyInput.value; 
         let colLabel = createColName.value; 
-        if (shareKey == '' ) {
-            alert('You Cannot Create A Public Collection Without A Share Key!')
+        if (shareKey == '' && colLabel == '' ) {
+            alert('You Cannot Create A Public Collection Without A Share Key Or Collection Name!')
         } else {
             //? for this collections logic ill only do the db creation
             //? and then ill have the page refresh and load it to the screen 
@@ -477,7 +477,7 @@ joinSharedBtn.addEventListener('click', (e) => {
     let dbRef = ref(db);
     auth.onAuthStateChanged((cred) => {
         let uid = cred.uid; 
-        set(ref(db, `users/${uid}/public_collections_keys/${colLabel}/` + shareKey), {
+        set(ref(db, `users/${uid}/public_collections_keys/join_keys/${colLabel}/` + shareKey), {
             shareKey
         })
         .then(() => {
@@ -485,7 +485,54 @@ joinSharedBtn.addEventListener('click', (e) => {
         })
     })
 })
+auth.onAuthStateChanged((cred) => {
+    let uid = cred.uid; 
+    joinSharedBtn.addEventListener('click', (e) => {
+        e.preventDefault(); 
+        let shareKey = joinKeyInput.value; 
+        let colLabel = joinColName.value;  
+        if (shareKey == '' && colLabel == '' ) {
+            alert('You Cannot Join A Public Collection Without A Share Key or Collection Name!')
+        } else {
+            //? for this collections logic ill only do the db creation
+            //? and then ill have the page refresh and load it to the screen 
+            //? with a get() function so i only have to make one logic tree 
+            //? as opposed to one for live creation and db getting like 
+            //? above with the private collections
+            set(ref(db,`users/${uid}/public_collections_keys/join_keys/${colLabel}/`), { 
+                shareKey
+            })
+            .catch((err) => {
+                console.log(err.message); 
+            })
+            //? this creates a copy of the key to the users db
+            //? for access later
+            location.reload(); 
+        }
+    })
+})
 //* get the shared collections: 
+auth.onAuthStateChanged((cred) => {
+    let uid = cred.uid; 
+    let dbRef = ref(db); 
+    get(child(dbRef, `users/${uid}/public_collection_keys/join_keys/`))
+    .then((joinKey_item) => {
+        joinKey_item.forEach((joinKey) => {
+            let shareKey = joinKey.val().shareKey; //? used for grabbing the collection they joined from db/public_collections
+            get(child(dbRef, `public_collections/${shareKey}/`))
+            .then((publicCollection_item) => {
+                publicCollection_item.forEach((publicCollectionNode) => {
+                    let sharedColCont = document.querySelector('.sharedColCont'); 
+                    sharedCollection = document.createElement('h1'); 
+                    sharedCollection.classList.add('sharedCollection'); 
+                    sharedCollection.textContent = publicCollectionNode.val().colLabel; 
+                    sharedColCont.appendChild(sharedCollection)
 
+                })
+            })
+
+        })
+    })
+})
 
 //! //! //! //!============================================================================
