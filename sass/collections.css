@@ -29,17 +29,17 @@
 }
 
 .colsPreloader {
-  position: absolute;
-  height: 100vh;
+  height: 25rem;
   width: 100%;
-  background: #f1f1f1;
-  background-image: url(../images/pencil.gif);
+  background: #2f3148;
+  background-image: url(../images/colpreloader.gif);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   top: 9%;
   opacity: 1;
   transition: all .2s;
+  background-size: 2.5vh;
 }
 
 .errorText {
@@ -459,6 +459,13 @@ body {
   border-radius: 10px;
 }
 
+.todoPreloader {
+  background: #1c1c32 url(../images/colpreloader.gif) no-repeat center center;
+  background-size: 3vh;
+  height: 100%;
+  width: 100%;
+}
+
 .todoItemCont {
   background: #1c1c32;
   height: 80%;
@@ -478,6 +485,7 @@ body {
   margin: 1rem 0rem;
   word-wrap: normal;
   position: relative;
+  font-size: 2.5vh;
 }
 
 .todoItemCont .todo:hover {

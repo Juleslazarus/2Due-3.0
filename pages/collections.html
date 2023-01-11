@@ -9,11 +9,8 @@
     <script src="https://kit.fontawesome.com/a3fa4c138f.js" crossorigin="anonymous"></script> <!--? font awesome  -->
 </head>
 <body>
-    <div class='preloadCont'>
+    <!-- <div class='preloadCont'>
         
-    </div>
-    <!-- <div class="colsPreloader">
-
     </div> -->
     <div class="todoList">
         <div class="todoHeader">
@@ -23,10 +20,12 @@
         <p class="sharedKeyTitle"></p>
         <div class="todoInputCont">
             <input class="todoListInput">
-            <button class="addTodoItem">New 2Due</button>
+            <button id="submit" class="addTodoItem">New 2Due</button>
         </div>
-        <div class="todoItemCont">
-
+        <div id="todoCont" class="todoItemCont">
+            <div class="todoPreloader">
+                
+            </div>
         </div>
         <div class="removeColCont"> 
             <button class="removeCol">Remove This Collection</button>
@@ -42,7 +41,7 @@
             </div>
         </form>
     </div>
-    <div class="createSharedCol">
+    <!-- <div class="createSharedCol">
         <i id="closeCreateMenu" class="fa-solid fa-circle-xmark"></i>
         <form>
             <label>Collection Name:</label>
@@ -53,8 +52,8 @@
                 <button class="createSharedBtn">Create Collection <i class="fa-solid fa-hammer"></i></button>
             </div>
         </form>
-    </div>
-    <div class="joinSharedCol">
+    </div> -->
+    <!-- <div class="joinSharedCol">
         <i id="closeJoinMenu" class="fa-solid fa-circle-xmark"></i>
         <form>
             <label>Collection Name:</label>
@@ -65,30 +64,30 @@
                 <button class="joinSharedBtn">Join Collection <i class="fa-solid fa-hammer"></i></button>
             </div>
         </form>
-    </div>
-    <div class="choiceMenu">
+    </div> -->
+    <!-- <div class="choiceMenu">
         <h1 class="choiceText">Would You Like To:</h1>
         <div class="choicesCont"> 
-                <i id="createIcon" class="fa-solid fa-hammer"></i>
+            <i id="createIcon" class="fa-solid fa-hammer"></i>
                 <i id="joinIcon" class="fa-solid fa-user-group"></i>
-        </div>
-        <i id="closeChoices" class="fa-solid fa-circle-xmark"></i>
-    </div>
-    <div class="headerCont">
-        <div class="textCont">
+            </div>
+            <i id="closeChoices" class="fa-solid fa-circle-xmark"></i>
+        </div> -->
+        <div class="headerCont">
+            <div class="textCont">
             <i id="returnPage" class=" fa-solid fa-circle-arrow-left"></i> <!-- this will be needed later -->
             <h1 class="headerText">Collections</h1>
         </div>
         <i id="openNavMenu" class="fa-solid fa-user"></i>
-            <div class="navMenu">
-                <i id="closeNavMenu" class="fa-solid fa-circle-xmark"></i>
-                <div class="navCont">
-                    <h1 class="accBtn">Account:</h1>
+        <div class="navMenu">
+            <i id="closeNavMenu" class="fa-solid fa-circle-xmark"></i>
+            <div class="navCont">
+                <h1 class="accBtn">Account:</h1>
                     <a class="accountText"></a>
                     <button class="logoutBtn">Log Out</button>
                 </div> 
             </div>
-    </div>
+        </div>
     <h1 class="userText"></h1>
     <div class="colsSection">
         <div class="privColHeader">
@@ -96,6 +95,7 @@
             <button class="addColBtn">Add A Collection</button>
         </div>
         <div class="collectionsCont">
+            <div class="colsPreloader"></div>
             <!-- ? this is where collections are appended -->
         </div>
         <!-- <div class="pubColHeader">

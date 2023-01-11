@@ -159,7 +159,7 @@ function createCollection() {
                     todo.classList.add('todo'); 
                     todo.textContent = todoText; 
                     todoItemCont.appendChild(todo); 
-
+                    removeTodoPreloader(); 
                     //? next we have to add the logic for removing todo items. this has to stay nested inside this event listener 
                     //? where the todo scope is. 
                     todo.addEventListener('click', (e) => {
@@ -191,7 +191,7 @@ auth.onAuthStateChanged((cred) => {
             collection.classList.add('collection'); 
             collection.textContent = collectionNode.val().colLabel; 
             collectionsCont.appendChild(collection); 
-            // removePreloader(); 
+            removePreloader(); 
             collection.addEventListener('click', (e) => {
                 colLabel = e.target.innerText; 
                 todoList.style.display = 'inline-block'; //? displays the todo list designated to that collection 
@@ -210,7 +210,7 @@ auth.onAuthStateChanged((cred) => {
                             todo.classList.add('todo'); 
                             todo.textContent = todoNode.val().todoText; 
                             todoItemCont.appendChild(todo); //! //? this will append the todo to the screen
-                            
+                            removeTodoPreloader()
                             //? next we need to add the ability to remove a todo: 
                             todo.addEventListener('click', (e) => {
                                 let removeTodo = e.target.innerText
@@ -248,6 +248,7 @@ auth.onAuthStateChanged((cred) => {
                         todo.classList.add('todo'); 
                         todo.textContent = todoText; 
                         todoItemCont.appendChild(todo); 
+                        removeTodoPreloader(); 
                         //? next we have to add the logic for removing todo items. this has to stay nested inside this event listener 
                         //? where the todo scope is. 
                         todo.addEventListener('click', (e) => {
@@ -610,10 +611,33 @@ createColBtn.addEventListener('click', (e) => {
 //     })
 // })
 // //! //! //! //!============================================================================
-// let colsPreloader = document.querySelector('.colsPreloader')
+let colsPreloader = document.querySelector('.colsPreloader')
+let initialColPreload = false; 
+function removePreloader() {
+    if (initialColPreload = true) {
+        colsPreloader.style.display = 'none'
+    } else {
+        colsPreloader.style.opacity = '0';
+        colsPreloader.style.height = '0vh' 
+        colsPreloader.style.width = '0vw' 
+        initialColPreload = true; 
+    }
+}
 
-// function removePreloader() {
-//     colsPreloader.style.opacity = 0;
-//     colsPreloader.style.height = '0vh' 
-//     colsPreloader.style.width = '0vw' 
-// }
+
+//? todoinput event listener to support 'enter' as submit. having a form with the input and button together for some reason
+//? closes the todo list 
+
+todoListInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        document.getElementById('submit').click(); 
+    }
+})
+
+//? preloader for the todos
+
+let todoPreloader = document.querySelector('.todoPreloader'); 
+function removeTodoPreloader() {
+    todoPreloader.style.opacity = '0'
+    todoPreloader.style.display = 'none'; 
+}
