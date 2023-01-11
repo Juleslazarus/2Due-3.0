@@ -353,6 +353,7 @@ body {
 
 .todoList .todoHeader .shareKeyTitle {
   font-size: 2vh;
+  color: white;
 }
 
 .todoList .todoHeader .closeTodoList {

@@ -20,11 +20,11 @@ const db = getDatabase();
 const auth = getAuth(); 
 //? this will check if the user is already logged in to avoid the need to go through various pages 
 //? to access the app 
-auth.onAuthStateChanged((cred) => {
-    if (cred) {
-        location.href = './app.html'; 
-    }
-})
+// auth.onAuthStateChanged((cred) => {
+//     if (cred) {
+//         location.href = './app.html'; 
+//     }
+// })
 
 
 //? dom elements needed for user registration: 
@@ -34,37 +34,41 @@ let regPassInput = document.querySelector('.regPassInput');
 let signUpBtn = document.querySelector('.signUpBtn'); 
 //? this will display the error message: 
 let errorText = document.querySelector('.errorText'); 
+//? this will display the prompts 
+let promptText = document.querySelector('.promptText'); 
 
 //? user sign up logic: 
 signUpBtn.addEventListener("click", (e) => {
+    errorText.textContent = ''; 
+    promptText.textContent = ''; 
     e.preventDefault(); 
     let name = regFNInput.value; 
     let email = regEInput.value; 
     let password = regPassInput.value; 
-    errorText.textContent = ''; 
-    createUserWithEmailAndPassword(auth, email, password) 
+    createUserWithEmailAndPassword(auth, email, password)
     .then((cred) => {
         let uid = cred.user.uid; 
-        console.log(uid)
-        console.log(cred)
-        set(ref(db, 'users/' + uid), {
+        set(ref(db, `users/${uid}/`), {
             name: name, 
             email: email
         })
         .then(() => {
-            auth.onAuthStateChanged((cred) => {
-                if (cred) {
-                    location.href = './app.html'
-                }
-})
-
+            promptText.textContent = 'You have successfully created a user. Click below to sign in'
+            alert('You have created a user and are being redirected.')
+            setTimeout(
+                location.href = './app.html', 
+                5000
+            )
         })
+        
     })
     .catch((err) => {
-        console.log(err.message); 
         errorText.textContent = err.message; 
     })
-})
+    })
+    
+    
+
 
 //? this will redirect you to the app if you're loged in already 
 //? so you don't have to navigate from sign up to login to app 

@@ -147,7 +147,7 @@ function createCollection() {
                     let todoItemCont = document.querySelector('.todoItemCont'); 
                     let todoText = todoListInput.value;
                     if (todoText == '') {
-                        alert('You Must Use The Input Field To Write Your 2due!')
+                        alert('You Must Use The Input Field To Write Your 2Due!')
                     } 
                     todoListInput.value = ''; //? sets the input to empty
                     set(ref(db, `users/${uid}/collections/${colLabel}/todos/` + todoText), {
@@ -235,7 +235,7 @@ auth.onAuthStateChanged((cred) => {
                     let todoItemCont = document.querySelector('.todoItemCont'); 
                     let todoText = todoListInput.value; 
                     if (todoText === '') {
-                        alert('You Must Use The Input Field To Write Your 2due!')
+                        alert('You Must Use The Input Field To Write Your 2Due!')
                     } else {
                         todoListInput.value === ''; //? sets the input to empty
                         set(ref(db, `users/${uid}/collections/${colLabel}/todos/` + todoText), {
@@ -346,6 +346,7 @@ auth.onAuthStateChanged((cred) => {
             //? this creates a copy of the key to the users db
             //? for access later
             location.reload(); 
+        
         }
     })
 })
@@ -362,7 +363,6 @@ auth.onAuthStateChanged((cred) => {
             get(child(dbRef, `public_collections/${key}/`))
             .then((public_collection_item) => { //! 3
                 public_collection_item.forEach((publicCollectionNode) => {
-                    
                     let sharedCollection = document.createElement('h1'); 
                     sharedCollection.classList.add('sharedCollection'); 
                     sharedCollection.textContent = publicCollectionNode.val().colLabel; 
@@ -376,13 +376,11 @@ auth.onAuthStateChanged((cred) => {
                         //? db item with that key
                         //? 3 grabs each collection from the public folder using their respective keys
                         sharedCollection.addEventListener('click', (e) => {
-                            console.log(e.target.innerText); 
                             if (e.target.innerText == '')
                             {
                                 sharedColCont.removeChild(sharedCollection)
                             }
                             else {
-    
                                 auth.onAuthStateChanged((cred) => { //! this will allow me to use get() to get all todos on todolist load 
                                     let uid = cred.uid;  
                                     let colLabel = e.target.innerText;
@@ -420,8 +418,8 @@ auth.onAuthStateChanged((cred) => {
                                         
                                     })
                                     addTodoItem.addEventListener('click', () => {
-                                        if (todoItem = '') { //? makes sure that the todo isnt empty. if you remove an empty todo it'll delete all todos
-                                            alert('You Must Use The Input Field To Write Your 2due!')
+                                        if (todoItem == '') { //? makes sure that the todo isnt empty. if you remove an empty todo it'll delete all todos
+                                            alert('You Must Use The Input Field To Write Your 2Due!')
                                         } else {
                                             get(child(dbRef, `users/${uid}/public_collections_keys/${colLabel}`))
                                             .then((shareKey_item) => {
@@ -477,7 +475,7 @@ joinSharedBtn.addEventListener('click', (e) => {
     let dbRef = ref(db);
     auth.onAuthStateChanged((cred) => {
         let uid = cred.uid; 
-        set(ref(db, `users/${uid}/public_collections_keys/join_keys/${colLabel}/` + shareKey), {
+        set(ref(db, `users/${uid}/public_collections_keys/join_keys/${colLabel}/`), {
             shareKey
         })
         .then(() => {
@@ -512,27 +510,6 @@ auth.onAuthStateChanged((cred) => {
     })
 })
 //* get the shared collections: 
-auth.onAuthStateChanged((cred) => {
-    let uid = cred.uid; 
-    let dbRef = ref(db); 
-    get(child(dbRef, `users/${uid}/public_collection_keys/join_keys/`))
-    .then((joinKey_item) => {
-        joinKey_item.forEach((joinKey) => {
-            let shareKey = joinKey.val().shareKey; //? used for grabbing the collection they joined from db/public_collections
-            get(child(dbRef, `public_collections/${shareKey}/`))
-            .then((publicCollection_item) => {
-                publicCollection_item.forEach((publicCollectionNode) => {
-                    let sharedColCont = document.querySelector('.sharedColCont'); 
-                    sharedCollection = document.createElement('h1'); 
-                    sharedCollection.classList.add('sharedCollection'); 
-                    sharedCollection.textContent = publicCollectionNode.val().colLabel; 
-                    sharedColCont.appendChild(sharedCollection)
 
-                })
-            })
-
-        })
-    })
-})
 
 //! //! //! //!============================================================================

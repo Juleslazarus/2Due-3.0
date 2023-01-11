@@ -19,7 +19,15 @@ const db = getDatabase();
 const auth = getAuth(); 
 
 let userText = document.querySelector('.userText'); 
-
+//? log users name to the screen 
+auth.onAuthStateChanged((cred) => {
+    let uid = cred.uid; 
+    let dbRef = ref(db);
+    get(child(dbRef, `users/${uid}/`))
+    .then((user_item) => {
+        userText.textContent = user_item.val().name; 
+    })
+})
 //? logic for opening the navMenu: 
 let openNavMenu = document.querySelector('#openNavMenu'); 
 let navMenu = document.querySelector('.navMenu'); 
@@ -29,7 +37,7 @@ let closeNavMenu = document.querySelector('#closeNavMenu');
 openNavMenu.addEventListener('click', () => {
     auth.onAuthStateChanged((cred) => {
         let uid = cred.uid
-        //? get users name
+        //? get users email
         let dbRef = ref(db); 
         get(child(dbRef, `users/${uid}/`))
         .then((username) => {
@@ -72,14 +80,12 @@ goToDashBtn.addEventListener('click', () => {
 })
 
 auth.onAuthStateChanged((cred) => {
-    if (cred) {
-        let uid = cred.uid; 
-        let dbRef = ref(db, 'users/' + uid)
-        get(dbRef)
-        .then((user_name) => {
-            userText.textContent = user_name.val().name; 
-        })
-    }
+    let uid = cred.uid; 
+    let dbRef = ref(db); 
+    get(child(dbRef, `users/${uid}`))
+    .then((userName) => {
+        console.log(userName.val().name); 
+    })
 })
 
 //!

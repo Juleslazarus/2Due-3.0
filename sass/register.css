@@ -27,6 +27,14 @@ body {
   width: 100%;
 }
 
+.promptText {
+  color: #005eff;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+  width: 100%;
+}
+
 .mainCont {
   display: grid;
   grid-template-columns: repeat(2, 45vw);

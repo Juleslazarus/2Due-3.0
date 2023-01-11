@@ -24,6 +24,13 @@ body {
     text-align: center;
     width: 100%; 
 }
+.promptText {
+    color: $accentColor; 
+    font-weight: bold;
+    font-size: 1rem; 
+    text-align: center;
+    width: 100%; 
+}
 
 .mainCont {
     display: grid; 

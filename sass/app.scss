@@ -165,12 +165,12 @@ body {
     margin: 5vh 0vh; 
     height: 60rem;
     width: 100%; 
-    background: $secondAccent; 
+    background: $thirdColor; 
     align-items: center;
     box-shadow: 1px 1px 30px 1px rgba(0, 0, 0, 0.301);
     margin-bottom: -15rem;
     .quickTodosTitle {
-        font-size: 5vh;
+        font-size: 3vh;
         color: white; 
         font-weight: 600; 
     }
@@ -181,7 +181,7 @@ body {
             align-items: center;
             .quickTodoInput {
                 padding: 2vh 3vw; 
-                font-size: 2.5vh;
+                font-size: 2vh;
                 border-radius: 10px; 
                 border: none; 
             }
@@ -199,11 +199,11 @@ body {
     .todoItemCont{
         display: flex; 
         flex-direction: column;
-        width: 100%; 
+        width: 50%; 
         .todo {
         height: 8vh; 
         width: 100%; 
-        background: $secondaryColor; 
+        background: $primaryColor; 
         text-align: left;
         display: flex; 
         align-items: center;
@@ -213,6 +213,8 @@ body {
         position: relative; 
         color: white; 
         overflow-y: scroll; 
+        font-size: 2.2vh;
+        border-radius: 10px;
         &:hover {
             text-decoration: line-through 5px black;
             cursor: pointer; 
