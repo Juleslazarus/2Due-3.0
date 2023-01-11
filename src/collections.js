@@ -119,6 +119,7 @@ function createCollection() {
             collection.classList.add('collection'); 
             collection.textContent = colLabel; 
             collectionsCont.appendChild(collection); 
+            removePreloader()
 
             //!
             //? next we need to add the logic for opening the collection: 
@@ -133,7 +134,7 @@ function createCollection() {
                 })
                 removeCol.addEventListener('click', () => {
                             let removePrompt = prompt("Are You Sure You'd Like To Remove This Collection?").tolowerCase
-                            if (removePrompt === 'yes'){
+                            if (removePrompt == 'yes'){
                                 console.log(removePrompt); 
                                 remove(ref(db, `users/${uid}/collections/` + colLabel))
                                 .then(() => {
@@ -166,7 +167,7 @@ function createCollection() {
                         remove(ref(db, `users/${uid}/collections/${colLabel}/todos/${removeTodo}`))
                         todoItemCont.removeChild(todo); 
                     })
-
+                    todoListInput.value = ''; 
                     //! this ends the needed functions of the app!
                 })
             })
@@ -190,6 +191,7 @@ auth.onAuthStateChanged((cred) => {
             collection.classList.add('collection'); 
             collection.textContent = collectionNode.val().colLabel; 
             collectionsCont.appendChild(collection); 
+            // removePreloader(); 
             collection.addEventListener('click', (e) => {
                 colLabel = e.target.innerText; 
                 todoList.style.display = 'inline-block'; //? displays the todo list designated to that collection 
@@ -254,7 +256,7 @@ auth.onAuthStateChanged((cred) => {
                             todoItemCont.removeChild(todo); 
                         })
                     }
-
+                    todoListInput.value = '';
                     //! this ends the needed functions of the app!
                 })
             })
@@ -608,3 +610,10 @@ createColBtn.addEventListener('click', (e) => {
 //     })
 // })
 // //! //! //! //!============================================================================
+// let colsPreloader = document.querySelector('.colsPreloader')
+
+// function removePreloader() {
+//     colsPreloader.style.opacity = 0;
+//     colsPreloader.style.height = '0vh' 
+//     colsPreloader.style.width = '0vw' 
+// }

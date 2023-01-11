@@ -9,6 +9,12 @@
     <script src="https://kit.fontawesome.com/a3fa4c138f.js" crossorigin="anonymous"></script> <!--? font awesome  -->
 </head>
 <body>
+    <div class='preloadCont'>
+        
+    </div>
+    <!-- <div class="colsPreloader">
+
+    </div> -->
     <div class="todoList">
         <div class="todoHeader">
             <h1 class="todoListTitle"></h1>
@@ -101,5 +107,12 @@
         </div> -->
     </div>
     <script src="../src/collections.js" type="module"></script>
+    <script>
+        let loader = document.querySelector('.preloadCont')
+
+        window.addEventListener('load', () => {
+            loader.style.display = 'none'; 
+        })
+    </script>
 </body>
 </html>
