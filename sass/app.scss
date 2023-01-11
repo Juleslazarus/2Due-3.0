@@ -29,6 +29,16 @@ body {
     transition: all .4s; 
 }
 
+.preloader {
+    height: 100%; 
+    width: 100%; 
+    z-index: 100; 
+    background: $thirdColor; 
+    background-size: 3vh;
+    transition: all .4s;
+
+}
+
 
 .userText {
     // font-size: 1.5vh !important;
@@ -148,6 +158,7 @@ body {
                 &:hover {
                     transform: translateY(-4px); 
                     box-shadow: 0px 20px 15px 1px rgba(0, 0, 0, 0.549);
+                    background: $primaryColor;
                 }
             }
         }
@@ -201,7 +212,7 @@ body {
                 font-size: 2vh;
                 border-radius: 10px; 
                 border: none; 
-                width: 30vw;
+                width: 60vw;
             }
             #addQuickTodo {
                 font-size: 6.5vh;
@@ -217,10 +228,11 @@ body {
     .todoItemCont{
         display: flex; 
         flex-direction: column;
-        width: 50%; 
+        width: 100%; 
+        align-items: center;
         .todo {
         height: 8vh; 
-        width: 100%; 
+        width: 80%; ; 
         background: $primaryColor; 
         text-align: left;
         display: flex; 

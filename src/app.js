@@ -141,3 +141,10 @@ auth.onAuthStateChanged((cred) => {
         })
     })
 })
+
+//? use enter to submit 
+quickTodoInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        document.getElementById('addQuickTodo').click(); 
+    }
+})

@@ -82,7 +82,7 @@ body {
 }
 
 .mainCont .bgContLeft {
-  background-image: url(../images/macbookToUse.png);
+  background-image: url(../images/macCollections.png);
   background-size: 75em;
   background-position: center;
   background-repeat: no-repeat;
@@ -198,7 +198,7 @@ body {
     background-size: 90vw !important;
     background-position: center !important;
     background-repeat: no-repeat;
-    width: 85%;
+    width: 80%;
   }
   .bgContLeft h1 {
     padding: 1em;
@@ -247,9 +247,9 @@ body {
   .mainCont .bgContLeft {
     height: 30em !important;
     width: 100%;
-    background-image: url(../images/iphonetouse.jpg) !important;
-    background-size: 30vh !important;
-    background-position: center !important;
+    background-image: url(../images/iphonecols.png) !important;
+    background-size: 100vh !important;
+    background-position: top !important;
   }
   .mainCont .bgContLeft h1 {
     font-size: 1rem;

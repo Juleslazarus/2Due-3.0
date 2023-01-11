@@ -45,7 +45,7 @@ body {
 }
 
 .mainCont .bgContLeft {
-  background-image: url(../images/macbookToUse.png);
+  background-image: url(../images/macCollections.png);
   background-size: 75em;
   background-position: center;
   background-repeat: no-repeat;
@@ -205,8 +205,8 @@ body {
   .mainCont .bgContLeft {
     height: 30em !important;
     width: 100%;
-    background-image: url(../images/iphonetouse.jpg) !important;
-    background-size: 10em !important;
+    background-image: url(../images/iphonecols.png) !important;
+    background-size: 100vh !important;
     background-position: top !important;
   }
   .mainCont .bgContLeft h1 {

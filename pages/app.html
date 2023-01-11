@@ -9,9 +9,7 @@
     <script src="https://kit.fontawesome.com/a3fa4c138f.js" crossorigin="anonymous"></script> <!--? font awesome  -->
 </head>
 <body>
-    <div class='preloadCont'>
-        
-    </div>
+    
     <div class="landingPageSection">  <!-- ! will need this in js -->
         <div class="headerCont">
             <div class="textCont"> 
@@ -28,24 +26,26 @@
                 </div> 
             </div>
         </div>
-        <div class="landingHeroCont">
-            <div class="heroCont">
-                <h1 class="heroText">Welcome,  </h1>
-                <h1 class="userText"> </h1>
-            </div>
-            <div class="heroBtnCont">
-                <button class="goToDashBtn">View Dashboard</button> <!--! this will be needed later in js -->
-            </div>
-            <div class="quickTodosCont">
-                <h1 class="quickTodosTitle">Add A Quick 2Due!</h1>
-                <div>
-                    <div class="inputCont">
-                        <input class='quickTodoInput' type="text">
-                        <i id="addQuickTodo" class="fa-solid fa-circle-plus"></i>
-                        
-                    </div>
+        <div class="preloader"> 
+            <div class="landingHeroCont">
+                <div class="heroCont">
+                    <h1 class="heroText">Welcome,  </h1>
+                    <h1 class="userText"> </h1>
                 </div>
-                <div class="todoItemCont">
+                <div class="heroBtnCont">
+                    <button class="goToDashBtn">View Dashboard</button> <!--! this will be needed later in js -->
+                </div>
+                <div class="quickTodosCont">
+                    <h1 class="quickTodosTitle">Add A Quick 2Due!</h1>
+                    <div>
+                        <div class="inputCont">
+                            <input id="quickInput" class='quickTodoInput' type="text">
+                            <i id="addQuickTodo" class="fa-solid fa-circle-plus"></i>
+                            
+                        </div>
+                    </div>
+                    <div class="todoItemCont">
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,12 +54,6 @@
 
     <script src="../src/app.js" type="module"></script>
 
-    <!-- <script>
-        let loader = document.querySelector('.preloadCont')
-
-        window.addEventListener('load', () => {
-            loader.style.display = 'none'; 
-        })
-    </script> -->
+    
 </body>
 </html>

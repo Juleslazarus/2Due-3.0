@@ -13,14 +13,24 @@ body {
 }
 
 .bgCont {
-  background-image: url(../images/macbookToUse.png);
-  background-size: cover;
+  background-image: url(../images/mac1.png);
+  background-size: 80rem;
+  background-repeat: no-repeat;
   background-position: center;
   height: 100vh;
   width: 100vw;
   position: absolute;
   animation: bgFadeIn 2s running ease-in-out;
   z-index: -1;
+}
+
+.bgCont::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: black;
+  opacity: .4;
 }
 
 @keyframes bgFadeIn {
@@ -41,9 +51,10 @@ body {
 
 @media all and (max-width: 1020px) {
   .bgCont {
-    background-image: url(../images/ipadtouse.png);
-    background-size: 100em;
+    background-image: url(../images/ipadCollections.png);
+    background-size: 70rem;
     background-repeat: no-repeat;
+    background-position: center;
   }
   .todoTextCont p {
     padding: none !important;
@@ -52,9 +63,10 @@ body {
 
 @media all and (max-width: 650px) {
   .bgCont {
-    background-image: url(../images/iphone1.png);
-    background-size: 20em;
+    background-image: url(../images/iphonetouse.png);
+    background-size: 15rem;
     z-index: -1 !important;
+    background-position: bottom;
   }
   .todoTextCont p {
     padding: 1em;
@@ -93,6 +105,7 @@ body {
 .mainSection .appCont h1 {
   text-align: center;
   font-size: 4rem;
+  font-weight: 900;
   animation: headerFadeIn 1.5s running ease-in-out;
 }
 
@@ -127,6 +140,7 @@ body {
 
 .mainSection .appCont .btnCont .startBtn:hover {
   transform: translateY(-5px);
+  background: #1c1c32;
 }
 
 @keyframes headerFadeIn {
