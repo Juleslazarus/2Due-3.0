@@ -1,4 +1,5 @@
 
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
 import { getDatabase, set, get, ref, remove, update, child, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"; 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js"; 
@@ -24,7 +25,9 @@ auth.onAuthStateChanged((cred) => {
         location.href = './login.html'
     }
 })
-
+//? for showing how many todos there are: 
+let todoCounter = document.querySelector('.todoCounter'); 
+let todoCount = 0; 
 //? logic for opening the navMenu: 
 let openNavMenu = document.querySelector('#openNavMenu'); 
 let navMenu = document.querySelector('.navMenu'); 
@@ -147,7 +150,8 @@ function createCollection() {
                 addTodoItem.addEventListener('click', () => {
                     let todoItemCont = document.querySelector('.todoItemCont'); 
                     let todoText = todoListInput.value;
-                    if (todoText == '') {
+                    
+                    if (todoText = '') {
                         alert('You Must Use The Input Field To Write Your 2Due!')
                     } 
                     todoListInput.value = ''; //? sets the input to empty
@@ -160,6 +164,9 @@ function createCollection() {
                     todo.textContent = todoText; 
                     todoItemCont.appendChild(todo); 
                     removeTodoPreloader(); 
+                    todoCount + 1; 
+                    todoCounter.textContent = todoCount; 
+                    todoCounter.style.display = 'inline-block'
                     //? next we have to add the logic for removing todo items. this has to stay nested inside this event listener 
                     //? where the todo scope is. 
                     todo.addEventListener('click', (e) => {
@@ -211,6 +218,9 @@ auth.onAuthStateChanged((cred) => {
                             todo.textContent = todoNode.val().todoText; 
                             todoItemCont.appendChild(todo); //! //? this will append the todo to the screen
                             removeTodoPreloader()
+                            todoCount += 1
+                            todoCounter.style.display = 'inline-block'; 
+                            todoCounter.textContent = todoCount; 
                             //? next we need to add the ability to remove a todo: 
                             todo.addEventListener('click', (e) => {
                                 let removeTodo = e.target.innerText
@@ -280,196 +290,222 @@ createColBtn.addEventListener('click', (e) => {
 // //? logic for creating and joining online collections:
 
 // //* choices menu dom elements: 
-// let choiceMenu = document.querySelector('.choiceMenu'); 
-// let createIcon = document.querySelector('#createIcon'); 
-// let joinIcon = document.querySelector('#joinIcon'); 
-// let closeChoices = document.querySelector('#closeChoices');
+let choiceMenu = document.querySelector('.choiceMenu'); 
+let createIcon = document.querySelector('#createIcon'); 
+let joinIcon = document.querySelector('#joinIcon'); 
+let closeChoices = document.querySelector('#closeChoices');
 
-// //* open the choices menu: 
-// let addSharedBtn = document.querySelector('.addSharedBtn')
+//* open the choices menu: 
+let addSharedBtn = document.querySelector('.addSharedBtn')
 
-// //* create shared collection dom elements: 
-// let createSharedCol = document.querySelector('.createSharedCol'); 
-// let closeCSharedMenu = document.querySelector('#closeCreateMenu'); 
-// let createColName = document.querySelector('.createColName'); 
-// let createKeyInput = document.querySelector('.createKeyInput'); 
-// let createSharedBtn = document.querySelector('.createSharedBtn'); 
-// let sharedColCont = document.querySelector('.sharedColCont'); 
+//* create shared collection dom elements: 
+let createSharedCol = document.querySelector('.createSharedCol'); 
+let closeCSharedMenu = document.querySelector('#closeCreateMenu'); 
+let createColName = document.querySelector('.createColName'); 
+let createKeyInput = document.querySelector('.createKeyInput'); 
+let createSharedBtn = document.querySelector('.createSharedBtn'); 
+let sharedColCont = document.querySelector('.sharedColCont'); 
 
-// //* join shared collection dom elements: 
-// let joinSharedCol = document.querySelector('.joinSharedCol'); 
-// let closeJoinMenu = document.querySelector('#closeJoinMenu'); 
-// let joinColName = document.querySelector('.joinColName'); 
-// let joinKeyInput = document.querySelector('.joinKeyInput'); 
-// let joinSharedBtn = document.querySelector('.joinSharedBtn'); 
-// //?==== first we'll do the logic for creating a shared collection: ===============================
-// addSharedBtn.addEventListener('click', () => {
-//     choiceMenu.style.display = 'flex'; //! opens the choice menu
-// })
-// closeChoices.addEventListener('click', () => {
-//     choiceMenu.style.display = 'none'; //! closes the choice menu
-// })
+//* join shared collection dom elements: 
+let joinSharedCol = document.querySelector('.joinSharedCol'); 
+let closeJoinMenu = document.querySelector('#closeJoinMenu'); 
+let joinColName = document.querySelector('.joinColName'); 
+let joinKeyInput = document.querySelector('.joinKeyInput'); 
+let joinSharedBtn = document.querySelector('.joinSharedBtn'); 
+//?==== first we'll do the logic for creating a shared collection: ===============================
+addSharedBtn.addEventListener('click', () => {
+    choiceMenu.style.display = 'flex'; //! opens the choice menu
+})
+closeChoices.addEventListener('click', () => {
+    choiceMenu.style.display = 'none'; //! closes the choice menu
+})
 
-// createIcon.addEventListener('click', () => {
-//     createSharedCol.style.display = 'flex'
-//     choiceMenu.style.display = 'none'; 
-//     createColName.select(); 
-// })
-// closeCSharedMenu.addEventListener('click', () => {
-//     createSharedCol.style.display = 'none';
-// })
-// //* create the shared collection: ----------------------------
-// closeTodoList.addEventListener('click', () => {
-//     todoList.style.display = 'none'; 
-//     location.reload(); 
-// })
-// auth.onAuthStateChanged((cred) => {
-//     let uid = cred.uid; 
-//     createSharedBtn.addEventListener('click', (e) => {
-//         e.preventDefault(); 
-//         let shareKey = createKeyInput.value; 
-//         let colLabel = createColName.value; 
-//         if (shareKey == '' && colLabel == '' ) {
-//             alert('You Cannot Create A Public Collection Without A Share Key Or Collection Name!')
-//         } else {
-//             //? for this collections logic ill only do the db creation
-//             //? and then ill have the page refresh and load it to the screen 
-//             //? with a get() function so i only have to make one logic tree 
-//             //? as opposed to one for live creation and db getting like 
-//             //? above with the private collections
-//             set(ref(db, `public_collections/${shareKey}/${colLabel}/`), {
-//                 colLabel
-//             }),
-//             set(ref(db,`users/${uid}/public_collections_keys/${colLabel}/`), { 
-//                 shareKey
-//             })
-//             .catch((err) => {
-//                 console.log(err.message); 
-//             })
-//             //? this creates a copy of the key to the users db
-//             //? for access later
-//             location.reload(); 
+createIcon.addEventListener('click', () => {
+    createSharedCol.style.display = 'flex'
+    choiceMenu.style.display = 'none'; 
+    createColName.select(); 
+})
+closeCSharedMenu.addEventListener('click', () => {
+    createSharedCol.style.display = 'none';
+})
+//* create the shared collection: ----------------------------
+closeTodoList.addEventListener('click', () => {
+    todoList.style.display = 'none'; 
+    location.reload(); 
+})
+auth.onAuthStateChanged((cred) => {
+    let uid = cred.uid; 
+    createSharedBtn.addEventListener('click', (e) => {
+        e.preventDefault(); 
+        let shareKey = createKeyInput.value; 
+        let colLabel = createColName.value; 
+        if (shareKey == '' && colLabel == '' ) {
+            alert('You Cannot Create A Public Collection Without A Share Key Or Collection Name!')
+        } else {
+            //? for this collections logic ill only do the db creation
+            //? and then ill have the page refresh and load it to the screen 
+            //? with a get() function so i only have to make one logic tree 
+            //? as opposed to one for live creation and db getting like 
+            //? above with the private collections
+            set(ref(db, `public_collections/${shareKey}/${colLabel}/`), {
+                colLabel
+            }),
+            set(ref(db,`users/${uid}/public_collections_keys/${colLabel}/`), { 
+                shareKey
+            })
+            .catch((err) => {
+                console.log(err.message); 
+            })
+            //? this creates a copy of the key to the users db
+            //? for access later
+            location.reload(); 
         
-//         }
-//     })
-// })
+        }
+    })
+})
 // //* get() from db to display and then the rest of the logic will 
 // //* sit here!: 
-// auth.onAuthStateChanged((cred) => {
-//     let uid = cred.uid; 
-//     let dbRef = ref(db); 
-//     get(child(dbRef, `users/${uid}/public_collections_keys/`)) //! 1
-//     .then((public_key_item) => {
-//         public_key_item.forEach((publicKeyNode) => { //! 2
-//             let key = publicKeyNode.val().shareKey; 
-//             let dbRef = ref(db); 
-//             get(child(dbRef, `public_collections/${key}/`))
-//             .then((public_collection_item) => { //! 3
-//                 public_collection_item.forEach((publicCollectionNode) => {
-//                     let sharedCollection = document.createElement('h1'); 
-//                     sharedCollection.classList.add('sharedCollection'); 
-//                     sharedCollection.textContent = publicCollectionNode.val().colLabel; 
-//                     if (sharedCollection == '') {
-//                         console.log('sharedCol not created');
-//                     }
-//                     else { 
-//                         sharedColCont.appendChild(sharedCollection); 
-//                         //? this is kind of complex but it works. grabs the key from the user @ 1
-//                         //? 2 sets each key as a variable and uses that variable to call the public collection
-//                         //? db item with that key
-//                         //? 3 grabs each collection from the public folder using their respective keys
-//                         sharedCollection.addEventListener('click', (e) => {
-//                             if (e.target.innerText == '')
-//                             {
-//                                 sharedColCont.removeChild(sharedCollection)
-//                             }
-//                             else {
-//                                 auth.onAuthStateChanged((cred) => { //! this will allow me to use get() to get all todos on todolist load 
-//                                     let uid = cred.uid;  
-//                                     let colLabel = e.target.innerText;
-//                                     let todoItem = todoListInput.value;  
-//                                     let dbRef = ref(db)
-//                                     todoList.style.display = 'inline-block'; 
-//                                     todoListTitle.textContent = `${colLabel}`;
-//                                     //? removes shared Col
-//                                     removeCol.addEventListener('click', () => {
-//                                         auth.onAuthStateChanged((cred) => {
-//                                             let uid = cred.uid
-//                                             get(child(dbRef, `users/${uid}/public_collections_keys/${colLabel}/`))
-//                                             .then((shareKey_item) => {
-//                                                 let shareKey = shareKey_item.val().shareKey; 
-//                                                 let removeSharedPrompt = prompt("Are You Sure You'd Like To Remove This Shared Collection?").toLowerCase
-//                                                 if ( removeSharedPrompt = 'yes'){
-//                                                     remove(ref(db, `public_collections/${shareKey}`))
-//                                                     remove(ref(db, `users/${uid}/public_collections_keys/${colLabel}`))
-//                                                     closeTodoList.click();
-//                                                     console.log('db deleted'); 
-//                                                 } 
-//                                             })
-//                                         })
-//                                     })
+auth.onAuthStateChanged((cred) => {
+    let uid = cred.uid; 
+    let dbRef = ref(db); 
+    get(child(dbRef, `users/${uid}/public_collections_keys/`)) //! 1
+    .then((public_key_item) => {
+        public_key_item.forEach((publicKeyNode) => { //! 2
+            let key = publicKeyNode.val().shareKey; 
+            let dbRef = ref(db); 
+            get(child(dbRef, `public_collections/${key}/`))
+            .then((public_collection_item) => { //! 3
+                public_collection_item.forEach((publicCollectionNode) => {
+                    let sharedCollection = document.createElement('h1'); 
+                    sharedCollection.classList.add('sharedCollection'); 
+                    sharedCollection.textContent = publicCollectionNode.val().colLabel; 
+                    if (sharedCollection.textContent == '') {
+                        console.log('sharedCol not created');
+                    }
+                    else { 
+                        sharedColCont.appendChild(sharedCollection); 
+                        //? this is kind of complex but it works. grabs the key from the user @ 1
+                        //? 2 sets each key as a variable and uses that variable to call the public collection
+                        //? db item with that key
+                        //? 3 grabs each collection from the public folder using their respective keys
+                        sharedCollection.addEventListener('click', (e) => {
+                            if (e.target.innerText == '')
+                            {
+                                sharedColCont.removeChild(sharedCollection)
+                            }
+                            else {
+                                auth.onAuthStateChanged((cred) => { //! this will allow me to use get() to get all todos on todolist load 
+                                    let uid = cred.uid;  
+                                    let colLabel = e.target.innerText;
+                                    let todoItem = todoListInput.value;  
+                                    let dbRef = ref(db)
+                                    todoList.style.display = 'inline-block'; 
+                                    todoListTitle.textContent = `${colLabel}`;
+                                    //? removes shared Col
+                                    removeCol.addEventListener('click', () => {
+                                        auth.onAuthStateChanged((cred) => {
+                                            let uid = cred.uid
+                                            get(child(dbRef, `users/${uid}/public_collections_keys/${colLabel}/`))
+                                            .then((shareKey_item) => {
+                                                let shareKey = shareKey_item.val().shareKey;
+                                                let RemoveAnswer = 'yes';  
+                                                let removeSharedPrompt = prompt("Are You Sure You'd Like To Remove This Shared Collection?").toLowerCase()
+                                                if ( removeSharedPrompt === RemoveAnswer){
+                                                    remove(ref(db, `public_collections/${shareKey}`))
+                                                    remove(ref(db, `users/${uid}/public_collections_keys/${colLabel}`))
+                                                    closeTodoList.click();
+                                                    console.log('db deleted'); 
+                                                } 
+                                            })
+                                        })
+                                    })
 
-//                                     //? get all the todos from the database 
-//                                     get(child(dbRef, `users/${uid}/public_collections_keys/${colLabel}/`))
-//                                     .then((shareKey_item) => {
-//                                         let todoListTitle = document.querySelector('.todoListTitle'); 
-//                                         let shareKey = shareKey_item.val().shareKey; 
-//                                         let sharedKeyTitle = document.querySelector(".sharedKeyTitle")
-//                                         sharedKeyTitle.textContent = `Share Key: ${shareKey}`
-//                                         // todoListTitle.appendChild(shareKeyTitle); 
-                                        
-//                                     })
-//                                     addTodoItem.addEventListener('click', () => {
-//                                         if (todoItem = '') { //? makes sure that the todo isnt empty. if you remove an empty todo it'll delete all todos
-//                                             alert('You Must Use The Input Field To Write Your 2Due!')
-//                                         } else {
-//                                             get(child(dbRef, `users/${uid}/public_collections_keys/${colLabel}`))
-//                                             .then((shareKey_item) => {
-//                                                 let todoItem = todoListInput.value; 
-//                                                 let shareKey = shareKey_item.val().shareKey; 
-//                                                     set(ref(db, `public_collections/${shareKey}/todos/${todoItem}`), {
-//                                                         todoItem
-//                                                     })
-//                                                     .then(() => { //? creates todos
-//                                                         let todoItemCont = document.querySelector('.todoItemCont'); 
-//                                                         let todo = document.createElement('h1'); 
-//                                                         todo.classList.add('todo'); 
-//                                                         todo.textContent = todoItem; 
-//                                                         todoItemCont.appendChild(todo); 
-//                                                         todoListInput.value = ''; 
-//                                                         todo.addEventListener('click', (e) => { //? removes todos
-//                                                             let removeTodo = e.target.innerText; 
-//                                                             remove(ref(db, `users/${uid}/public_collections_keys/${colLabel}/${removeTodo}`))
-//                                                             remove(ref(db, `public_collections/${shareKey}/todos/${removeTodo}`))
-//                                                             todoItemCont.removeChild(todo);                                                 })
+                                    //? get all the todos from the database 
+                                    get(child(dbRef, `users/${uid}/public_collections_keys/${colLabel}/`))
+                                    .then((shareKey_item) => {
+                                        let todoListTitle = document.querySelector('.todoListTitle'); 
+                                        let shareKey = shareKey_item.val().shareKey; 
+                                        let sharedKeyTitle = document.querySelector(".sharedKeyTitle")
+                                        sharedKeyTitle.textContent = `Share Key: ${shareKey}`
+                                        //? actual get todos part: 
+                                        get(child(dbRef, `users/${uid}/`))
+                                        .then((usersName) => {
+                                            let userName = usersName.val().name; 
+                                            addTodoItem.addEventListener('click', () => {
+                                                if (todoItem = '') { //? makes sure that the todo isnt empty. if you remove an empty todo it'll delete all todos
+                                                    alert('You Must Use The Input Field To Write Your 2Due!')
+                                                } else {
+                                                    get(child(dbRef, `users/${uid}/public_collections_keys/${colLabel}`))
+                                                    .then((shareKey_item) => {
+                                                        let todoItem = `${userName}: ${todoListInput.value} `
+                                                        let shareKey = shareKey_item.val().shareKey; 
+                                                            set(ref(db, `public_collections/${shareKey}/todos/${todoItem}`), {
+                                                                todoItem
+                                                            })
+                                                            .then(() => { //? creates todos
+                                                                let todoItemCont = document.querySelector('.todoItemCont'); 
+                                                                let todo = document.createElement('h1'); 
+                                                                todo.classList.add('todo'); 
+                                                                todo.textContent = todoItem; 
+                                                                todoItemCont.appendChild(todo); 
+                                                                todoListInput.value = ''; 
+                                                                todo.addEventListener('click', (e) => { //? removes todos
+                                                                    let removeTodo = e.target.innerText; 
+                                                                    // remove(ref(db, `users/${uid}/public_collections_keys/${colLabel}/${removeTodo}`))
+                                                                    remove(ref(db, `public_collections/${shareKey}/todos/${removeTodo}`))
+                                                                    todoItemCont.removeChild(todo);
+                                                                })
+                                                                    
+                                                            })
                                                             
-//                                                     })
-                                                    
-//                                             })
-//                                         }
-//                                     })
-//                                 })
-//                             }
-//                         })
+                                                    })
+                                                }
+                                            })
+                                        })
+                                        get(child(dbRef, `public_collections/${shareKey}/todos`))
+                                        .then((todo_item) => {
+                                            todo_item.forEach((todoNode) => {
+                                                let todoItemCont = document.querySelector('.todoItemCont'); 
+                                                console.log(todoNode.val().todoItem)
+                                                let todo = document.createElement('h1'); 
+                                                todo.classList.add("todo"); 
+                                                let todoText = todoNode.val().todoItem; 
+                                                
+                                                todo.textContent = todoNode.val().todoItem 
+                                                todoItemCont.appendChild(todo); 
+                                                todoPreloader.style.display = 'none'; 
+                                                todo.addEventListener('click', (e) => { //? removes todos
+                                                    let removeTodo = e.target.innerText; 
+                                                    // remove(ref(db, `users/${uid}/public_collections_keys/${colLabel}/${removeTodo}`))
+                                                    remove(ref(db, `public_collections/${shareKey}/todos/${removeTodo}`))
+                                                    todoItemCont.removeChild(todo);
+                                                })
+                                            })
+                                        })
+                                        
+                                    })
+                                })
+                            }
+                        })
                         
-//                     }
+                    }
 
-//                 })
-//             })
-//         })
-//     })
-// })
-// //? this concludes creating shared collections now we'll add joining the collections
-// //* this is for opening and closing the choice menu and join menu
-// joinIcon.addEventListener('click', () => {
-//     joinSharedCol.style.display = 'flex'; 
-//     choiceMenu.style.display = 'none'; 
-//     joinColName.select(); 
-// })
-// closeJoinMenu.addEventListener('click', () => {
-//     joinSharedCol.style.display = 'none'; 
-// })
-// //* this will set the join key 
+                })
+            })
+        })
+    })
+})
+//? this concludes creating shared collections now we'll add joining the collections
+//* this is for opening and closing the choice menu and join menu
+joinIcon.addEventListener('click', () => {
+    joinSharedCol.style.display = 'flex'; 
+    choiceMenu.style.display = 'none'; 
+    joinColName.select(); 
+})
+closeJoinMenu.addEventListener('click', () => {
+    joinSharedCol.style.display = 'none'; 
+})
+//* this will set the join key 
 // joinSharedBtn.addEventListener('click', (e) => {
 //     e.preventDefault();
 //     let shareKey = joinKeyInput.value; 
@@ -485,38 +521,39 @@ createColBtn.addEventListener('click', (e) => {
 //         })
 //     })
 // })
-// auth.onAuthStateChanged((cred) => {
-//     let uid = cred.uid; 
-//     joinSharedBtn.addEventListener('click', (e) => {
-//         e.preventDefault(); 
-//         let shareKey = joinKeyInput.value; 
-//         let colLabel = joinColName.value;  
-//         if (shareKey === '' && colLabel == '' ) {
-//             alert('You Cannot Join A Public Collection Without A Share Key or Collection Name!')
-//         } else {
-//             //? for this collections logic ill only do the db creation
-//             //? and then ill have the page refresh and load it to the screen 
-//             //? with a get() function so i only have to make one logic tree 
-//             //? as opposed to one for live creation and db getting like 
-//             //? above with the private collections
-//             set(ref(db,`users/${uid}/public_collections_keys/${colLabel}/`), { 
-//                 shareKey
-//             })
-//             .catch((err) => {
-//                 console.log(err.message); 
-//             })
-//             //? this creates a copy of the key to the users db
-//             //? for access later
-//             location.reload(); 
-//         }
-//     })
-// })
-// //* get the shared collections: 
+auth.onAuthStateChanged((cred) => {
+    let uid = cred.uid; 
+    joinSharedBtn.addEventListener('click', (e) => {
+        e.preventDefault(); 
+        let shareKey = joinKeyInput.value; 
+        let colLabel = joinColName.value;  
+        if (shareKey === '' && colLabel == '' ) {
+            alert('You Cannot Join A Public Collection Without A Share Key or Collection Name!')
+        } else {
+            //? for this collections logic ill only do the db creation
+            //? and then ill have the page refresh and load it to the screen 
+            //? with a get() function so i only have to make one logic tree 
+            //? as opposed to one for live creation and db getting like 
+            //? above with the private collections
+            set(ref(db,`users/${uid}/public_collections_keys/${colLabel}/`), { 
+                shareKey
+            })
+            .catch((err) => {
+                console.log(err.message); 
+            })
+            //? this creates a copy of the key to the users db
+            //? for access later
+            location.reload(); 
+        }
+    })
+})
+//* get the shared collections: 
 
 // auth.onAuthStateChanged((cred) => {
 //     let uid = cred.uid; 
 //     let dbRef = ref(db); 
-//     get(child(dbRef, `users/${uid}/public_collections_keys/`))
+//     get(child(dbRef, `users/${uid}/public_collections_keys/join_keys/`))
+
 //     .then((join_key_item) => {
 //         join_key_item.forEach((joinKeyNode) => {
 //             let key = joinKeyNode.val().shareKey; 

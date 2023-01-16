@@ -148,3 +148,20 @@ quickTodoInput.addEventListener('keydown', (e) => {
         document.getElementById('addQuickTodo').click(); 
     }
 })
+
+//? colCounter for user ease: 
+let colCounter = document.querySelector('.colCounter'); 
+let colCount = 0; 
+//? get collections count for colCounter: 
+let dbRef = ref(db); 
+auth.onAuthStateChanged((cred) => {
+    let uid = cred.uid; 
+    get(child(dbRef, `users/${uid}/collections/`))
+    .then((collection_item) => {
+        collection_item.forEach((collectionNode) => {
+            colCount += 1; 
+            colCounter.style.display = 'inline-block'
+            colCounter.textContent = colCount; 
+        })
+    })
+})

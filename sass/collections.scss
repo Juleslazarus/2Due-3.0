@@ -117,7 +117,7 @@
     .collectionsCont {
         height: 45%; 
         .collection {
-            background: $primaryColor; 
+            background: rgb(13, 16, 59); 
             padding: 2vh;
             margin: 1vh 0vw; 
             text-align: left;
@@ -341,7 +341,7 @@ body {
     width: 100%;
     top: 10%; 
     left: 0%; 
-    background: $primaryColor; 
+    background: rgb(18, 18, 39); 
     color: white; 
     display: none; 
     opacity: 1; 
@@ -349,6 +349,17 @@ body {
     .todoHeader {
         display: flex; 
         padding: 1vw; 
+        position: relative; 
+        .todoCounter {
+            position: absolute; 
+            top: 30%; 
+            right: 15%; 
+            background: red; 
+            padding: .2rem .6rem; 
+            border-radius: 50%; 
+            font-size: 2vh;
+            display: none; 
+        }
         .todoListTitle {
             margin-right: auto; 
             font-weight: bold; 
@@ -379,6 +390,7 @@ body {
         align-items: center;
         padding: .1rem; 
         gap: 1rem;
+        position: relative; 
         input {
             height: 90%; 
             margin-right: auto;
@@ -403,6 +415,7 @@ body {
                 background: $secondAccent 
             }
         }
+        
     }
 }
 
@@ -436,23 +449,24 @@ body {
     width: 100%; 
 }
 .todoItemCont {
-    background: $primaryColor; 
+    background: rgb(15, 15, 40); 
     height: 80%; 
     width: 100%; 
     overflow-y: scroll; 
     overflow-x: hidden; 
     .todo {
-        height: 8vh; 
+        height: 10vh; 
         width: 100%; 
         background: $secondaryColor; 
         text-align: left;
         display: flex; 
         align-items: center;
-        padding: 1vh;
+        padding: 1.5vh;
         margin: 1rem 0rem;
         word-wrap: normal;
         position: relative; 
         font-size: 2.5vh;
+        overflow-y: scroll; 
         &:hover {
             text-decoration: line-through 5px black;
             cursor: pointer; 
