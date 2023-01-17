@@ -131,7 +131,7 @@
 }
 
 .colsSection .collectionsCont .collection {
-  background: #1c1c32;
+  background: #0d103b;
   padding: 2vh;
   margin: 1vh 0vw;
   text-align: left;
@@ -361,7 +361,7 @@ body {
   width: 100%;
   top: 10%;
   left: 0%;
-  background: #1c1c32;
+  background: #121227;
   color: white;
   display: none;
   opacity: 1;
@@ -371,6 +371,18 @@ body {
 .todoList .todoHeader {
   display: flex;
   padding: 1vw;
+  position: relative;
+}
+
+.todoList .todoHeader .todoCounter {
+  position: absolute;
+  top: 30%;
+  right: 15%;
+  background: red;
+  padding: .2rem .6rem;
+  border-radius: 50%;
+  font-size: 2vh;
+  display: none;
 }
 
 .todoList .todoHeader .todoListTitle {
@@ -406,6 +418,7 @@ body {
   align-items: center;
   padding: .1rem;
   gap: 1rem;
+  position: relative;
 }
 
 .todoList .todoInputCont input {
@@ -467,7 +480,7 @@ body {
 }
 
 .todoItemCont {
-  background: #1c1c32;
+  background: #0f0f28;
   height: 80%;
   width: 100%;
   overflow-y: scroll;
@@ -475,17 +488,18 @@ body {
 }
 
 .todoItemCont .todo {
-  height: 8vh;
+  height: 10vh;
   width: 100%;
   background: #3f3f75;
   text-align: left;
   display: flex;
   align-items: center;
-  padding: 1vh;
+  padding: 1.5vh;
   margin: 1rem 0rem;
   word-wrap: normal;
   position: relative;
   font-size: 2.5vh;
+  overflow-y: scroll;
 }
 
 .todoItemCont .todo:hover {
