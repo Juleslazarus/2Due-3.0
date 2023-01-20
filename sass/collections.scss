@@ -200,8 +200,8 @@
             display: flex; 
             justify-content: center;
             align-items: center;
-            height: 50vh;; 
-            width: 50%; 
+            height: 50vh;
+            width: 100%; 
             font-size: 8vh; 
             color: white; 
             z-index: 11; 
@@ -230,7 +230,7 @@
             transition: all .2s; 
             &:hover {
                 &::before {
-                    content: 'Create A Collection'; 
+                    content: 'Create/Join'; 
                     overflow: hidden; 
                     font-size: 2vh;
                     text-align: center; 
@@ -260,7 +260,7 @@ body {
     position: relative; 
 }
 .headerCont {
-    height: 10vh; 
+    height: 8vh; 
     display: flex; 
     background: $fourthColor; 
     color: white; 
@@ -335,6 +335,16 @@ body {
 
 //? 
 //? todolist from collection 
+.todoCounter {
+    position: absolute;
+    top: 0%;
+    right: 1%;
+    background: red;
+    padding: .2rem .6rem;
+    border-radius: 50%;
+    font-size: 2vh;
+    display: none;
+}
 .todoList {
     position: fixed; 
     height: 80vh; 
@@ -348,6 +358,7 @@ body {
     z-index: 10; 
     .todoHeader {
         display: flex; 
+        position: relative; 
         padding: 1vw; 
         .todoListTitle {
             margin-right: auto; 

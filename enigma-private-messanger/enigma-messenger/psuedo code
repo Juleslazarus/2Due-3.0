@@ -1,0 +1,1 @@
+use onValue method to location.reload() every time a new message is sent

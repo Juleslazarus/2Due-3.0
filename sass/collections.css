@@ -12,7 +12,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #494b6e;
+  background: #212a38;
 }
 
 .preloadCont {
@@ -31,7 +31,7 @@
 .colsPreloader {
   height: 25rem;
   width: 100%;
-  background: #2f3148;
+  background: #15172c;
   background-image: url(../images/colpreloader.gif);
   background-repeat: no-repeat;
   background-position: center;
@@ -111,7 +111,7 @@
 
 .colsSection {
   height: 100vh;
-  background: #2f3148;
+  background: #15172c;
 }
 
 .colsSection .privColHeader {
@@ -131,7 +131,7 @@
 }
 
 .colsSection .collectionsCont .collection {
-  background: #0d103b;
+  background: #1c1c32;
   padding: 2vh;
   margin: 1vh 0vw;
   text-align: left;
@@ -217,7 +217,7 @@
   justify-content: center;
   align-items: center;
   height: 50vh;
-  width: 50%;
+  width: 100%;
   font-size: 8vh;
   color: white;
   z-index: 11;
@@ -247,7 +247,7 @@
 }
 
 .choiceMenu .choicesCont #createIcon:hover::before {
-  content: 'Create A Collection';
+  content: 'Create/Join';
   overflow: hidden;
   font-size: 2vh;
   text-align: center;
@@ -274,7 +274,7 @@ body {
 }
 
 .headerCont {
-  height: 10vh;
+  height: 8vh;
   display: flex;
   background: #212154;
   color: white;
@@ -355,13 +355,24 @@ body {
   color: white;
 }
 
+.todoCounter {
+  position: absolute;
+  top: 0%;
+  right: 1%;
+  background: red;
+  padding: .2rem .6rem;
+  border-radius: 50%;
+  font-size: 2vh;
+  display: none;
+}
+
 .todoList {
   position: fixed;
   height: 80vh;
   width: 100%;
   top: 10%;
   left: 0%;
-  background: #121227;
+  background: #1c1c32;
   color: white;
   display: none;
   opacity: 1;
@@ -370,19 +381,8 @@ body {
 
 .todoList .todoHeader {
   display: flex;
-  padding: 1vw;
   position: relative;
-}
-
-.todoList .todoHeader .todoCounter {
-  position: absolute;
-  top: 30%;
-  right: 15%;
-  background: red;
-  padding: .2rem .6rem;
-  border-radius: 50%;
-  font-size: 2vh;
-  display: none;
+  padding: 1vw;
 }
 
 .todoList .todoHeader .todoListTitle {
@@ -418,7 +418,6 @@ body {
   align-items: center;
   padding: .1rem;
   gap: 1rem;
-  position: relative;
 }
 
 .todoList .todoInputCont input {
@@ -445,7 +444,7 @@ body {
 }
 
 .todoList .todoInputCont button:active {
-  background: #494b6e;
+  background: #212a38;
 }
 
 .userText {
@@ -463,7 +462,7 @@ body {
 }
 
 .removeColCont button {
-  background-color: #2f3148;
+  background-color: #15172c;
   cursor: pointer;
   border: none;
   color: white;
@@ -480,7 +479,7 @@ body {
 }
 
 .todoItemCont {
-  background: #0f0f28;
+  background: #1c1c32;
   height: 80%;
   width: 100%;
   overflow-y: scroll;
@@ -488,18 +487,17 @@ body {
 }
 
 .todoItemCont .todo {
-  height: 10vh;
+  height: 8vh;
   width: 100%;
   background: #3f3f75;
   text-align: left;
   display: flex;
   align-items: center;
-  padding: 1.5vh;
+  padding: 1vh;
   margin: 1rem 0rem;
   word-wrap: normal;
   position: relative;
   font-size: 2.5vh;
-  overflow-y: scroll;
 }
 
 .todoItemCont .todo:hover {

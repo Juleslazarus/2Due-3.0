@@ -2,3 +2,59 @@ for the delete task ill have a classList.add to the todo div
 that will mark it through and reduce text opacity as well as 
 move it to a different section.
 
+
+
+(line: 90)
+//!
+//? quick todo logic
+//!
+let todoItemCont = document.querySelector('.todoItemCont'); 
+let quickTodoInput = document.querySelector('.quickTodoInput'); 
+let addQuickTodo = document.querySelector('#addQuickTodo'); 
+//? set todos: 
+auth.onAuthStateChanged((cred) => {
+    let uid = cred.uid; 
+    addQuickTodo.addEventListener('click', (e) => {
+        e.preventDefault(); 
+        let todoText = quickTodoInput.value; 
+        set(ref(db, `users/${uid}/quickTodos/${todoText}/`), {
+            todoText
+        })
+        .then(() => {//? append them to the dom
+            let todo = document.createElement('h1'); 
+            todo.classList.add('todo'); 
+            todo.textContent = todoText; 
+            todoItemCont.appendChild(todo); 
+            quickTodoInput.value = ''; 
+            //!
+            //? next is the remove todo ability: 
+            todo.addEventListener('click', (e) => {
+                let removeTodo = e.target.innerText; 
+                remove(ref(db, `users/${uid}/quickTodos/${removeTodo}`))
+                todoItemCont.removeChild(todo); 
+            })
+
+        })
+    })
+})
+
+//!
+//? this is to load the todos on page start 
+auth.onAuthStateChanged((cred) => {
+    let uid = cred.uid; 
+    let dbRef = ref(db); 
+    get(child(dbRef, `users/${uid}/quickTodos/`))
+    .then((todo_item) => {
+        todo_item.forEach((todoNode) => {
+            let todo = document.createElement('h1'); 
+            todo.classList.add('todo'); 
+            todo.textContent = todoNode.val().todoText; 
+            todoItemCont.appendChild(todo); 
+            todo.addEventListener('click', (e) => {
+                let removeTodo = e.target.innerText; 
+                remove(ref(db, `users/${uid}/quickTodos/${removeTodo}`))
+                todoItemCont.removeChild(todo); 
+            })
+        })
+    })
+})

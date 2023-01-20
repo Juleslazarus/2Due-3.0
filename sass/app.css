@@ -1,291 +1,166 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-::-webkit-scrollbar {
-  background: rgba(0, 0, 0, 0.292);
-  width: .4rem;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #005eff;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
 }
 
 body {
-  background: #2f3148;
+  background: #15172c;
 }
 
-.preloadCont {
-  height: 100%;
-  width: 100%;
+.userMenu {
+  display: none;
   position: absolute;
-  background-image: url(../images/pencil.gif);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: #f1f1f1;
-  background-size: 80vh;
-  z-index: 100;
-  transition: all .4s;
-}
-
-.preloader {
-  height: 100%;
+  top: 10%;
   width: 100%;
-  z-index: 100;
-  background: #2f3148;
-  background-size: 3vh;
-  transition: all .4s;
-}
-
-.landingPageSection {
-  display: inline-block;
-  height: 100vh;
-  width: 100%;
-  overflow-y: scroll;
-}
-
-.landingPageSection .headerCont {
-  height: 10vh;
-  display: flex;
-  background: #212154;
-  color: white;
+  background: #141438;
+  height: 35vh;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: white;
+  font-size: 2.2vh;
+  font-weight: bold;
+}
+
+.userMenu button {
+  background-color: white;
+  padding: .5vw;
+  border-radius: 5px;
+  transition: all .2s;
+  margin: 1rem;
+  color: black;
+}
+
+.userMenu button:hover {
+  background: black;
+  color: white;
+}
+
+.dashboardCont {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerCont {
+  background: #212154;
+  display: flex;
+  gap: 1rem;
+  height: 5vh;
+  width: 100%;
+  align-items: center;
+  overflow: hidden;
+}
+
+.headerCont h1 {
+  color: white;
   padding: .5rem;
 }
 
-.landingPageSection .headerCont #openNavMenu {
-  font-size: 3vh;
+.headerCont i {
+  margin-left: auto;
+  color: white;
+  padding: 1rem;
   cursor: pointer;
-  position: fixed;
-  top: 2%;
-  right: 2%;
 }
 
-.landingPageSection .headerCont .textCont {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: .5rem;
-  margin-right: auto;
-  font-size: 1.2vh;
-}
-
-.landingPageSection .headerCont .navMenu {
-  position: absolute;
-  height: 30vh;
-  width: 80vw;
-  top: 5%;
-  z-index: 10;
-  background: #f1f1f1;
-  box-shadow: 0px 20px 30px 1px rgba(0, 0, 0, 0.531);
-  display: none;
-  align-items: center;
-  flex-direction: column;
-  word-wrap: break-word;
-}
-
-.landingPageSection .headerCont .navMenu #closeNavMenu {
-  font-size: 2.5vh !important;
+.welcomeText {
+  color: white;
   text-align: center;
-  margin: 1rem 0rem;
-  cursor: pointer;
-  color: black;
-}
-
-.landingPageSection .headerCont .navMenu .navCont {
-  text-align: center;
-  display: grid;
-  grid-template-columns: repeat(1, auto);
-  gap: .8rem;
-  word-wrap: break-word;
-}
-
-.landingPageSection .headerCont .navMenu .navCont button,
-.landingPageSection .headerCont .navMenu .navCont a,
-.landingPageSection .headerCont .navMenu .navCont h1 {
-  border: none;
-  background: transparent;
-  color: black;
-  font-weight: 600;
-  font-size: 3vh;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.landingPageSection .headerCont .navMenu .navCont a {
-  cursor: default !important;
-}
-
-.landingPageSection .headerCont .navMenu .navCont .logoutBtn {
-  background: #005eff;
-  padding: 1vh;
-  border-radius: 5px;
-  color: white;
-}
-
-.landingPageSection .landingHeroCont {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  height: 100%;
-  flex-direction: column;
-  gap: 10em;
-}
-
-.landingPageSection .landingHeroCont .heroCont {
-  margin-top: 3rem;
-  display: flex;
-  gap: 1em;
-}
-
-.landingPageSection .landingHeroCont .heroCont h1 {
-  font-size: 4.5vh;
-  color: white;
-}
-
-.landingPageSection .landingHeroCont .heroBtnCont {
-  margin-top: 5em;
-  margin-bottom: -10rem;
-  position: relative;
-}
-
-.landingPageSection .landingHeroCont .heroBtnCont button {
-  padding: 1.8vh 3.6vw;
-  font-size: 2.4vh;
-  font-weight: 600;
-  color: white;
-  background: #005eff;
-  border: none;
-  border-radius: 5px;
-  transition: all .2s;
-  cursor: pointer;
-  box-shadow: 0px 15px 15px 1px rgba(0, 0, 0, 0.292);
-  animation: dashFadeIn 2s running linear ease-in-out;
-}
-
-.landingPageSection .landingHeroCont .heroBtnCont button:hover {
-  transform: translateY(-4px);
-  box-shadow: 0px 20px 15px 1px rgba(0, 0, 0, 0.549);
-  background: #1c1c32;
-}
-
-.landingPageSection .landingHeroCont .heroBtnCont .colCounter {
-  position: absolute;
-  top: -10%;
-  right: -5%;
-  background: red;
-  padding: .2rem .6rem;
-  border-radius: 50%;
-  font-size: 2vh;
-  display: none;
-}
-
-.gotoDashBtn {
-  animation: dashFadeIn 2s running;
-}
-
-@keyframes dashFadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@media all and (max-width: 720px) {
-  .accountText {
-    font-size: 2vh !important;
-  }
-}
-
-.quickTodosCont {
-  display: flex;
-  flex-direction: column;
-  margin: 5vh 0vh;
-  height: 60rem;
-  width: 100%;
-  background: #2f3148;
-  align-items: center;
-  margin-bottom: -15rem;
-  gap: 2vh;
-}
-
-.quickTodosCont .quickTodosTitle {
-  font-size: 3vh;
-  color: white;
-  font-weight: 600;
-}
-
-.quickTodosCont div .inputCont {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.quickTodosCont div .inputCont .quickTodoInput {
-  padding: 2vh 3vw;
-  font-size: 2vh;
-  border-radius: 10px;
-  border: none;
-  width: 60vw;
-}
-
-.quickTodosCont div .inputCont #addQuickTodo {
-  font-size: 6.5vh;
-  color: #005eff;
-  background: white;
-  border: none;
-  outline: none;
-  border-radius: 100%;
-  cursor: pointer;
-}
-
-.quickTodosCont .todoItemCont {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: center;
-}
-
-.quickTodosCont .todoItemCont .todo {
-  height: 8vh;
-  width: 80%;
-  background: #1c1c32;
-  text-align: left;
-  display: flex;
-  align-items: center;
-  padding: 1vh;
-  margin: 1rem 0rem;
-  word-wrap: normal;
-  position: relative;
-  color: white;
-  overflow-y: scroll;
   font-size: 2.2vh;
-  border-radius: 10px;
-  overflow: scroll;
+  font-weight: bold;
 }
 
-.quickTodosCont .todoItemCont .todo:hover {
-  text-decoration: line-through 5px black;
-  cursor: pointer;
+.heroBtnCont {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
 
-.quickTodosCont .todoItemCont .todo:hover::before {
-  content: "X";
-  height: 50%;
-  width: 10%;
-  position: absolute;
-  top: 1%;
-  right: 1%;
+.heroBtnCont a {
+  background: #005eff;
+  padding: 1.5vh;
+  font-size: 2.2vh;
+  border-radius: 5px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.562);
+  transition: all .25s;
+}
+
+.heroBtnCont a:hover {
+  box-shadow: 0px 15px 10px rgba(0, 0, 0, 0.801);
+  transform: translateY(-10px);
+  background: #1c1c32;
+}
+
+.quickTodoCont {
+  height: 85vh;
+  width: 90vw;
+  background: #212154;
+  border-radius: 8px;
+}
+
+.quickTodoCont h1 {
+  text-align: center;
+  color: white;
+  font-size: 2.2vh;
+}
+
+.quickTodoCont .inputCont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 8%;
+  gap: 1vw;
+  padding: .5vw;
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.233);
+}
+
+.quickTodoCont .inputCont:invalid button {
+  background: #1c1c32;
+}
+
+.quickTodoCont .inputCont input {
+  width: 85%;
   background: #1c1c32;
   color: white;
-  text-align: center;
-  text-decoration: none;
+  margin: .3vw;
+  padding: .3vw;
+  font-weight: bold;
+}
+
+.quickTodoCont .inputCont button {
+  width: 15%;
+  background: #005eff;
+  color: white;
+  font-weight: bold;
+  transition: all .2s;
+  margin: .3vw;
+  padding: .3vw;
+}
+
+.quickTodoCont .inputCont button:hover {
+  transform: translateY(-8px);
+}
+
+.todoCont {
+  height: 71.5vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  align-items: center;
+}
+
+.todoCont .todo {
+  background: #141438;
+  width: 98%;
+  padding: 2.2vh;
+  text-align: left;
+  border-radius: 10px;
 }

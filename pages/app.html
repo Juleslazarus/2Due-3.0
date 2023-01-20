@@ -4,57 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2Due 3.0</title>
+    <title>2Due Dashboard</title>
+    <link rel="stylesheet" href="../tailwind.css">
     <link rel="stylesheet" href="../sass/app.css">
     <script src="https://kit.fontawesome.com/a3fa4c138f.js" crossorigin="anonymous"></script> <!--? font awesome  -->
 </head>
 <body>
-    
-    <div class="landingPageSection">  <!-- ! will need this in js -->
+    <div class="userMenu">
+        <h1>User:</h1>
+        <h1 class="emailText"></h1>
+        <h1 class="nameText"></h1>
+        <button class="logOutBtn">Log Out</button>
+        <button class="closeUserMenu">Close</button>
+    </div>
+    <div class="dashboardCont"> 
         <div class="headerCont">
-            <div class="textCont"> 
-                <h1 class="headerText">2Due</h1>
-                <h1 class="headerText">Dashboard</h1>
-            </div>
-            <i id="openNavMenu" class="fa-solid fa-user"></i>
-            <div class="navMenu">
-                <i id="closeNavMenu" class="fa-solid fa-circle-xmark"></i>
-                <div class="navCont">
-                    <h1 class="accBtn">Account:</h1>
-                    <a class="accountText"></a>
-                    <button class="logoutBtn">Log Out</button>
-                </div> 
-            </div>
+            <h1>2Due</h1>
+            <h1>Dashboard</h1>
+            <i class="userBtn fa-solid fa-user"></i>
         </div>
-        <div class="preloader"> 
-            <div class="landingHeroCont">
-                <div class="heroCont">
-                    <h1 class="heroText">Welcome,  </h1>
-                    <h1 class="userText"> </h1>
-                </div>
-                <div class="heroBtnCont">
-                    <button class="goToDashBtn">View Dashboard</button> <!--! this will be needed later in js -->
-                    <h1 class="colCounter"></h1>
-                </div>
-                <div class="quickTodosCont">
-                    <h1 class="quickTodosTitle">Add A Quick 2Due!</h1>
-                    <div>
-                        <div class="inputCont">
-                            <input id="quickInput" class='quickTodoInput' type="text">
-                            <i id="addQuickTodo" class="fa-solid fa-circle-plus"></i>
-                            
-                        </div>
-                    </div>
-                    <div class="todoItemCont">
-                    </div>
-                </div>
-            </div>
+        <h1 class="welcomeText"></h1>
+        <div class="heroBtnCont">
+            <a href="./collections.html" class="colBtn">View Collections</a>
+        </div> 
+        <div class="quickTodoCont">
+            <h1 class="quickTodoTitle">QuickTodos</h1>
+            <form class="inputCont">
+                <input class="quickTodoInput" required placeholder="Walk The Dogs.......">
+                <button class="addTodo">New 2Due</button>
+            </form>
+            <div class="todoCont"></div>
         </div>
     </div>
-
-
     <script src="../src/app.js" type="module"></script>
-
-    
 </body>
 </html>

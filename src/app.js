@@ -1,6 +1,6 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getDatabase, set, get, ref, remove, update, child } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"; 
+import { getDatabase, onValue , set, get, ref, remove, update, child } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"; 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js"; 
 
 
@@ -18,86 +18,81 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(); 
 const auth = getAuth(); 
 
-let userText = document.querySelector('.userText'); 
-//? log users name to the screen 
-auth.onAuthStateChanged((cred) => {
-    let uid = cred.uid; 
-    let dbRef = ref(db);
-    get(child(dbRef, `users/${uid}/`))
-    .then((user_item) => {
-        userText.textContent = user_item.val().name; 
-    })
-})
-//? logic for opening the navMenu: 
-let openNavMenu = document.querySelector('#openNavMenu'); 
-let navMenu = document.querySelector('.navMenu'); 
-let accountText = document.querySelector('.accountText'); 
-let closeNavMenu = document.querySelector('#closeNavMenu'); 
-
-openNavMenu.addEventListener('click', () => {
-    auth.onAuthStateChanged((cred) => {
-        let uid = cred.uid
-        //? get users email
-        let dbRef = ref(db); 
-        get(child(dbRef, `users/${uid}/`))
-        .then((username) => {
-            accountText.textContent = username.val().email; 
-        })
-    })
-    navMenu.style.display = 'flex'; 
-})
-closeNavMenu.addEventListener('click', () => {
-    navMenu.style.display = 'none'; 
-})
-
-//? logic for logging out: 
-let logoutBtn = document.querySelector('.logoutBtn'); 
-logoutBtn.addEventListener('click', () => {
-    auth.signOut(); 
-})
-
-//! check if user is logged in to allow them on the page: 
+//? get user credentials 
 auth.onAuthStateChanged((cred) => {
     if (!cred) {
-        alert('Your Session Has Expired Or You Have Logged Out. Log Back In To Continue'); 
-        window.location.href = './login.html'; 
+        alert('Your Session Has Expired Or You Have Logged Out. Log Back In To Continue.')
+        location.href = './login.html'
     }
 })
 
+//? user menu logic: 
+let userBtn = document.querySelector('.userBtn'); 
+let userMenu = document.querySelector('.userMenu'); 
+let emailText = document.querySelector('.emailText'); 
+let nameText = document.querySelector('.nameText'); 
+let logOutBtn = document.querySelector('.logOutBtn'); 
+let closeUserMenu = document.querySelector('.closeUserMenu'); 
 
-let goToDashBtn = document.querySelector('.goToDashBtn'); 
-
-goToDashBtn.addEventListener('click', () => {
+userBtn.addEventListener('click', (e) => {
+    e.preventDefault(); 
+    userMenu.style.display = 'flex'; 
     auth.onAuthStateChanged((cred) => {
-        if (cred) {
-            location.href = './collections.html'
-        }
-        else {
-            alert('Your Session Has Expired Or You Have Logged Out. Log Back In To Continue'); 
-            window.location.href = './login.html'; 
-        }
+        let uid = cred.uid; 
+        let dbRef = ref(db); 
+        get(child(dbRef, `users/${uid}/`))
+        .then((userNode) => {
+            emailText.textContent = `Email: ${userNode.val().email}`
+            nameText.textContent = `Name: ${userNode.val().name}`
+        })
     })
 })
+closeUserMenu.addEventListener('click', (e) => {
+    e.preventDefault(); 
+    userMenu.style.display = 'none'; 
+})
 
+//? setting welcome text: 
+let welcomeText = document.querySelector('.welcomeText'); 
 auth.onAuthStateChanged((cred) => {
     let uid = cred.uid; 
     let dbRef = ref(db); 
-    get(child(dbRef, `users/${uid}`))
-    .then((userName) => {
-        console.log(userName.val().name); 
+    get(child(dbRef, `users/${uid}/`))
+    .then((userNode) => {
+        welcomeText.textContent = `Welcome: ${userNode.val().name}`
     })
 })
 
-//!
-//? quick todo logic
-//!
-let todoItemCont = document.querySelector('.todoItemCont'); 
+//? get quickTodos:
+auth.onAuthStateChanged((cred) => {
+    let uid = cred.uid; 
+    let dbRef = ref(db); 
+    get(child(dbRef, `users/${uid}/quickTodos/`))
+    .then((todo_item) => {
+        todo_item.forEach((todoNode) => {
+            let todoCont = document.querySelector('.todoCont');
+            let todo = document.createElement('h1'); 
+            todo.classList.add('todo'); 
+            todo.textContent = todoNode.val().todoText; 
+            todoCont.appendChild(todo); 
+            todo.addEventListener('click', (e) => {
+                e.preventDefault(); 
+                let removeTodo = e.target.textContent; 
+                remove(ref(db, `users/${uid}/quickTodos/${removeTodo}`))
+                todoCont.removeChild(todo); 
+                console.log(removeTodo); 
+            })
+        })
+    })
+})
+
+let todoCont = document.querySelector('.todoCont'); 
 let quickTodoInput = document.querySelector('.quickTodoInput'); 
-let addQuickTodo = document.querySelector('#addQuickTodo'); 
+let addTodo = document.querySelector('.addTodo'); 
 //? set todos: 
 auth.onAuthStateChanged((cred) => {
     let uid = cred.uid; 
-    addQuickTodo.addEventListener('click', (e) => {
+    addTodo.addEventListener('click', (e) => {
         e.preventDefault(); 
         let todoText = quickTodoInput.value; 
         set(ref(db, `users/${uid}/quickTodos/${todoText}/`), {
@@ -107,44 +102,22 @@ auth.onAuthStateChanged((cred) => {
             let todo = document.createElement('h1'); 
             todo.classList.add('todo'); 
             todo.textContent = todoText; 
-            todoItemCont.appendChild(todo); 
+            todoCont.appendChild(todo); 
             quickTodoInput.value = ''; 
             //!
             //? next is the remove todo ability: 
             todo.addEventListener('click', (e) => {
-                let removeTodo = e.target.innerText; 
+                e.preventDefault(); 
+                let removeTodo = e.target.textContent; 
                 remove(ref(db, `users/${uid}/quickTodos/${removeTodo}`))
-                todoItemCont.removeChild(todo); 
+                todoCont.removeChild(todo); 
+                console.log(removeTodo); 
             })
 
         })
     })
 })
 
-//!
-//? this is to load the todos on page start 
-auth.onAuthStateChanged((cred) => {
-    let uid = cred.uid; 
-    let dbRef = ref(db); 
-    get(child(dbRef, `users/${uid}/quickTodos/`))
-    .then((todo_item) => {
-        todo_item.forEach((todoNode) => {
-            let todo = document.createElement('h1'); 
-            todo.classList.add('todo'); 
-            todo.textContent = todoNode.val().todoText; 
-            todoItemCont.appendChild(todo); 
-            todo.addEventListener('click', (e) => {
-                let removeTodo = e.target.innerText; 
-                remove(ref(db, `users/${uid}/quickTodos/${removeTodo}`))
-                todoItemCont.removeChild(todo); 
-            })
-        })
-    })
-})
 
-//? use enter to submit 
-quickTodoInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        document.getElementById('addQuickTodo').click(); 
-    }
-})
+//? check if user is signed in: 
+
