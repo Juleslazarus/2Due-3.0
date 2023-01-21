@@ -21,35 +21,9 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(); 
 const auth = getAuth(); 
 
-// //? these are the input elements we'll need for user auth: 
-// let regFNInput = document.querySelector('.regFNInput'); //? reg=register FN=first-name
-// let regEInput = document.querySelector('.regEInput'); 
-// let regPassInput = document.querySelector('.regPassInput'); 
-
-// //? this is the register btn for register.html: 
-// let signUpBtn = document.querySelector('.signUpBtn'); 
-// let signup = document.getElementById('signup'); 
-
-// //? dom element to display errors: 
-// let errorText = document.querySelector('.errorText'); 
-
-// function registerNewUser(event) {
-//     event.preventDefault(); 
-//     let name = regFNInput.value; 
-//     let email = regEInput.value; 
-//     let password = regPassInput.value; 
-//     createUserWithEmailAndPassword(auth, email, password)
-//     .then((cred) => {
-//         console.log(cred)
-//         set(ref(db, 'users/' + cred.user.uid), {
-//             name: regFNInput.value, 
-//             email: regEInput.value
-//         })
-//         errorText.textContent = ''; 
-//     })
-//     .catch((err) => {
-//         errorText.textContent = err.message; 
-//     })
-// }
-
-// signup.addEventListener('click', registerNewUser); 
+//? check to see if user is logged in to route them to app page if not null: 
+auth.onAuthStateChanged((cred) => {
+    if (cred) {
+        location.href = './pages/app.html'
+    }
+})

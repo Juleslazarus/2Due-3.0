@@ -11,18 +11,18 @@
 <body>
     <div class="todoList">
         <div class="todoHeader">
-            <h1 class="todoListTitle"></h1>
             <a class="closeTodoList"><i class="fa-solid fa-circle-xmark"></i></a>
+            <h1 class="todoListTitle"></h1>
         </div>
         <p class="sharedKeyTitle"></p>
-        <div class="todoInputCont">
-            <input class="todoListInput">
+        <form class="todoInputCont">
+            <input class="todoInput" required placeholder="Walk the dogs, get milk, etc">
             <button id="submit" class="addTodoItem">New 2Due</button>
-        </div>
-        <div id="todoCont" class="todoItemCont">
-            <!-- <div class="todoPreloader">
+        </form>
+        <div class="todoCont">
+            <div class="todoPreloader">
                 
-            </div> -->
+            </div>
         </div>
         <div class="removeColCont"> 
             <button class="removeCol">Remove This Collection</button>
@@ -33,9 +33,7 @@
         <form>
             <label>Collection Name:</label>
             <input class="colLabelInput" type="text" required placeholder="Work, School, etc">
-            <div> 
                 <button class="createColBtn">Create Collection</button>
-            </div>
         </form>
     </div>
     <div class="createSharedCol">
@@ -45,30 +43,9 @@
             <input class="createColName" type="text" required placeholder="Work, School, etc">
             <label>Private Key: (will be used for others to join)</label>
             <input class="createKeyInput" type="text" required placeholder="maryHadALittleLam...">
-            <div> 
-                <button class="createSharedBtn">Create Collection <i class="fa-solid fa-hammer"></i></button>
-            </div>
+            <button type="submit" class="createSharedBtn">Create Collection <i class="fa-solid fa-hammer"></i></button>
         </form>
     </div> 
-    <div class="joinSharedCol">
-        <i id="closeJoinMenu" class="fa-solid fa-circle-xmark"></i>
-        <form>
-            <label>Collection Name:</label>
-            <input class="joinColName" type="text" required placeholder="Work, School, etc">
-            <label>Private Key: (will be used for others to join)</label>
-            <input class="joinKeyInput" type="text" required placeholder="maryHadALittleLam...">
-            <div> 
-                <button class="joinSharedBtn">Join Collection <i class="fa-solid fa-hammer"></i></button>
-            </div>
-        </form>
-    </div>
-    <div class="choiceMenu">
-        <h1 class="choiceText">Would You Like To:</h1>
-        <div class="choicesCont"> 
-            <i id="createIcon" class="fa-solid fa-people-group"></i>
-            </div>
-            <i id="closeChoices" class="fa-solid fa-circle-xmark"></i>
-        </div>
         <div class="headerCont">
             <div class="textCont">
             <i id="returnPage" class=" fa-solid fa-circle-arrow-left"></i> <!-- this will be needed later -->

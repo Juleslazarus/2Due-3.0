@@ -70,11 +70,13 @@ auth.onAuthStateChanged((cred) => {
     get(child(dbRef, `users/${uid}/quickTodos/`))
     .then((todo_item) => {
         todo_item.forEach((todoNode) => {
+            let todoPreloader = document.querySelector('.todoPreloader')
             let todoCont = document.querySelector('.todoCont');
             let todo = document.createElement('h1'); 
             todo.classList.add('todo'); 
             todo.textContent = todoNode.val().todoText; 
             todoCont.appendChild(todo); 
+            todoPreloader.style.display = 'none'; 
             todo.addEventListener('click', (e) => {
                 e.preventDefault(); 
                 let removeTodo = e.target.textContent; 

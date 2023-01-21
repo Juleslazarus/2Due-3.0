@@ -92,9 +92,9 @@ let todoHeader = document.querySelector('.todoHeader');
 let todoListTitle = document.querySelector('.todoListTitle'); 
 let closeTodoList = document.querySelector('.closeTodoList'); 
 let todoInputCont = document.querySelector('todoInputCont'); 
-let todoListInput = document.querySelector('.todoListInput'); 
+let todoInput = document.querySelector('.todoInput'); 
 let addTodoItem = document.querySelector('.addTodoItem'); 
-let todoItemCont = document.querySelector('todoItemCont'); 
+let todoCont = document.querySelector('todoCont'); 
 
 addColBtn.addEventListener('click', openCreateMenu); 
 closeColMenu.addEventListener('click', closeCreateMenu); 
@@ -144,13 +144,14 @@ function createCollection() {
                             }
                         })
                 //? next is the logic to add todo items to the database: 
-                addTodoItem.addEventListener('click', () => {
-                    let todoItemCont = document.querySelector('.todoItemCont'); 
-                    let todoText = todoListInput.value;
-                    if (todoText == '') {
+                addTodoItem.addEventListener('click', (e) => {
+                    e.preventDefault(); 
+                    let todoCont = document.querySelector('.todoCont'); 
+                    let todoText = todoInput.value;
+                    if (todoInput.value.length == 0 ) {
                         alert('You Must Use The Input Field To Write Your 2Due!')
                     } 
-                    todoListInput.value = ''; //? sets the input to empty
+                    todoInput.value = ''; //? sets the input to empty
                     set(ref(db, `users/${uid}/collections/${colLabel}/todos/` + todoText), {
                         todoText
                     })
@@ -158,16 +159,16 @@ function createCollection() {
                     let todo = document.createElement('h1'); 
                     todo.classList.add('todo'); 
                     todo.textContent = todoText; 
-                    todoItemCont.appendChild(todo); 
+                    todoCont.appendChild(todo); 
                     removeTodoPreloader(); 
                     //? next we have to add the logic for removing todo items. this has to stay nested inside this event listener 
                     //? where the todo scope is. 
                     todo.addEventListener('click', (e) => {
                         let removeTodo = e.target.innerText
                         remove(ref(db, `users/${uid}/collections/${colLabel}/todos/${removeTodo}`))
-                        todoItemCont.removeChild(todo); 
+                        todoCont.removeChild(todo); 
                     })
-                    todoListInput.value = ''; 
+                    todoInput.value = ''; 
                     //! this ends the needed functions of the app!
                 })
             })
@@ -205,22 +206,17 @@ auth.onAuthStateChanged((cred) => {
                 get(child(dbRef, `users/${uid}/collections/${colLabel}/todos/`))
                     .then((todo_item) => {
                         todo_item.forEach((todoNode) => {
-                            let todoItemCont = document.querySelector('.todoItemCont')
+                            let todoCont = document.querySelector('.todoCont')
                             let todo = document.createElement('h1'); 
                             todo.classList.add('todo'); 
                             todo.textContent = todoNode.val().todoText; 
-                            todoItemCont.appendChild(todo); //! //? this will append the todo to the screen
+                            todoCont.appendChild(todo); //! //? this will append the todo to the screen
                             removeTodoPreloader()
-                            let todoCounter = document.querySelector('.todoCounter'); 
-                            let todoCount = 0; 
-                            todoCount += 1; 
-                            todoCounter.textContent = todoCount; 
-                            todoCounter.style.display = 'inline-block'
                             //? next we need to add the ability to remove a todo: 
                             todo.addEventListener('click', (e) => {
                                 let removeTodo = e.target.innerText
                                 remove(ref(db, `users/${uid}/collections/${colLabel}/todos/${removeTodo}`))
-                                todoItemCont.removeChild(todo); 
+                                todoCont.removeChild(todo); 
                     })
                         })
                         removeCol.addEventListener('click', () => {
@@ -238,13 +234,14 @@ auth.onAuthStateChanged((cred) => {
 
                 
                 //? next is the logic to add todo items to the database: 
-                addTodoItem.addEventListener('click', () => {
-                    let todoItemCont = document.querySelector('.todoItemCont'); 
-                    let todoText = todoListInput.value; 
+                addTodoItem.addEventListener('click', (e) => {
+                    e.preventDefault(); 
+                    let todoCont = document.querySelector('.todoCont'); 
+                    let todoText = todoInput.value; 
                     if (todoText === '') {
                         alert('You Must Use The Input Field To Write Your 2Due!')
                     } else {
-                        todoListInput.value === ''; //? sets the input to empty
+                        todoInput.value === ''; //? sets the input to empty
                         set(ref(db, `users/${uid}/collections/${colLabel}/todos/` + todoText), {
                             todoText
                         })
@@ -252,17 +249,17 @@ auth.onAuthStateChanged((cred) => {
                         let todo = document.createElement('h1'); 
                         todo.classList.add('todo'); 
                         todo.textContent = todoText; 
-                        todoItemCont.appendChild(todo); 
+                        todoCont.appendChild(todo); 
                         removeTodoPreloader(); 
                         //? next we have to add the logic for removing todo items. this has to stay nested inside this event listener 
                         //? where the todo scope is. 
                         todo.addEventListener('click', (e) => {
                             let removeTodo = e.target.innerText
                             remove(ref(db, `users/${uid}/collections/${colLabel}/todos/${removeTodo}`))
-                            todoItemCont.removeChild(todo); 
+                            todoCont.removeChild(todo); 
                         })
                     }
-                    todoListInput.value = '';
+                    todoInput.value = '';
                     //! this ends the needed functions of the app!
                 })
             })
@@ -308,17 +305,10 @@ let joinKeyInput = document.querySelector('.joinKeyInput');
 let joinSharedBtn = document.querySelector('.joinSharedBtn'); 
 //?==== first we'll do the logic for creating a shared collection: ===============================
 addSharedBtn.addEventListener('click', () => {
-    choiceMenu.style.display = 'flex'; //! opens the choice menu
-})
-closeChoices.addEventListener('click', () => {
-    choiceMenu.style.display = 'none'; //! closes the choice menu
+    createSharedCol.style.display = 'flex'; //! opens the choice menu
+    
 })
 
-createIcon.addEventListener('click', () => {
-    createSharedCol.style.display = 'flex'
-    choiceMenu.style.display = 'none'; 
-    createColName.select(); 
-})
 closeCSharedMenu.addEventListener('click', () => {
     createSharedCol.style.display = 'none';
 })
@@ -333,7 +323,7 @@ auth.onAuthStateChanged((cred) => {
         e.preventDefault(); 
         let shareKey = createKeyInput.value; 
         let colLabel = createColName.value; 
-        if (shareKey == '' && colLabel == '' ) {
+        if (createKeyInput.value.length == 0 || createColName.value.length == 0) {
             alert('You Cannot Create A Public Collection Without A Share Key Or Collection Name!')
         } else {
             //? for this collections logic ill only do the db creation
@@ -392,7 +382,7 @@ auth.onAuthStateChanged((cred) => {
                                 auth.onAuthStateChanged((cred) => { //! this will allow me to use get() to get all todos on todolist load 
                                     let uid = cred.uid;  
                                     let colLabel = e.target.innerText;
-                                    let todoItem = todoListInput.value;  
+                                    let todoItem = todoInput.value;  
                                     let dbRef = ref(db)
                                     todoList.style.display = 'inline-block'; 
                                     todoListTitle.textContent = `${colLabel}`;
@@ -428,11 +418,11 @@ auth.onAuthStateChanged((cred) => {
                                             let todoCounter = document.querySelector('.todoCounter'); 
                                             let todoCount = 0; 
                                             todo_item.forEach(todoNode => {
-                                                let todoItemCont = document.querySelector('.todoItemCont'); 
+                                                let todoCont = document.querySelector('.todoCont'); 
                                                 let todo = document.querySelector('h1'); 
                                                 todo.classList.add('todo'); 
                                                 todo.textContent = todoNode.val().todoItem; 
-                                                todoItemCont.appendChild(todo); 
+                                                todoCont.appendChild(todo); 
                                                 todoPreloader.style.display = 'none'; 
                                                 todoCount += 1; 
                                                 todoCounter.style.display = 'inline-block'; 
@@ -445,29 +435,30 @@ auth.onAuthStateChanged((cred) => {
                                         get(child(dbRef, `users/${uid}/`))
                                         .then(user_item => {
                                             let userName = user_item.val().name; 
-                                            addTodoItem.addEventListener('click', () => {
+                                            addTodoItem.addEventListener('click', (e) => {
+                                                e.preventDefault(); 
                                                 if (todoItem = '') { //? makes sure that the todo isnt empty. if you remove an empty todo it'll delete all todos
                                                     alert('You Must Use The Input Field To Write Your 2Due!')
                                                 } else {
                                                     get(child(dbRef, `users/${uid}/public_collections_keys/${colLabel}`))
                                                     .then((shareKey_item) => {
-                                                        let todoItem = todoListInput.value; 
+                                                        let todoItem = todoInput.value; 
                                                         let shareKey = shareKey_item.val().shareKey; 
                                                             set(ref(db, `public_collections/${shareKey}/todos/${todoItem}`), {
                                                                 todoItem
                                                             })
                                                             .then(() => { //? creates todos
-                                                                let todoItemCont = document.querySelector('.todoItemCont'); 
+                                                                let todoCont = document.querySelector('.todoCont'); 
                                                                 let todo = document.createElement('h1'); 
                                                                 todo.classList.add('todo'); 
                                                                 todo.textContent = `${userName}: ${todoItem}`; 
-                                                                todoItemCont.appendChild(todo); 
-                                                                todoListInput.value = ''; 
+                                                                todoCont.appendChild(todo); 
+                                                                todoInput.value = ''; 
                                                                 todo.addEventListener('click', (e) => { //? removes todos
                                                                     let removeTodo = e.target.innerText; 
                                                                     remove(ref(db, `users/${uid}/public_collections_keys/${colLabel}/${removeTodo}`))
                                                                     remove(ref(db, `public_collections/${shareKey}/todos/${removeTodo}`))
-                                                                    todoItemCont.removeChild(todo);                                                 })
+                                                                    todoCont.removeChild(todo);                                                 })
                                                                     
                                                             })
                                                             
@@ -569,7 +560,7 @@ auth.onAuthStateChanged((cred) => {
 //                                 auth.onAuthStateChanged((cred) => {
 //                                     let uid = cred.uid; 
 //                                     let colLabel = e.target.innerText; 
-//                                     let todoItem = todoListInput.value; 
+//                                     let todoItem = todoInput.value; 
 //                                     let dbRef = ref(db); 
 //                                     let todoListTitle = document.querySelector('.todoListTitle'); 
 //                                     todoList.style.display = 'inline-block'; 
@@ -606,23 +597,23 @@ auth.onAuthStateChanged((cred) => {
 //                                         } else {
 //                                             get(child(dbRef, `users/${uid}/public_collections_keys/${colLabel}`))
 //                                             .then((shareKey_item) => {
-//                                                 let todoItem = todoListInput.value; 
+//                                                 let todoItem = todoInput.value; 
 //                                                 let shareKey = shareKey_item.val().shareKey; 
 //                                                 set(ref(db, `public_collections/${shareKey}/todos/${todoItem}`), {
 //                                                     todoItem
 //                                                 })
 //                                                 .then(() => {//? creates todos
-//                                                     let todoItemCont = document.querySelector('.todoItemCont')
+//                                                     let todoCont = document.querySelector('.todoCont')
 //                                                     let todo = document.createElement('h1'); 
 //                                                     todo.classList.add('todo'); 
 //                                                     todo.textContent = todoItem; 
-//                                                     todoItemCont.appendChild(todo); 
-//                                                     todoListInput.value = ''; 
+//                                                     todoCont.appendChild(todo); 
+//                                                     todoInput.value = ''; 
 //                                                     todo.addEventListener('click', (e) => {
 //                                                         let removeTodo = e.target.innerText
 //                                                         remove(ref(db, `users/${uid}/public_collections_keys/${colLabel}/${removeTodo}`))
 //                                                         remove(ref(db, `public_collections/${shareKey}/todos/${removeTodo}`))
-//                                                         todoItemCont.removeChild(todo); 
+//                                                         todoCont.removeChild(todo); 
 //                                                     })
 //                                                 })
 //                                             })
@@ -657,11 +648,11 @@ function removePreloader() {
 //? todoinput event listener to support 'enter' as submit. having a form with the input and button together for some reason
 //? closes the todo list 
 
-todoListInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        document.getElementById('submit').click(); 
-    }
-})
+// todoInput.addEventListener('keydown', (e) => {
+//     if (e.key === 'Enter') {
+//         document.getElementById('submit').click(); 
+//     }
+// })
 
 //? preloader for the todos
 let todoPreloader = document.querySelector('.todoPreloader')

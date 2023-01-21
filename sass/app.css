@@ -126,6 +126,14 @@ body {
   background: #1c1c32;
 }
 
+.quickTodoCont .inputCont:invalid button:hover {
+  animation: invalidHover .3s running ease-in-out;
+}
+
+.quickTodoCont .inputCont:valid button:hover {
+  transform: translateY(-5px);
+}
+
 .quickTodoCont .inputCont input {
   width: 85%;
   background: #1c1c32;
@@ -145,16 +153,13 @@ body {
   padding: .3vw;
 }
 
-.quickTodoCont .inputCont button:hover {
-  transform: translateY(-8px);
-}
-
 .todoCont {
   height: 71.5vh;
   display: flex;
   flex-direction: column;
   gap: 2vh;
   align-items: center;
+  overflow-x: hidden;
 }
 
 .todoCont .todo {
@@ -163,4 +168,36 @@ body {
   padding: 2.2vh;
   text-align: left;
   border-radius: 10px;
+}
+
+.todoCont .todo:hover {
+  text-decoration: line-through;
+  background: black;
+  cursor: pointer;
+}
+
+.todoPreloader {
+  background: #1c1c32 url(../images/colpreloader.gif) no-repeat center center;
+  background-size: 3vh;
+  height: 72.2%;
+  width: 90%;
+  position: absolute;
+}
+
+@keyframes invalidHover {
+  0% {
+    transform: translateY(0px);
+  }
+  25% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+  75% {
+    transform: translateY(-2px);
+  }
+  100% {
+    transform: translateY(2px);
+  }
 }

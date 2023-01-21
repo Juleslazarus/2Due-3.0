@@ -14,3 +14,23 @@ $preloaderColor: #352c5a;
     font-family: 'Roboto', sans-serif;
 }
 
+@mixin KFInvalidHover {
+
+    @keyframes invalidHover {
+        0% {
+            transform: translateY(0px)
+        }
+        25% {
+            transform: translateY(-2px)
+        }
+        50% {
+            transform: translateY(2px)
+        }
+        75% {
+            transform: translateY(-2px)
+        }
+        100% {
+            transform: translateY(2px)
+        }
+    }
+}
