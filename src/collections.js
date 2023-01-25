@@ -59,8 +59,15 @@ let closeColMenu = document.querySelector('.closeColMenu')
 let createColMenu = document.querySelector('.createColMenu'); 
 let createColBtn = document.querySelector('.createColBtn'); 
 let colLabelInput = document.querySelector('.colLabelInput'); 
+let colColorInput = document.querySelector('.colColorInput'); 
 let colLabel = colLabelInput.value; 
 let removeCol = document.querySelector('.removeCol'); 
+let tealColSelect = document.querySelector('.tealCol'); 
+let burgandyColSelect = document.querySelector('.burgandyCol'); 
+let slateGrayColSelect = document.querySelector('.slateGrayCol'); 
+let seaGreenColSelect = document.querySelector('.seaGreenCol'); 
+let mauveColSelect = document.querySelector('.mauveCol'); 
+let roseGoldColSelect = document.querySelector('.roseGoldCol'); 
 //? logic for returning to app page: 
 returnPage.addEventListener('click', () => {
     auth.onAuthStateChanged((cred) => {
@@ -72,6 +79,9 @@ returnPage.addEventListener('click', () => {
         }
     })
 })
+
+//? logic for selecting the shared col style: 
+let sharedColInput = document.querySelector('.sharedColInput'); 
 
 //? functions to open and close create collection menu
 function closeCreateMenu() {
@@ -99,537 +109,424 @@ let todoCont = document.querySelector('todoCont');
 addColBtn.addEventListener('click', openCreateMenu); 
 closeColMenu.addEventListener('click', closeCreateMenu); 
 
-//!
-//! function for creating collections to the database: 
-//!
-function createCollection() {
-    auth.onAuthStateChanged((cred) => {
-        colLabel = colLabelInput.value; 
-        console.log(cred.uid); 
-        let uid = cred.uid; 
-        set(ref(db, `users/${uid}/collections/${colLabel}`), {
-            colLabel
-        })
+//  !function for setting collection to database: 
 
-        //!
-        //? this then() will display the collections: 
-        //!
-        .then(() => {
-            let collection = document.createElement('h1'); 
-            collection.classList.add('collection'); 
-            collection.textContent = colLabel; 
-            collectionsCont.appendChild(collection); 
-            removePreloader()
 
-            //!
-            //? next we need to add the logic for opening the collection: 
-            //!
-            collection.addEventListener('click', () => {
-                todoList.style.display = 'inline-block'; //? displays the todo list designated to that collection 
-                todoListTitle.textContent = colLabel;//? sets the title coherent with the collection title
-                //? next is the logic that closes the todo list: 
-                closeTodoList.addEventListener('click', () => {
-                    todoList.style.display = 'none'; 
-                    location.reload()
-                })
-                removeCol.addEventListener('click', () => {
-                            let removePrompt = prompt("Are You Sure You'd Like To Remove This Collection?").tolowerCase
-                            if (removePrompt == 'yes'){
-                                console.log(removePrompt); 
-                                remove(ref(db, `users/${uid}/collections/` + colLabel))
-                                .then(() => {
-                                    closeTodoList.click(); 
-                                    location.reload()
-                                })
-                            }
-                        })
-                //? next is the logic to add todo items to the database: 
-                addTodoItem.addEventListener('click', (e) => {
-                    e.preventDefault(); 
-                    let todoCont = document.querySelector('.todoCont'); 
-                    let todoText = todoInput.value;
-                    if (todoInput.value.length == 0 ) {
-                        alert('You Must Use The Input Field To Write Your 2Due!')
-                    } 
-                    todoInput.value = ''; //? sets the input to empty
-                    set(ref(db, `users/${uid}/collections/${colLabel}/todos/` + todoText), {
-                        todoText
-                    })
-                    //? next is the logic for appending the todo items to the todo list container: 
-                    let todo = document.createElement('h1'); 
-                    todo.classList.add('todo'); 
-                    todo.textContent = todoText; 
-                    todoCont.appendChild(todo); 
-                    removeTodoPreloader(); 
-                    //? next we have to add the logic for removing todo items. this has to stay nested inside this event listener 
-                    //? where the todo scope is. 
-                    todo.addEventListener('click', (e) => {
-                        let removeTodo = e.target.innerText
-                        remove(ref(db, `users/${uid}/collections/${colLabel}/todos/${removeTodo}`))
-                        todoCont.removeChild(todo); 
-                    })
-                    todoInput.value = ''; 
-                    //! this ends the needed functions of the app!
-                })
-            })
+//? set collection: 
+let colorPicked; 
+tealColSelect.addEventListener('click', () => {
+    colorPicked = 'tealCol'; 
+    console.log(colorPicked)
+    tealColSelect.classList.remove('notSelected'); 
+    burgandyColSelect.classList.add('notSelected'); 
+    slateGrayColSelect.classList.add('notSelected'); 
+    seaGreenColSelect.classList.add('notSelected'); 
+    mauveColSelect.classList.add('notSelected'); 
+    roseGoldColSelect.classList.add('notSelected');
+    console.log(colorPicked); 
+    colColorInput.value = colorPicked
+    sharedColInput.value = colorPicked
+})
+burgandyColSelect.addEventListener('click', () => {
+    colorPicked = 'burgandyCol'; 
+    burgandyColSelect.classList.remove('notSelected'); 
+    tealColSelect.classList.add('notSelected'); 
+    slateGrayColSelect.classList.add('notSelected'); 
+    seaGreenColSelect.classList.add('notSelected'); 
+    mauveColSelect.classList.add('notSelected'); 
+    roseGoldColSelect.classList.add('notSelected');
+    console.log(colorPicked); 
+    colColorInput.value = colorPicked
+    sharedColInput.value = colorPicked
 
-        })
+})
+slateGrayColSelect.addEventListener('click', () => {
+    colorPicked = 'slateGrayCol'; 
+    slateGrayColSelect.classList.remove('notSelected'); 
+    burgandyColSelect.classList.add('notSelected'); 
+    tealColSelect.classList.add('notSelected'); 
+    seaGreenColSelect.classList.add('notSelected'); 
+    mauveColSelect.classList.add('notSelected'); 
+    roseGoldColSelect.classList.add('notSelected');
+    console.log(colorPicked); 
+    colColorInput.value = colorPicked
+    sharedColInput.value = colorPicked
 
-    }) 
+})
+seaGreenColSelect.addEventListener('click', () => {
+    colorPicked = 'seaGreenCol'; 
+    seaGreenColSelect.classList.remove('notSelected'); 
+    burgandyColSelect.classList.add('notSelected'); 
+    slateGrayColSelect.classList.add('notSelected'); 
+    tealColSelect.classList.add('notSelected'); 
+    mauveColSelect.classList.add('notSelected'); 
+    roseGoldColSelect.classList.add('notSelected');
+    console.log(colorPicked); 
+    colColorInput.value = colorPicked
+
+})
+mauveColSelect.addEventListener('click', () => {
+    colorPicked = 'mauveCol'; 
+    mauveColSelect.classList.remove('notSelected'); 
+    burgandyColSelect.classList.add('notSelected'); 
+    slateGrayColSelect.classList.add('notSelected'); 
+    seaGreenColSelect.classList.add('notSelected'); 
+    tealColSelect.classList.add('notSelected'); 
+    roseGoldColSelect.classList.add('notSelected');
+    console.log(colorPicked); 
+    colColorInput.value = colorPicked
+    sharedColInput.value = colorPicked
+
+})
+roseGoldColSelect.addEventListener('click', () => {
+    colorPicked = 'roseGoldCol'; 
+    roseGoldColSelect.classList.remove('notSelected'); 
+    burgandyColSelect.classList.add('notSelected'); 
+    slateGrayColSelect.classList.add('notSelected'); 
+    seaGreenColSelect.classList.add('notSelected'); 
+    mauveColSelect.classList.add('notSelected'); 
+    tealColSelect.classList.add('notSelected');
+    console.log(colorPicked); 
+    colColorInput.value = colorPicked
+    sharedColInput.value = colorPicked
+
+})
+if (!colorPicked) {
+    colorPicked = 'defaultCol'
 }
+createColBtn.addEventListener('click',(e) => {
+    e.preventDefault(); 
 
-//!
-//? this section will be for displaying the collections on page start:
-//!
+    auth.onAuthStateChanged(cred => {
+        let dbRef = ref(db); 
+        let uid = cred.uid; 
+        let colLabelInput = document.querySelector('.colLabelInput'); 
+        let colColorInput = document.querySelector('.colColorInput'); 
+        let colColor = colColorInput.value; 
+        let colLabel = colLabelInput.value; 
+            set(ref(db, `users/${uid}/collections/${colLabel}/`), {
+                colLabel: colLabel, 
+                style: colColor
+            })
+            .then(() => {
+                location.reload(); 
+            })
+        })
+})
+
 auth.onAuthStateChanged((cred) => {
-    let dbRef = ref(db); 
     let uid = cred.uid; 
+    let dbRef = ref(db); 
+    
     get(child(dbRef, `users/${uid}/collections/`))
-    .then((collections_item) => {
-        collections_item.forEach((collectionNode) => {
-            let collectionsCont = document.querySelector(".collectionsCont"); 
+    .then((collection_item) => {
+        collection_item.forEach((collectionNode) => {
             let collection = document.createElement('h1'); 
-            collection.classList.add('collection'); 
+            collection.classList.add(`${collectionNode.val().style}`)
             collection.textContent = collectionNode.val().colLabel; 
             collectionsCont.appendChild(collection); 
-            removePreloader(); 
             collection.addEventListener('click', (e) => {
-                colLabel = e.target.innerText; 
-                todoList.style.display = 'inline-block'; //? displays the todo list designated to that collection 
-                todoListTitle.textContent = colLabel;//? sets the title coherent with the collection title
-                //? next is the logic that closes the todo list: 
-                closeTodoList.addEventListener('click', () => {
-                    todoList.style.display = 'none'; 
-                    location.reload(); 
-                })
-                //? this will retrieve the todo items from the db 
-                get(child(dbRef, `users/${uid}/collections/${colLabel}/todos/`))
-                    .then((todo_item) => {
-                        todo_item.forEach((todoNode) => {
-                            let todoCont = document.querySelector('.todoCont')
-                            let todo = document.createElement('h1'); 
-                            todo.classList.add('todo'); 
-                            todo.textContent = todoNode.val().todoText; 
-                            todoCont.appendChild(todo); //! //? this will append the todo to the screen
-                            removeTodoPreloader()
-                            //? next we need to add the ability to remove a todo: 
-                            todo.addEventListener('click', (e) => {
-                                let removeTodo = e.target.innerText
-                                remove(ref(db, `users/${uid}/collections/${colLabel}/todos/${removeTodo}`))
-                                todoCont.removeChild(todo); 
-                    })
-                        })
-                        removeCol.addEventListener('click', () => {
-                            let removePrompt = prompt("Are You Sure You'd Like To Remove This Collection?").tolowerCase
-                            if (removePrompt = 'yes'){
-                                console.log(removePrompt); 
-                                remove(ref(db, `users/${uid}/collections/` + colLabel))
-                                .then(() => {
-                                    closeTodoList.click(); 
-                                    location.reload()
-                                })
-                            }
-                        })
-                    } )
-
-                
-                //? next is the logic to add todo items to the database: 
-                addTodoItem.addEventListener('click', (e) => {
-                    e.preventDefault(); 
-                    let todoCont = document.querySelector('.todoCont'); 
-                    let todoText = todoInput.value; 
-                    if (todoText === '') {
-                        alert('You Must Use The Input Field To Write Your 2Due!')
+                let colLabel = e.target.textContent;
+                removeCol.addEventListener('click', () => {
+                    let removePrompt = prompt("Are you sure you'd like to delete this collection?")
+                    if (removePrompt == 'yes') {
+                        remove(ref(db, `users/${uid}/collections/${colLabel}/`))
+                        location.reload(); 
                     } else {
-                        todoInput.value === ''; //? sets the input to empty
-                        set(ref(db, `users/${uid}/collections/${colLabel}/todos/` + todoText), {
-                            todoText
-                        })
-                        //? next is the logic for appending the todo items to the todo list container: 
+                        null
+                    }
+                }) 
+                let style = collectionNode.val().style
+                todoList.style.display = 'inline-block';
+                todoListTitle.textContent = colLabel;
+                todoList    .classList.add(`${style}`); 
+                get(child(dbRef, `users/${uid}/collections/${colLabel}/todos/`))
+                .then((todo_Item) => {
+                    todo_Item.forEach((todoNode) => {
+                        let todoCont = document.querySelector('.todoCont');
+                        let todoInput = document.querySelector('.todoInput'); 
                         let todo = document.createElement('h1'); 
                         todo.classList.add('todo'); 
-                        todo.textContent = todoText; 
-                        todoCont.appendChild(todo); 
-                        removeTodoPreloader(); 
-                        //? next we have to add the logic for removing todo items. this has to stay nested inside this event listener 
-                        //? where the todo scope is. 
+                        todo.textContent = todoNode.val().todoText; 
+                        todoCont.appendChild(todo);  
+                        todoInput.value = ''; 
                         todo.addEventListener('click', (e) => {
-                            let removeTodo = e.target.innerText
-                            remove(ref(db, `users/${uid}/collections/${colLabel}/todos/${removeTodo}`))
+                            e.preventDefault(); 
+                            let removeTodo = e.target.textContent; 
+                            remove(ref(db, `users/${uid}/quickTodos/${removeTodo}`))
                             todoCont.removeChild(todo); 
+                            console.log(removeTodo); 
+                        })
+                    })
+                    
+                })
+                addTodoItem.addEventListener('click', (e) => {
+                    e.preventDefault(); 
+                    let todoText = todoInput.value; 
+                    if(todoText == '' ) {
+                        alert("You must use the input field to name the todo")
+                    } else {
+
+                        set(ref(db, `users/${uid}/collections/${colLabel}/todos/${todoText}`), {
+                            todoText: todoText
+                        })
+                        .then(() => {
+                            get(child(dbRef, `users/${uid}/collections/${colLabel}/`))
+                            .then((colStyle) => {
+                                let todoCont = document.querySelector('.todoCont');
+                                let todoInput = document.querySelector('.todoInput'); 
+                                let todo = document.createElement('h1'); 
+                                todo.classList.add('todo'); 
+                                todo.textContent = todoText; 
+                                todoCont.appendChild(todo);  
+                                todoInput.value = ''; 
+                                todo.addEventListener('click', (e) => {
+                                    e.preventDefault(); 
+                                    let removeTodo = e.target.textContent; 
+                                    remove(ref(db, `users/${uid}/quickTodos/${removeTodo}`))
+                                    todoCont.removeChild(todo); 
+                                    console.log(removeTodo); 
+                                })
+    
+                            })
+    
                         })
                     }
-                    todoInput.value = '';
-                    //! this ends the needed functions of the app!
                 })
             })
-
         })
     })
-    
-    
 })
 
-createColBtn.addEventListener('click', (e) => {
-    e.preventDefault(); 
-    createCollection(); 
-    closeColMenu.click(); 
-}); 
 
-// //! //! //! //!==========================================================================================================
 
-// //? logic for creating and joining online collections:
-
-// //* choices menu dom elements: 
-let choiceMenu = document.querySelector('.choiceMenu'); 
-let createIcon = document.querySelector('#createIcon'); 
-let joinIcon = document.querySelector('#joinIcon'); 
-let closeChoices = document.querySelector('#closeChoices');
-
-// //* open the choices menu: 
-let addSharedBtn = document.querySelector('.addSharedBtn')
-
-// //* create shared collection dom elements: 
-let createSharedCol = document.querySelector('.createSharedCol'); 
-let closeCSharedMenu = document.querySelector('#closeCreateMenu'); 
-let createColName = document.querySelector('.createColName'); 
-let createKeyInput = document.querySelector('.createKeyInput'); 
-let createSharedBtn = document.querySelector('.createSharedBtn'); 
-let sharedColCont = document.querySelector('.sharedColCont'); 
-
-// //* join shared collection dom elements: 
-let joinSharedCol = document.querySelector('.joinSharedCol'); 
-let closeJoinMenu = document.querySelector('#closeJoinMenu'); 
-let joinColName = document.querySelector('.joinColName'); 
-let joinKeyInput = document.querySelector('.joinKeyInput'); 
-let joinSharedBtn = document.querySelector('.joinSharedBtn'); 
-//?==== first we'll do the logic for creating a shared collection: ===============================
-addSharedBtn.addEventListener('click', () => {
-    createSharedCol.style.display = 'flex'; //! opens the choice menu
-    
-})
-
-closeCSharedMenu.addEventListener('click', () => {
-    createSharedCol.style.display = 'none';
-})
-// //* create the shared collection: ----------------------------
 closeTodoList.addEventListener('click', () => {
-//     todoList.style.display = 'none'; 
+    todoList.style.display = 'none'; 
     location.reload(); 
 })
+//!
+//! function for getting realtime collections to the database: 
+//!
+
+//! shareddCols
+
+let addSharedBtn = document.querySelector('.addSharedBtn'); 
+let createSharedCol = document.querySelector('.createSharedCol'); 
+let closeSharedCreateMenu = document.querySelector('#closeCreateMenu'); 
+let createColInput = document.querySelector('.createColInput'); 
+let createKeyInput = document.querySelector('.createKeyInput'); 
+let createSharedBtn = document.querySelector('.createSharedBtn'); 
+
+addSharedBtn.addEventListener('click', () => {
+    createSharedCol.style.display = 'flex'
+})
+closeSharedCreateMenu.addEventListener("click", () => {
+    createSharedCol.style.display = 'none'; 
+})
+
+let sharedtealColSelect = document.querySelector('.sharedtealCol'); 
+let sharedburgandyColSelect = document.querySelector('.sharedburgandyCol'); 
+let sharedslateGrayColSelect = document.querySelector('.sharedslateGrayCol'); 
+let sharedseaGreenColSelect = document.querySelector('.sharedseaGreenCol'); 
+let sharedmauveColSelect = document.querySelector('.sharedmauveCol'); 
+let sharedroseGoldColSelect = document.querySelector('.sharedroseGoldCol'); 
+
+sharedtealColSelect.addEventListener('click', () => {
+    colorPicked = 'tealCol'; 
+    console.log(colorPicked)
+    tealColSelect.classList.remove('notSelected'); 
+    burgandyColSelect.classList.add('notSelected'); 
+    slateGrayColSelect.classList.add('notSelected'); 
+    seaGreenColSelect.classList.add('notSelected'); 
+    mauveColSelect.classList.add('notSelected'); 
+    roseGoldColSelect.classList.add('notSelected');
+    console.log(colorPicked); 
+    colColorInput.value = colorPicked
+    sharedColInput.value = colorPicked
+})
+sharedburgandyColSelect.addEventListener('click', () => {
+    colorPicked = 'burgandyCol'; 
+    burgandyColSelect.classList.remove('notSelected'); 
+    tealColSelect.classList.add('notSelected'); 
+    slateGrayColSelect.classList.add('notSelected'); 
+    seaGreenColSelect.classList.add('notSelected'); 
+    mauveColSelect.classList.add('notSelected'); 
+    roseGoldColSelect.classList.add('notSelected');
+    console.log(colorPicked); 
+    colColorInput.value = colorPicked
+    sharedColInput.value = colorPicked
+
+})
+sharedslateGrayColSelect.addEventListener('click', () => {
+    colorPicked = 'slateGrayCol'; 
+    slateGrayColSelect.classList.remove('notSelected'); 
+    burgandyColSelect.classList.add('notSelected'); 
+    tealColSelect.classList.add('notSelected'); 
+    seaGreenColSelect.classList.add('notSelected'); 
+    mauveColSelect.classList.add('notSelected'); 
+    roseGoldColSelect.classList.add('notSelected');
+    console.log(colorPicked); 
+    colColorInput.value = colorPicked
+    sharedColInput.value = colorPicked
+
+})
+sharedseaGreenColSelect.addEventListener('click', () => {
+    colorPicked = 'seaGreenCol'; 
+    seaGreenColSelect.classList.remove('notSelected'); 
+    burgandyColSelect.classList.add('notSelected'); 
+    slateGrayColSelect.classList.add('notSelected'); 
+    tealColSelect.classList.add('notSelected'); 
+    mauveColSelect.classList.add('notSelected'); 
+    roseGoldColSelect.classList.add('notSelected');
+    console.log(colorPicked); 
+    sharedColInput.value = colorPicked
+
+})
+sharedmauveColSelect.addEventListener('click', () => {
+    colorPicked = 'mauveCol'; 
+    mauveColSelect.classList.remove('notSelected'); 
+    burgandyColSelect.classList.add('notSelected'); 
+    slateGrayColSelect.classList.add('notSelected'); 
+    seaGreenColSelect.classList.add('notSelected'); 
+    tealColSelect.classList.add('notSelected'); 
+    roseGoldColSelect.classList.add('notSelected');
+    console.log(colorPicked); 
+    colColorInput.value = colorPicked
+    sharedColInput.value = colorPicked
+
+})
+sharedroseGoldColSelect.addEventListener('click', () => {
+    colorPicked = 'roseGoldCol'; 
+    roseGoldColSelect.classList.remove('notSelected'); 
+    burgandyColSelect.classList.add('notSelected'); 
+    slateGrayColSelect.classList.add('notSelected'); 
+    seaGreenColSelect.classList.add('notSelected'); 
+    mauveColSelect.classList.add('notSelected'); 
+    tealColSelect.classList.add('notSelected');
+    console.log(colorPicked); 
+    colColorInput.value = colorPicked
+    sharedColInput.value = colorPicked
+
+})
+
 auth.onAuthStateChanged((cred) => {
-    let uid = cred.uid; 
-    createSharedBtn.addEventListener('click', (e) => {
-        e.preventDefault(); 
-        let shareKey = createKeyInput.value; 
-        let colLabel = createColName.value; 
-        if (createKeyInput.value.length == 0 || createColName.value.length == 0) {
-            alert('You Cannot Create A Public Collection Without A Share Key Or Collection Name!')
+    createSharedBtn.addEventListener('click', () => {
+        let colColorInput = document.querySelector('.colColorInput')
+        let createColInput = document.querySelector('.createColInput'); 
+        let createKeyInput = document.querySelector('.createKeyInput'); 
+        let color = colColorInput.value; 
+        let colLabel = createColInput.value; 
+        let colKey = createKeyInput.value; 
+        let uid = cred.uid; 
+        if (color == '' || colLabel == '' || colKey == '') {
+            alert('You must fill out the form to create a shared collection')
         } else {
-            //? for this collections logic ill only do the db creation
-            //? and then ill have the page refresh and load it to the screen 
-            //? with a get() function so i only have to make one logic tree 
-            //? as opposed to one for live creation and db getting like 
-            //? above with the private collections
-            set(ref(db, `public_collections/${shareKey}/${colLabel}/`), {
-                colLabel
+            set(ref(db, `users/${uid}/public_collections/${colLabel}/`), {
+                colLabel: colLabel, 
+                colKey: colKey, 
+                style: color
             }),
-            set(ref(db,`users/${uid}/public_collections_keys/${colLabel}/`), { 
-                shareKey
+            set(ref(db, `public_collections/${colKey}/`), {
+                colLabel: colLabel, 
+                style: color, 
+                colKey: colKey
             })
-            .catch((err) => {
-                console.log(err.message); 
+            .then(() => {
+                location.reload(); 
             })
-            //? this creates a copy of the key to the users db
-            //? for access later
-            location.reload(); 
-        
         }
     })
+
 })
-// //* get() from db to display and then the rest of the logic will 
-// //* sit here!: 
+
+//? get public collections!
+
 auth.onAuthStateChanged((cred) => {
     let uid = cred.uid; 
     let dbRef = ref(db); 
-    get(child(dbRef, `users/${uid}/public_collections_keys/`)) //! 1
-    .then((public_key_item) => {
-        public_key_item.forEach((publicKeyNode) => { //! 2
-            let key = publicKeyNode.val().shareKey; 
-            let dbRef = ref(db); 
-            get(child(dbRef, `public_collections/${key}/`))
-            .then((public_collection_item) => { //! 3
-                public_collection_item.forEach((publicCollectionNode) => {
-                    let sharedCollection = document.createElement('h1'); 
-                    sharedCollection.classList.add('sharedCollection'); 
-                    sharedCollection.textContent = publicCollectionNode.val().colLabel; 
-                    console.log('sharedCol was made')
-                    if (sharedCollection == '') {
-                        console.log('sharedCol not created');
-                    }
-                    else { 
-                        sharedColCont.appendChild(sharedCollection); 
-                        //? this is kind of complex but it works. grabs the key from the user @ 1
-                        //? 2 sets each key as a variable and uses that variable to call the public collection
-                        //? db item with that key
-                        //? 3 grabs each collection from the public folder using their respective keys
-                        sharedCollection.addEventListener('click', (e) => {
-                            if (e.target.innerText == '')
-                            {
-                                sharedColCont.removeChild(sharedCollection)
-                            }
-                            else {
-                                auth.onAuthStateChanged((cred) => { //! this will allow me to use get() to get all todos on todolist load 
-                                    let uid = cred.uid;  
-                                    let colLabel = e.target.innerText;
-                                    let todoItem = todoInput.value;  
-                                    let dbRef = ref(db)
-                                    todoList.style.display = 'inline-block'; 
-                                    todoListTitle.textContent = `${colLabel}`;
-                                    //? removes shared Col
-                                    removeCol.addEventListener('click', () => {
-                                        auth.onAuthStateChanged((cred) => {
-                                            let uid = cred.uid
-                                            get(child(dbRef, `users/${uid}/public_collections_keys/${colLabel}/`))
-                                            .then((shareKey_item) => {
-                                                let shareKey = shareKey_item.val().shareKey; 
-                                                let removeSharedPrompt = prompt("Are You Sure You'd Like To Remove This Shared Collection?").toLowerCase
-                                                if ( removeSharedPrompt = 'yes' ){
-                                                    remove(ref(db, `public_collections/${shareKey}`))
-                                                    remove(ref(db, `users/${uid}/public_collections_keys/${colLabel}`))
-                                                    closeTodoList.click();
-                                                    console.log('db deleted'); 
-                                                } 
-                                            })
-                                        })
+    get(child(dbRef, `users/${uid}/public_collections/`)) //? grab the key from user to verify public collection exists
+    .then((public_item) => {
+        public_item.forEach(publicUserNode => {
+            let colKey = publicUserNode.val().colKey; 
+            //? now get the public collections using the col key we just got
+            get(child(dbRef, `public_collections/${colKey}/`))
+            .then(publicNode => {
+                let collection = document.createElement('h1'); 
+                collection.classList.add(`${publicNode.val().style}`)
+                collection.textContent = publicNode.val().colLabel; 
+                let sharedColCont = document.querySelector('.sharedColCont')
+                sharedColCont.appendChild(collection); 
+                collection.addEventListener('click', (e) => {
+                    //? get todos from collection
+                    let uid = cred.uid; 
+                    let dbRef = ref(db); 
+                    get(child(dbRef, `public_collections/${colKey}/todos`))
+                    .then((todo_item) => {
+                        todo_item.forEach((todoNode) => {
+                            let todo = document.createElement("h1"); 
+                            todo.classList.add('todo'); 
+                            todo.textContent = todoNode.val().todoText; 
+                            let todoCont = document.querySelector('.todoCont'); 
+                            todoCont.appendChild(todo); 
+                            todo.addEventListener('click', (e) => {
+                                e.preventDefault(); 
+                                let removeTodo = e.target.textContent; 
+                                remove(ref(db, `public_collections/${colKey}/todos/${removeTodo}`))
+                                todoCont.removeChild(todo); 
+                                console.log(removeTodo); 
+                            })
+                        })
+                    } )
+                    //? open and style todolist 
+                    let sharedKeyTitle = document.querySelector('.sharedKeyTitle'); 
+                    todoList.style.display = 'inline-block'
+                    todoList.classList.add(`${publicNode.val().style}`)
+                    todoListTitle.textContent = e.target.textContent
+                    sharedKeyTitle.textContent = "ShareKey: " + publicNode.val().colKey
+                    //? add todos: 
+                    addTodoItem.addEventListener('click', (e) => {
+                        e.preventDefault(); 
+                        let todoText = todoInput.value
+                        if (todoText == '') {
+                            alert('You must use the input field to create a todo!')
+                        } else {
+                            //? get users name to make it easy to read.
+                            auth.onAuthStateChanged(cred => {
+                                let uid = cred.uid; 
+                                let dbRef = ref(db); 
+                                get(child(dbRef, `users/${uid}/`))
+                                .then((userNode)=> {
+                                    let usersName = userNode.val().name; 
+                                    let todoText = `${usersName}: ${todoInput.value} `
+                                    set(ref(db, `public_collections/${colKey}/todos/${todoText}`), {
+                                        todoText: todoText
                                     })
-
-                                    //? get all the todos from the database 
-                                    get(child(dbRef, `users/${uid}/public_collections_keys/${colLabel}/`))
-                                    .then((shareKey_item) => {
-                                        let todoListTitle = document.querySelector('.todoListTitle'); 
-                                        let shareKey = shareKey_item.val().shareKey; 
-                                        let sharedKeyTitle = document.querySelector(".sharedKeyTitle")
-                                        sharedKeyTitle.textContent = `Share Key: ${shareKey}`
-                                        // todoListTitle.appendChild(shareKeyTitle); 
-                                        //? get the todos: 
-                                        get(child(dbRef, `publicCollections/${shareKey}/todos/`))
-                                        .then(todo_item => {
-                                            let todoCounter = document.querySelector('.todoCounter'); 
-                                            let todoCount = 0; 
-                                            todo_item.forEach(todoNode => {
-                                                let todoCont = document.querySelector('.todoCont'); 
-                                                let todo = document.querySelector('h1'); 
-                                                todo.classList.add('todo'); 
-                                                todo.textContent = todoNode.val().todoItem; 
-                                                todoCont.appendChild(todo); 
-                                                todoPreloader.style.display = 'none'; 
-                                                todoCount += 1; 
-                                                todoCounter.style.display = 'inline-block'; 
-                                            })
+                                    .then(() => {
+                                        let todoCont = document.querySelector('.todoCont'); 
+                                        let todo = document.createElement('h1'); 
+                                        todo.classList.add('todo'); 
+                                        todo.textContent = todoText; 
+                                        todoCont.appendChild(todo); 
+                                        todoInput.value = ''; 
+                                        todo.addEventListener('click', (e) => {
+                                            e.preventDefault(); 
+                                            let removeTodo = e.target.textContent; 
+                                            remove(ref(db, `public_collections/${colKey}/todos/${removeTodo}`))
+                                            todoCont.removeChild(todo); 
+                                            console.log(removeTodo); 
                                         })
-                                    })
-                                    auth.onAuthStateChanged((cred) => {
-                                        let uid = cred.uid; 
-                                        let dbRef = ref(db); 
-                                        get(child(dbRef, `users/${uid}/`))
-                                        .then(user_item => {
-                                            let userName = user_item.val().name; 
-                                            addTodoItem.addEventListener('click', (e) => {
-                                                e.preventDefault(); 
-                                                if (todoItem = '') { //? makes sure that the todo isnt empty. if you remove an empty todo it'll delete all todos
-                                                    alert('You Must Use The Input Field To Write Your 2Due!')
-                                                } else {
-                                                    get(child(dbRef, `users/${uid}/public_collections_keys/${colLabel}`))
-                                                    .then((shareKey_item) => {
-                                                        let todoItem = todoInput.value; 
-                                                        let shareKey = shareKey_item.val().shareKey; 
-                                                            set(ref(db, `public_collections/${shareKey}/todos/${todoItem}`), {
-                                                                todoItem
-                                                            })
-                                                            .then(() => { //? creates todos
-                                                                let todoCont = document.querySelector('.todoCont'); 
-                                                                let todo = document.createElement('h1'); 
-                                                                todo.classList.add('todo'); 
-                                                                todo.textContent = `${userName}: ${todoItem}`; 
-                                                                todoCont.appendChild(todo); 
-                                                                todoInput.value = ''; 
-                                                                todo.addEventListener('click', (e) => { //? removes todos
-                                                                    let removeTodo = e.target.innerText; 
-                                                                    remove(ref(db, `users/${uid}/public_collections_keys/${colLabel}/${removeTodo}`))
-                                                                    remove(ref(db, `public_collections/${shareKey}/todos/${removeTodo}`))
-                                                                    todoCont.removeChild(todo);                                                 })
-                                                                    
-                                                            })
-                                                            
-                                                    })
-                                                }
-                                            })
-                                        })
-                                        
                                     })
                                 })
-                            }
-                        })
-                        
-                    }
-
+                            })
+                        }
+                    })
                 })
             })
-        })
+        }) 
     })
 })
-//? this concludes creating shared collections now we'll add joining the collections
-// // //* this is for opening and closing the choice menu and join menu
-// joinIcon.addEventListener('click', () => {
-//     joinSharedCol.style.display = 'flex'; 
-//     choiceMenu.style.display = 'none'; 
-//     joinColName.select(); 
-// })
-// closeJoinMenu.addEventListener('click', () => {
-//     joinSharedCol.style.display = 'none'; 
-// })
-// // //* this will set the join key 
-// joinSharedBtn.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     let shareKey = joinKeyInput.value; 
-//     let colLabel = joinColName.value; 
-//     let dbRef = ref(db);
-//     auth.onAuthStateChanged((cred) => {
-//         let uid = cred.uid; 
-//         set(ref(db, `users/${uid}/public_collections_keys/${colLabel}/`), {
-//             shareKey
-//         })
-//         .then(() => {
-//             location.reload() //? this reloads the page so we can get the joined collection on page load and only have one path. 
-//         })
-//     })
-// })
-// auth.onAuthStateChanged((cred) => {
-//     let uid = cred.uid; 
-//     joinSharedBtn.addEventListener('click', (e) => {
-//         e.preventDefault(); 
-//         let shareKey = joinKeyInput.value; 
-//         let colLabel = joinColName.value;  
-//         if (shareKey === '' && colLabel == '' ) {
-//             alert('You Cannot Join A Public Collection Without A Share Key or Collection Name!')
-//         } else {
-//             //? for this collections logic ill only do the db creation
-//             //? and then ill have the page refresh and load it to the screen 
-//             //? with a get() function so i only have to make one logic tree 
-//             //? as opposed to one for live creation and db getting like 
-//             //? above with the private collections
-//             set(ref(db,`users/${uid}/public_collections_keys/${colLabel}/`), { 
-//                 shareKey
-//             })
-//             .catch((err) => {
-//                 console.log(err.message); 
-//             })
-//             //? this creates a copy of the key to the users db
-//             //? for access later
-//             location.reload(); 
-//         }
-//     })
-// })
-// // //* get the shared collections: 
 
-// auth.onAuthStateChanged((cred) => {
-//     let uid = cred.uid; 
-//     let dbRef = ref(db); 
-//     get(child(dbRef, `users/${uid}/public_collections_keys/`))
-//     .then((join_key_item) => {
-//         join_key_item.forEach((joinKeyNode) => {
-//             let key = joinKeyNode.val().shareKey; 
-//             let dbRef = ref(db); 
-//             get(child(dbRef, `public_collections/${key}/`))
-//             .then((public_collection_item) => {
-//                 public_collection_item.forEach((publicCollectionNode) => {
-//                     let sharedCollection = document.createElement('h1'); 
-//                     sharedCollection.classList.add('sharedCollection'); 
-//                     sharedCollection.textContent = publicCollectionNode.val().colLabel; 
-//                     if (sharedCollection =='') {
-//                         console.log('empty collections deleted'); 
-//                     }
-//                     else {
-//                         sharedColCont.appendChild(sharedCollection); 
-//                         sharedCollection.addEventListener('click',(e) => {
-//                             if (e.target.innerText = '') {
-//                                 sharedColCont.removeChild(sharedCollection); 
-//                             }
-//                             else {
-//                                 auth.onAuthStateChanged((cred) => {
-//                                     let uid = cred.uid; 
-//                                     let colLabel = e.target.innerText; 
-//                                     let todoItem = todoInput.value; 
-//                                     let dbRef = ref(db); 
-//                                     let todoListTitle = document.querySelector('.todoListTitle'); 
-//                                     todoList.style.display = 'inline-block'; 
-//                                     todoListTitle.textContent = e.target.innerText; 
 
-//                                     //? removes shared col: 
-//                                     removeCol.addEventListener('click', () => {
-//                                         auth.onAuthStateChanged((cred) => {
-//                                             let uid = cred.uid; 
-//                                             get(child(dbRef, `users/${uid}/public_collections_keys/join_keys${colLabel}/`))
-//                                             .then((shareKey_item) => {
-//                                                 let shareKey = shareKey_item.val().shareKey; 
-//                                                 let removeSharedPrompt = prompt("Are You Sure You'd Like To Remove This Shared Collection?").toLowerCase
-//                                                 if (removeSharedPrompt = 'yes') {
-//                                                     remove(ref(db, `public_collections/${shareKey}`))
-//                                                     remove(ref(db, `users/${uid}/public_collections_keys/${colLabel}`))
-//                                                     closeTodoList.click(); 
-//                                                     console.log('db deleted'); 
-//                                                 }
-//                                             })
-//                                         })
-//                                     })
-//                                     //? get all the todos from the database 
-//                                     get(child(dbRef, `users/${uid}/public_collections_keys/${colLabel}/`))
-//                                     .then((shareKey_item) => {
-//                                         let todoListTitle = document.querySelector('.todoListTitle'); 
-//                                         let shareKey = shareKey_item.val().shareKey; 
-//                                         let sharedKeyTitle = document.querySelector(".sharedKeyTitle")
-//                                         sharedKeyTitle.textContent = `Share Key: ${shareKey}`
-//                                     })
-//                                     addTodoItem.addEventListener('click', () => {
-//                                         if (todoItem == '') {
-//                                             alert('You Must Use The Input Field To Write Your 2Due!')
-//                                         } else {
-//                                             get(child(dbRef, `users/${uid}/public_collections_keys/${colLabel}`))
-//                                             .then((shareKey_item) => {
-//                                                 let todoItem = todoInput.value; 
-//                                                 let shareKey = shareKey_item.val().shareKey; 
-//                                                 set(ref(db, `public_collections/${shareKey}/todos/${todoItem}`), {
-//                                                     todoItem
-//                                                 })
-//                                                 .then(() => {//? creates todos
-//                                                     let todoCont = document.querySelector('.todoCont')
-//                                                     let todo = document.createElement('h1'); 
-//                                                     todo.classList.add('todo'); 
-//                                                     todo.textContent = todoItem; 
-//                                                     todoCont.appendChild(todo); 
-//                                                     todoInput.value = ''; 
-//                                                     todo.addEventListener('click', (e) => {
-//                                                         let removeTodo = e.target.innerText
-//                                                         remove(ref(db, `users/${uid}/public_collections_keys/${colLabel}/${removeTodo}`))
-//                                                         remove(ref(db, `public_collections/${shareKey}/todos/${removeTodo}`))
-//                                                         todoCont.removeChild(todo); 
-//                                                     })
-//                                                 })
-//                                             })
-//                                         }
-//                                     })
-//                                 })
-
-//                             }
-//                         })
-//                     }
-
-//                 })
-//             })
-//         })
-//     })
-// })
 // //! //! //! //!============================================================================
 let colsPreloader = document.querySelector('.colsPreloader')
 let initialColPreload = false; 

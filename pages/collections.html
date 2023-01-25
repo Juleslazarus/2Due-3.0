@@ -33,24 +33,42 @@
         <form>
             <label>Collection Name:</label>
             <input class="colLabelInput" type="text" required placeholder="Work, School, etc">
-                <button class="createColBtn">Create Collection</button>
+            <label>Color: (Blank For Default)</label>
+            <input class="colColorInput" type="text" required placeholder="T,R,D G,S G etc">
+            <div class="colorSelect"> 
+                <span class="tealCol">T</span>
+                <span class="burgandyCol">R</span>
+                <span class="slateGrayCol">D G</span>
+                <span class="seaGreenCol">S G</span>
+                <span class="mauveCol">M</span>
+                <span class="roseGoldCol">R G</span>
+            </div>
+            <button class="createColBtn">Create Collection</button>
         </form>
     </div>
     <div class="createSharedCol">
         <i id="closeCreateMenu" class="fa-solid fa-circle-xmark"></i>
         <form>
             <label>Collection Name:</label>
-            <input class="createColName" type="text" required placeholder="Work, School, etc">
+            <input class="createColInput" type="text" required placeholder="Work, School, etc">
+            <label>Color:</label>
+            <input class="sharedColInput" type="text" required placeholder="T, R, D G, S G, etc"/>
+            <div class="colorSelect"> 
+                <span class="sharedtealCol">T</span>
+                <span class="sharedburgandyCol">R</span>
+                <span class="sharedslateGrayCol">D G</span>
+                <span class="sharedseaGreenCol">S G</span>
+                <span class="sharedmauveCol">M</span>
+                <span class="sharedroseGoldCol">R G</span>
+            </div>
             <label>Private Key: (will be used for others to join)</label>
             <input class="createKeyInput" type="text" required placeholder="maryHadALittleLam...">
-            <button type="submit" class="createSharedBtn">Create Collection <i class="fa-solid fa-hammer"></i></button>
+            <button type="submit" class="createSharedBtn">Create/Join Collection</button>
         </form>
     </div> 
         <div class="headerCont">
-            <div class="textCont">
             <i id="returnPage" class=" fa-solid fa-circle-arrow-left"></i> <!-- this will be needed later -->
             <h1 class="headerText">Collections</h1>
-        </div>
         <i id="openNavMenu" class="fa-solid fa-user"></i>
         <div class="navMenu">
             <i id="closeNavMenu" class="fa-solid fa-circle-xmark"></i>
@@ -68,7 +86,6 @@
             <button class="addColBtn">Add A Collection</button>
         </div>
         <div class="collectionsCont">
-            <div class="colsPreloader"></div>
             <!-- ? this is where collections are appended -->
         </div>
         <div class="pubColHeader">

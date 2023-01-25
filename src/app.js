@@ -1,6 +1,6 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getDatabase, onValue , set, get, ref, remove, update, child } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"; 
+import { getDatabase, query, onValue , set, get, ref, remove, update, child, limitToLast, limitToFirst, orderByChild } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"; 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js"; 
 
 
@@ -34,6 +34,10 @@ let nameText = document.querySelector('.nameText');
 let logOutBtn = document.querySelector('.logOutBtn'); 
 let closeUserMenu = document.querySelector('.closeUserMenu'); 
 
+
+//? add todos: 
+let addTodo = document.querySelector('.addTodo'); 
+
 userBtn.addEventListener('click', (e) => {
     e.preventDefault(); 
     userMenu.style.display = 'flex'; 
@@ -52,6 +56,7 @@ closeUserMenu.addEventListener('click', (e) => {
     userMenu.style.display = 'none'; 
 })
 
+
 //? setting welcome text: 
 let welcomeText = document.querySelector('.welcomeText'); 
 auth.onAuthStateChanged((cred) => {
@@ -63,20 +68,33 @@ auth.onAuthStateChanged((cred) => {
     })
 })
 
-//? get quickTodos:
+// auth.onAuthStateChanged((cred) => {
+//     let uid = cred.uid; 
+//     const dbRef = ref(db, `users/${uid}/quickTodos/`)
+//     onValue(dbRef, (snapshot) => {
+//         let todoArr = []; 
+//         snapshot.forEach(todo => {
+//             todoArr.push({...todo.val().todoText})
+//         })
+//         setTodos(todosArr); 
+//     })
+// } )
+
+
+// ? get quickTodos:
 auth.onAuthStateChanged((cred) => {
     let uid = cred.uid; 
     let dbRef = ref(db); 
     get(child(dbRef, `users/${uid}/quickTodos/`))
     .then((todo_item) => {
         todo_item.forEach((todoNode) => {
-            let todoPreloader = document.querySelector('.todoPreloader')
-            let todoCont = document.querySelector('.todoCont');
+            let todoCont = document.querySelector('.todoCont'); 
+            let quickTodoInput = document.querySelector('.quickTodoInput'); 
             let todo = document.createElement('h1'); 
             todo.classList.add('todo'); 
             todo.textContent = todoNode.val().todoText; 
             todoCont.appendChild(todo); 
-            todoPreloader.style.display = 'none'; 
+            quickTodoInput.value = ''; 
             todo.addEventListener('click', (e) => {
                 e.preventDefault(); 
                 let removeTodo = e.target.textContent; 
@@ -88,19 +106,18 @@ auth.onAuthStateChanged((cred) => {
     })
 })
 
-let todoCont = document.querySelector('.todoCont'); 
-let quickTodoInput = document.querySelector('.quickTodoInput'); 
-let addTodo = document.querySelector('.addTodo'); 
-//? set todos: 
 auth.onAuthStateChanged((cred) => {
     let uid = cred.uid; 
     addTodo.addEventListener('click', (e) => {
         e.preventDefault(); 
+        let quickTodoInput = document.querySelector('.quickTodoInput'); 
         let todoText = quickTodoInput.value; 
         set(ref(db, `users/${uid}/quickTodos/${todoText}/`), {
-            todoText
+            todoText: todoText, 
+            created_at: Date()
         })
         .then(() => {//? append them to the dom
+            let todoCont = document.querySelector('.todoCont'); 
             let todo = document.createElement('h1'); 
             todo.classList.add('todo'); 
             todo.textContent = todoText; 
@@ -119,6 +136,8 @@ auth.onAuthStateChanged((cred) => {
         })
     })
 })
+
+//? realtime listener that can work for public collections or a messaging app
 
 
 //? check if user is signed in: 

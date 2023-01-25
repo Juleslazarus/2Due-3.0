@@ -6,24 +6,18 @@
   font-family: 'Roboto', sans-serif;
 }
 
-::-webkit-scrollbar {
-  background: rgba(0, 0, 0, 0.292);
-  width: .4rem;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #212a38;
-}
-
 * button {
   cursor: pointer;
+}
+
+body {
+  overflow: hidden;
 }
 
 .todoList {
   height: 100vh;
   width: 100%;
   position: fixed;
-  background: #212154;
   display: none;
 }
 
@@ -138,6 +132,7 @@
   padding: 2.2vh;
   text-align: left;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .todoCont .todo:hover {
@@ -164,7 +159,7 @@
 .createColMenu form {
   display: flex;
   flex-direction: column;
-  gap: 2vh;
+  gap: 5vh;
   align-items: center;
 }
 
@@ -203,6 +198,16 @@
   font-size: 2.2vh;
   background: #005eff;
   transition: all .2s;
+}
+
+.createColMenu form .colorSelect span {
+  padding: 2vh;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.createColMenu form .colorSelect span:hover {
+  transform: translateY(-10px);
 }
 
 @keyframes invalidHover {
@@ -307,7 +312,7 @@
   height: 100vh;
   width: 100%;
   background: #212154;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   color: white;
@@ -330,4 +335,237 @@
   border: none;
   color: white;
   font-weight: bold;
+}
+
+.headerCont {
+  background: #212154;
+  display: flex;
+  gap: 1rem;
+  height: 5vh;
+  width: 100%;
+  align-items: center;
+  overflow: hidden;
+}
+
+.headerCont h1 {
+  color: white;
+  padding: .5rem;
+  font-size: 2vh;
+  margin-right: auto;
+}
+
+.headerCont i {
+  color: white;
+  padding: 1rem;
+  cursor: pointer;
+  font-size: 2vh;
+}
+
+.colsSection {
+  background: #f2f2e2;
+  color: black;
+  height: 100vh;
+}
+
+.colsSection .privColHeader {
+  display: flex;
+}
+
+.colsSection .privColHeader h1 {
+  margin-right: auto;
+}
+
+.colsSection .privColHeader button {
+  background: #005eff;
+  color: white;
+  font-weight: bold;
+  font-size: 2vh;
+  padding: 1vh;
+  border: none;
+}
+
+.colsSection .collectionsCont {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.colsSection .collectionsCont h1 {
+  height: 8vh;
+  display: flex;
+  align-items: center;
+  margin: 1vh;
+  padding: 1vh;
+  color: white;
+  cursor: pointer;
+  background: #1c1c32;
+}
+
+.colsSection .pubColHeader {
+  display: flex;
+}
+
+.colsSection .pubColHeader h1 {
+  margin-right: auto;
+}
+
+.colsSection .pubColHeader button {
+  background: #005eff;
+  color: white;
+  font-weight: bold;
+  font-size: 2vh;
+  padding: 1vh;
+  border: none;
+}
+
+.colsSection .sharedColCont {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.colsSection .sharedColCont h1 {
+  height: 8vh;
+  display: flex;
+  align-items: center;
+  margin: 1vh;
+  padding: 1vh;
+  color: white;
+  cursor: pointer;
+}
+
+.defaultCol {
+  background: #1c1c32;
+}
+
+.tealCol {
+  background: #1e95bc !important;
+}
+
+.burgandyCol {
+  background: #8f2424 !important;
+}
+
+.slateGrayCol {
+  background: darkslategray !important;
+}
+
+.seaGreenCol {
+  background: seagreen !important;
+}
+
+.mauveCol {
+  background: #874c62 !important;
+}
+
+.roseGoldCol {
+  background: #f6cfca !important;
+}
+
+.createSharedCol form {
+  display: flex;
+  flex-direction: column;
+  gap: 5vh;
+  align-items: center;
+}
+
+.createSharedCol form:invalid button {
+  background: #1c1c32;
+}
+
+.createSharedCol form:invalid button:hover {
+  animation: invalidHover .3s running ease-in-out;
+}
+
+.createSharedCol form:valid button:hover {
+  transform: translateY(-5px);
+}
+
+.createSharedCol form label {
+  font-weight: bold;
+}
+
+.createSharedCol form input {
+  padding: 2vh 1vw;
+  font-size: 2.5vh;
+  border: none;
+  outline: none;
+  background-color: #1c1c32;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.322);
+}
+
+.createSharedCol form button {
+  border: none;
+  outline: none;
+  color: white;
+  padding: 2vh;
+  font-size: 2.2vh;
+  background: #005eff;
+  transition: all .2s;
+}
+
+.createSharedCol form .colorSelect span {
+  padding: 2vh;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.createSharedCol form .colorSelect span:hover {
+  transform: translateY(-10px);
+}
+
+.sharedtealCol {
+  background: #1e95bc !important;
+}
+
+.sharedburgandyCol {
+  background: #8f2424 !important;
+}
+
+.sharedslateGrayCol {
+  background: darkslategray !important;
+}
+
+.sharedseaGreenCol {
+  background: seagreen !important;
+}
+
+.sharedmauveCol {
+  background: #874c62 !important;
+}
+
+.sharedroseGoldCol {
+  background: #f6cfca !important;
+}
+
+.notSelected {
+  background: gray;
+}
+
+.seltealCol {
+  background: #1e95bc !important;
+}
+
+.selburgandyCol {
+  background: #8f2424 !important;
+}
+
+.selslateGrayCol {
+  background: darkslategray !important;
+}
+
+.selseaGreenCol {
+  background: seagreen !important;
+}
+
+.selmauveCol {
+  background: #874c62 !important;
+}
+
+.selroseGoldCol {
+  background: #f6cfca !important;
 }

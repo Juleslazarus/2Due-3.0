@@ -2,612 +2,19 @@
 
 * {
     @include global; 
-
-}
-
-
-::-webkit-scrollbar {
-    background:rgba(0, 0, 0, 0.292); 
-    width: .4rem; 
-}
-::-webkit-scrollbar-thumb {
-    background: $secondAccent; 
-}
-// .preloadCont {
-//     height: 100%; 
-//     width: 100%; 
-//     position: absolute; 
-//     background-image: url(../images/pencil.gif);
-//     background-repeat: no-repeat;
-//     background-position: center;
-//     background-color: #f1f1f1;
-//     background-size: 80vh;
-//     z-index: 100; 
-//     transition: all .4s; 
-// }
-// .colsPreloader {
-//     height: 25rem;
-//     width: 100%; 
-//     background: $thirdColor; 
-//     background-image: url(../images/colpreloader.gif); background-repeat: no-repeat; background-position: center; background-size: contain; 
-//     top: 9%; 
-//     opacity: 1; 
-//     transition: all .2s; 
-//     background-size: 2.5vh;
-// }
-
-
-// .errorText {
-//     font-size: 2rem; 
-//     color: red; 
-//     font-weight: bold; 
-//     text-align: center; 
-// }
-// .createColMenu {
-//     display: none; 
-//     position: absolute; 
-//     height: 100vh; 
-//     width: 100vw; 
-//     top: 1%; 
-//     left: 0%; 
-//     background:rgb(13, 16, 59); 
-//     border-radius: 10px;
-//     z-index: 5; 
-//     text-align: center; 
-//     flex-direction: column;
-//     align-items: center; 
-//     justify-content: center;
-//     a {
-//         border: none; 
-//         background: transparent; 
-//         font-size: 4vh;
-//         color: white; 
-//         cursor: pointer; 
-//         float: right; 
-//     }
-//     form {
-//         display: flex; 
-//         flex-direction: column;
-//         padding: 1.5rem;
-//         gap: .8rem;
-//         label {
-//             font-size: 2rem;
-//             color: white; 
-//         }
-//         input {
-//             font-size: 2.5vh;
-//             padding: 1.5rem;
-//             border-radius: 10px; 
-
-//         }
-//         div {
-//             display: flex; 
-//             align-items: center;
-//             justify-content: center;
-//             button {
-//                 font-size: 1.8rem;
-//                 padding: 1rem;
-//                 border-radius: 5px; 
-//                 border: none; 
-//                 background: $accentColor; 
-//                 color: white; 
-//                 cursor: pointer; 
-//                 transition: all .3s; 
-//             }
-//         }
-//     }
-// }
-
-// //! ------------------------------------------------------------
-// //? collections style section: 
-// .colsSection {
-//     height: 100vh;
-//     background: $thirdColor; 
-//     .privColHeader {
-//         height: 8%; 
-//         display: flex; 
-//         align-items: center;
-//         background: $primaryColor; 
-//         padding: 1rem;
-//         .privColText {
-//             color: white; 
-//         }
-        
-//     }
-//     .collectionsCont {
-//         height: 45%; 
-//         .collection {
-//             background: $primaryColor; 
-//             padding: 2vh;
-//             margin: 1vh 0vw; 
-//             text-align: left;
-//             color: white; 
-//             font-weight: 600; 
-//             transition: all .3s;
-//             cursor: pointer; 
-//             &:hover {
-//                 background: black; 
-//             }
-//         }
-//     }
-//     .pubColHeader {
-//         height: 8%; 
-//         display: flex; 
-//         align-items: center;
-//         background: $primaryColor; 
-//         padding: 1rem;
-//         .sharedColText {
-//             color: white; 
-//         }
-//     }
-//     .sharedColCont {
-//         .sharedCollection {
-//             background: $primaryColor; 
-//             padding: 2vh;
-//             margin: 1vh 0vw; 
-//             text-align: left;
-//             color: white; 
-//             font-weight: 600; 
-//             transition: all .3s;
-//             cursor: pointer; 
-//             &:hover {
-//                 background: black; 
-//             }
-//         }
-//     }
-    
-// }
-
-// //? add collection buttons: 
-// .addColBtn, 
-// .addSharedBtn {
-//     background: $accentColor; 
-//     padding: 1.5vh;
-//     border-radius: 10px; 
-//     font-size: 2vh;
-//     color: white; 
-//     border: none; 
-//     outline: none; 
-//     margin-left: auto; 
-//     cursor: pointer; 
-// }
-// //!--------------------------------------------------------------
-
-// .choiceMenu {
-//     position: absolute; 
-//     top: 35%; 
-//     left: 14.7%; 
-//     height: 50vh; 
-//     width: 70vw; 
-//     background:rgba(28, 28, 50, 0.934); 
-//     display: none; 
-//     flex-direction: column;
-//     border-radius: 10px; 
-//     // align-items: center;
-//     h1 {
-//         color: white; 
-//         text-align: center;
-//         margin-top: 2.5rem; 
-//     }
-//     .choicesCont {
-//         display: flex; 
-//         flex-direction: row;
-//         overflow: hidden; 
-//         position: relative; 
-//         z-index: 11;
-//         i {
-//             background: rgba(0, 0, 0, 0.11); 
-//             display: flex; 
-//             justify-content: center;
-//             align-items: center;
-//             height: 50vh;
-//             width: 100%; 
-//             font-size: 8vh; 
-//             color: white; 
-//             z-index: 11; 
-//             &:hover {
-//                     background: rgba(0, 0, 0, 0.378); 
-//                     cursor: pointer; 
-
-//                 }   
-            
-//         }
-//         #joinIcon {
-//             overflow: hidden; 
-//             transition: all .2s;
-//             word-wrap: break-word; 
-//             &:hover {
-//                 &::before {
-//                     content: 'Join A Collection'; 
-//                     position: absolute;
-//                     font-size: 2vh; 
-//                     text-align: center; 
-//                 }
-//             }
-//         }
-//         #createIcon {
-//             overflow: hidden; 
-//             transition: all .2s; 
-//             &:hover {
-//                 &::before {
-//                     content: 'Create/Join'; 
-//                     overflow: hidden; 
-//                     font-size: 2vh;
-//                     text-align: center; 
-//                 }
-//             }
-//         }
-//     }
-//     #closeChoices {
-//         font-size: 4vh;
-//         color: white; 
-//         margin-bottom: 1rem;
-//         cursor: pointer; 
-//         text-align: center;
-//         position: absolute; 
-//         top: 1%; 
-//         right: 1%; 
-//     }
-// }
-
-
-// #returnPage {
-//     cursor: pointer; 
-// }
-
-// body {
-//     background: $primaryColor; 
-//     position: relative; 
-// }
-// .headerCont {
-//     height: 8vh; 
-//     display: flex; 
-//     background: $fourthColor; 
-//     color: white; 
-//     align-items: center; 
-//     justify-content: center;
-//     padding: .5rem;
-//     #openNavMenu {
-//         font-size: 3vh;
-//         cursor: pointer; 
-//     }
-//     .textCont {
-//         display: flex; 
-//         flex-direction: row;
-//         align-items: center; 
-//         gap: .5rem;
-//         margin-right: auto;
-//         font-size: 1.2vh;
-//         i {
-//             font-size: 3vh !important;
-//         }
-//     }
-//     .navMenu {
-//         position: absolute; 
-//         height: 30vh;
-//         width: 80vw; 
-//         border: solid white; 
-//         top: 5%; 
-//         z-index: 10; 
-//         background: #f1f1f1 ; 
-//         box-shadow: 0px 20px 30px 1px rgba(0, 0, 0, 0.531); 
-//         display: none; 
-//         align-items: center;
-//         flex-direction: column;
-//         word-wrap: break-word;
-//         #closeNavMenu {
-//             font-size: 2.5vh !important;
-//             text-align: center; 
-//             margin: 1rem 0rem;
-//             cursor: pointer;
-//             color: black;
-//         }
-//         .navCont {
-//             text-align: center;
-//             display: grid; 
-//             grid-template-columns: repeat(1, auto);
-//             gap: .8rem;
-//             word-wrap: break-word;
-//             button, 
-//             a, 
-//             h1 {
-//                     border: none; 
-//                     background: transparent; 
-//                     color: black; 
-//                     font-weight: 600;
-//                     font-size: 3vh;
-//                     cursor: pointer;
-//                     text-decoration: none;  
-//                 }
-//             a {
-//                 cursor: default !important; 
-//             }
-//             .logoutBtn {
-//                 background: $accentColor;
-//                 padding: 1vh; 
-//                 border-radius: 5px; 
-//                 color: white; 
-//             }
-//         }
-//     }
-// }
-
-
-// //? 
-// //? todolist from collection 
-// .todoCounter {
-//     position: absolute;
-//     top: 0%;
-//     right: 1%;
-//     background: red;
-//     padding: .2rem .6rem;
-//     border-radius: 50%;
-//     font-size: 2vh;
-//     display: none;
-// }
-// .todoList {
-//     position: fixed; 
-//     height: 80vh; 
-//     width: 100%;
-//     top: 10%; 
-//     left: 0%; 
-//     background: $primaryColor; 
-//     color: white; 
-//     display: none; 
-//     opacity: 1; 
-//     z-index: 10; 
-//     .todoHeader {
-//         display: flex; 
-//         position: relative; 
-//         padding: 1vw; 
-//         .todoListTitle {
-//             margin-right: auto; 
-//             font-weight: bold; 
-//             color: white; 
-//             margin-right: auto;     
-//         }
-//         .shareKeyTitle {
-//             font-size: 2vh;
-//             color: white; 
-//         }
-//         .closeTodoList {
-//             padding: 1rem; 
-//             border-radius: 10px;
-//             border: none;  
-//             font-size: 3vh; 
-//             font-weight: bold;
-//             color: white; 
-//             cursor: pointer; 
-//             transition: all .3s; 
-//             &:hover {
-//                 transform: translateY(-3px) scale(1.3); 
-//             }
-//         }
-//     }
-//     .todoInputCont {
-//         height: 8vh;
-//         display: flex; 
-//         align-items: center;
-//         padding: .1rem; 
-//         gap: 1rem;
-//         input {
-//             height: 90%; 
-//             margin-right: auto;
-//             border-radius: 10px;  
-//             border: none; 
-//             padding: 1rem;
-//             font-size: 2vh;
-//             font-weight: 600; 
-//             width: 90%; 
-//         }
-//         button {
-//             padding: 1.4vh 2.4vw;
-//             border: none; 
-//             border-radius: 5px; 
-//             font-size: 2vh; 
-//             background: $accentColor; 
-//             transition: all .2s; 
-//             color: white; 
-//             font-weight: 600;
-//             cursor: pointer;
-//             &:active {
-//                 background: $secondAccent 
-//             }
-//         }
-//     }
-// }
-
-// .userText {
-//     height: 2vh; 
-//     width: 100%; 
-//     text-align: center; 
-//     font-weight: 600; 
-//     color: white; 
-//     font-size: 2vh;
-// }
-
-//     .removeColCont {
-//         display: flex; 
-//         justify-content: center;
-//         button {
-//             background-color: $thirdColor;
-//             cursor: pointer; 
-//             border: none; 
-//             color: white; 
-//             font-size: 3vh; 
-//             padding: 1vh;
-//             border-radius: 10px; 
-//         }
-//     }
-
-// .todoPreloader {
-//     background: $primaryColor url(../images/colpreloader.gif) no-repeat center center;
-//     background-size: 3vh;
-//     height: 100%; 
-//     width: 100%; 
-// }
-// .todoItemCont {
-//     background: $primaryColor; 
-//     height: 80%; 
-//     width: 100%; 
-//     overflow-y: scroll; 
-//     overflow-x: hidden; 
-//     .todo {
-//         height: 8vh; 
-//         width: 100%; 
-//         background: $secondaryColor; 
-//         text-align: left;
-//         display: flex; 
-//         align-items: center;
-//         padding: 1vh;
-//         margin: 1rem 0rem;
-//         word-wrap: normal;
-//         position: relative; 
-//         font-size: 2.5vh;
-//         &:hover {
-//             text-decoration: line-through 5px black;
-//             cursor: pointer; 
-//             &::before {
-//                 content: "X"; 
-//                 height: 50%; 
-//                 width: 10%; 
-//                 position: absolute; 
-//                 top: 1%;
-//                 right: 1%; 
-//                 background: $primaryColor; 
-//                 color: white; 
-//                 text-align: center; 
-//                 text-decoration: none; 
-//             }
-//         }
-//     }
-// }
-
-// @media all and (max-width: 720px) {
-//     .accountText {
-//         font-size: 2vh !important; 
-//     }
-// }
-
-// @media all and (max-width: 500px) {
-//     .choicesCont {
-//         display: flex;
-//         flex-direction: column !important;
-//         #joinIcon {
-//             width: 100%; 
-//         }
-//         #createIcon {
-//             width: 100%; 
-//         }
-//     }
-// }
-
-
-// .createSharedCol {
-//     position: absolute; 
-//     height: 40em; 
-//     width: 80vw; 
-//     background: rgba(13, 16, 59, 0.893); 
-//     top: 10%; 
-//     left: 10%; 
-//     display: none; //? js will change it to flex; 
-//     flex-direction: column;
-//     text-align: end;
-//     overflow-y: scroll; 
-//     i {
-//         font-size: 4vh !important; 
-//         color: white; 
-//         padding: .5rem;
-//     }
-//     form {
-//         display: flex; 
-//         flex-direction: column;
-//         padding: 2rem; 
-//         font-size: 4vh;
-//         color: white; 
-//         text-align: center;
-//         gap: 1rem; 
-//         input {
-//             padding: 2vh 1vw; 
-//             font-size: 3vh;
-//             border-radius: 10px; 
-//         }
-//         button {
-//             background: $accentColor; 
-//             border: none; 
-//             font-size: 2vh;
-//             color: white; 
-//             padding: .5rem; 
-//             cursor: pointer; 
-//             i {
-//                 font-size: 3vh;
-//                 padding: .5rem;
-//                 cursor: pointer; 
-//                 color: white; 
-//             }
-//         }
-//     }
-// }
-
-// .joinSharedCol {
-//     position: absolute; 
-//     height: 40em; 
-//     width: 80vw; 
-//     background: rgba(13, 16, 59, 0.893); 
-//     top: 10%; 
-//     left: 10%; 
-//     display: none; //? js will change it to flex
-//     flex-direction: column;
-//     text-align: end;
-//     overflow-y: scroll; 
-//     i {
-//         font-size: 4vh !important; 
-//         color: white; 
-//         padding: .5rem;
-//     }
-//     form {
-//         display: flex; 
-//         flex-direction: column;
-//         padding: 2rem; 
-//         font-size: 4vh;
-//         color: white; 
-//         text-align: center;
-//         input {
-//             padding: 2vh 1vw; 
-//             font-size: 3vh;
-//             border-radius: 10px; 
-//         }
-//         button {
-//             background: $accentColor; 
-//             border: none; 
-//             font-size: 2.5vh;
-//             color: white; 
-//             padding: .5rem; 
-//             i {
-//                 font-size: 3vh;
-//                 padding: .5rem;
-//                 cursor: pointer; 
-//                 color: white; 
-//             }
-//         }
-//     }
-// }
-
-
-
-//? new styles
-
-* {
     button {
         cursor: pointer; 
     }
 }
 
+body {
+    overflow: hidden;
+}
 .todoList {
     height: 100vh; 
     width: 100%; 
     position: fixed; 
-    background: $fourthColor; 
+    // background: $fourthColor; 
     display: none; 
     .removeColCont {
         position: absolute; 
@@ -715,6 +122,7 @@
         padding: 2.2vh; 
         text-align: left;
         border-radius: 10px; 
+        cursor: pointer;
         &:hover {
             text-decoration:line-through .3vh white;
         }
@@ -739,7 +147,7 @@
     form {
         display: flex; 
         flex-direction: column;
-        gap: 2vh;
+        gap: 5vh;
         align-items: center;
         &:invalid {
             button {
@@ -777,6 +185,16 @@
             font-size: 2.2vh;
             background: $accentColor; 
             transition: all .2s; 
+        }
+        .colorSelect {
+            span {
+                padding: 2vh;
+                cursor: pointer; 
+                transition: all .3s; 
+                &:hover {
+                    transform: translateY(-10px); 
+                }
+            }
         }
 
     }
@@ -885,7 +303,7 @@
     height: 100vh; 
     width: 100%; 
     background: $fourthColor; 
-    display: flex; 
+    display: none; 
     align-items: center;
     justify-content: center;
     color: white;
@@ -905,4 +323,219 @@
             font-weight: bold; 
         }
     }
+}
+
+// site styles
+.headerCont {
+    background: $fourthColor; 
+    display: flex; 
+    gap: 1rem;
+    height: 5vh;
+    width: 100%; 
+    align-items: center;
+    overflow: hidden;
+    h1 {
+        color: white; 
+        padding: .5rem;
+        font-size: 2vh;
+        margin-right: auto; 
+    }
+    i {
+        color: white; 
+        padding: 1rem;
+        cursor: pointer; 
+        font-size: 2vh;
+    }
+}
+
+
+.colsSection {
+    background: rgb(242, 242, 226); 
+    color: black; 
+    height: 100vh;
+    .privColHeader {
+        display: flex;
+
+        h1 {
+            margin-right: auto; 
+        }
+        button {
+            background: $accentColor; 
+            color: white; 
+            font-weight: bold;
+            font-size: 2vh;
+            padding: 1vh;
+            border: none; 
+        }
+    }
+    .collectionsCont {
+        height: 50%; 
+        display: flex; 
+        flex-direction: column;
+        overflow-y: scroll;
+        h1 {
+            height: 8vh;
+            display: flex; 
+            align-items: center;
+            margin: 1vh;
+            padding: 1vh;
+            color: white; 
+            cursor: pointer; 
+            background: $primaryColor;
+        }
+    }
+        .pubColHeader {
+            display: flex;
+    
+            h1 {
+                margin-right: auto; 
+            }
+            button {
+                background: $accentColor; 
+                color: white; 
+                font-weight: bold;
+                font-size: 2vh;
+                padding: 1vh;
+                border: none; 
+            }
+        }
+        .sharedColCont {
+            height: 50%; 
+            display: flex; 
+            flex-direction: column;
+            overflow-y: scroll;
+            h1 {
+                height: 8vh;
+                display: flex; 
+                align-items: center;
+                margin: 1vh;
+                padding: 1vh;
+                color: white; 
+                cursor: pointer; 
+            }
+        
+    }
+}
+
+.defaultCol {
+    background: $primaryColor; 
+}
+//? user custom collection folders
+.tealCol {
+    background: rgb(30, 149, 188) !important; 
+}
+.burgandyCol {
+    background: rgb(143, 36, 36) !important;    
+}
+.slateGrayCol {
+    background: darkslategray !important; 
+}
+.seaGreenCol {
+    background: seagreen !important; 
+}
+.mauveCol {
+    background: #874c62 !important;
+}
+.roseGoldCol {
+    background: #f6cfca !important; 
+}
+
+
+.createSharedCol {
+    form {
+        display: flex; 
+        flex-direction: column;
+        gap: 5vh;
+        align-items: center;
+        &:invalid {
+            button {
+                background: $primaryColor; 
+                &:hover {
+                    animation: invalidHover .3s running ease-in-out; 
+                }
+            }
+        }
+        &:valid {
+            button {
+                &:hover {
+                transform: translateY(-5px); 
+                }
+            }
+        }
+        label {
+            font-weight: bold; 
+        }
+        input {
+            padding: 2vh 1vw; 
+            font-size: 2.5vh;
+            border: none; 
+            outline: none; 
+            background-color: $primaryColor;
+            color: white;
+            font-weight: bold; 
+            box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.322);
+        }
+        button {
+            border: none; 
+            outline: none; 
+            color: white; 
+            padding: 2vh; 
+            font-size: 2.2vh;
+            background: $accentColor; 
+            transition: all .2s; 
+        }
+        .colorSelect {
+            span {
+                padding: 2vh;
+                cursor: pointer; 
+                transition: all .3s; 
+                &:hover {
+                    transform: translateY(-10px); 
+                }
+            }
+        }
+
+    }
+}
+
+.sharedtealCol {
+    background: rgb(30, 149, 188) !important; 
+}
+.sharedburgandyCol {
+    background: rgb(143, 36, 36) !important;    
+}
+.sharedslateGrayCol {
+    background: darkslategray !important; 
+}
+.sharedseaGreenCol {
+    background: seagreen !important; 
+}
+.sharedmauveCol {
+    background: #874c62 !important;
+}
+.sharedroseGoldCol {
+    background: #f6cfca !important; 
+}
+
+.notSelected {
+    background: gray; 
+}
+
+.seltealCol {
+    background: rgb(30, 149, 188) !important; 
+}
+.selburgandyCol {
+    background: rgb(143, 36, 36) !important;    
+}
+.selslateGrayCol {
+    background: darkslategray !important; 
+}
+.selseaGreenCol {
+    background: seagreen !important; 
+}
+.selmauveCol {
+    background: #874c62 !important;
+}
+.selroseGoldCol {
+    background: #f6cfca !important; 
 }
