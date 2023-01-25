@@ -139,6 +139,10 @@ body {
   text-decoration: line-through .3vh white;
 }
 
+.todoCont .todo .created {
+  font-size: 1.3vh;
+}
+
 .createColMenu {
   height: 100Vh;
   display: none;

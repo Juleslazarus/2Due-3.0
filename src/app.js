@@ -82,26 +82,42 @@ auth.onAuthStateChanged((cred) => {
 
 
 // ? get quickTodos:
+// auth.onAuthStateChanged((cred) => {
+//     let uid = cred.uid; 
+//     let dbRef = ref(db); 
+//     get(child(dbRef, `users/${uid}/quickTodos/`))
+//     .then((todo_item) => {
+//         todo_item.forEach((todoNode) => {
+//             let todoCont = document.querySelector('.todoCont'); 
+//             let quickTodoInput = document.querySelector('.quickTodoInput'); 
+//             let todo = document.createElement('h1'); 
+//             todo.classList.add('todo'); 
+//             todo.textContent = todoNode.val().todoText; 
+//             todoCont.appendChild(todo); 
+//             quickTodoInput.value = ''; 
+//             todo.addEventListener('click', (e) => {
+//                 e.preventDefault(); 
+//                 let removeTodo = e.target.textContent; 
+//                 remove(ref(db, `users/${uid}/quickTodos/${removeTodo}`))
+//                 todoCont.removeChild(todo); 
+//                 console.log(removeTodo); 
+//             })
+//         })
+//     })
+// })
+
 auth.onAuthStateChanged((cred) => {
     let uid = cred.uid; 
     let dbRef = ref(db); 
-    get(child(dbRef, `users/${uid}/quickTodos/`))
-    .then((todo_item) => {
-        todo_item.forEach((todoNode) => {
-            let todoCont = document.querySelector('.todoCont'); 
-            let quickTodoInput = document.querySelector('.quickTodoInput'); 
+    get(child(dbRef, `users/${uid}/quickTodos/`) )
+    .then((todoItems) => {
+        let todoCont = document.querySelector('.todoCont'); 
+        todoCont.innerHTML = ''; 
+        todoItems.forEach((todoNode) => {
             let todo = document.createElement('h1'); 
             todo.classList.add('todo'); 
             todo.textContent = todoNode.val().todoText; 
             todoCont.appendChild(todo); 
-            quickTodoInput.value = ''; 
-            todo.addEventListener('click', (e) => {
-                e.preventDefault(); 
-                let removeTodo = e.target.textContent; 
-                remove(ref(db, `users/${uid}/quickTodos/${removeTodo}`))
-                todoCont.removeChild(todo); 
-                console.log(removeTodo); 
-            })
         })
     })
 })

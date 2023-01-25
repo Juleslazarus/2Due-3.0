@@ -1,6 +1,6 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getDatabase, set, get, ref, remove, update, child, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"; 
+import { getDatabase, set, get, ref, remove, update, child, onValue, orderByChild, query } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"; 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js"; 
 
 
@@ -459,15 +459,20 @@ auth.onAuthStateChanged((cred) => {
                 collection.addEventListener('click', (e) => {
                     //? get todos from collection
                     let uid = cred.uid; 
-                    let dbRef = ref(db); 
-                    get(child(dbRef, `public_collections/${colKey}/todos`))
-                    .then((todo_item) => {
-                        todo_item.forEach((todoNode) => {
-                            let todo = document.createElement("h1"); 
+                    let dbRef = query(ref(db, `public_collections/${colKey}/todos`), orderByChild('created_at')); 
+                    onValue(dbRef, snapshot => {
+                        let todoCont = document.querySelector('.todoCont'); 
+                        todoCont.innerHTML = ''; 
+                        snapshot.forEach(doc => {
+                            console.log(doc.val().todoText)
+                            let todo = document.createElement('h1'); 
+                            let created = document.createElement('p'); 
                             todo.classList.add('todo'); 
-                            todo.textContent = todoNode.val().todoText; 
-                            let todoCont = document.querySelector('.todoCont'); 
-                            todoCont.appendChild(todo); 
+                            created.classList.add('created'); 
+                            todo.textContent = doc.val().todoText; 
+                            created.textContent = doc.val().created_at; 
+                            todo.appendChild(created);  
+                            todoCont.appendChild(todo);
                             todo.addEventListener('click', (e) => {
                                 e.preventDefault(); 
                                 let removeTodo = e.target.textContent; 
@@ -476,7 +481,24 @@ auth.onAuthStateChanged((cred) => {
                                 console.log(removeTodo); 
                             })
                         })
-                    } )
+                    })
+                    // get(child(dbRef, `public_collections/${colKey}/todos`))
+                    // .then((todo_item) => {
+                    //     todo_item.forEach((todoNode) => {
+                    //         let todo = document.createElement("h1"); 
+                    //         todo.classList.add('todo'); 
+                    //         todo.textContent = todoNode.val().todoText; 
+                    //         let todoCont = document.querySelector('.todoCont'); 
+                    //         todoCont.appendChild(todo); 
+                    //         todo.addEventListener('click', (e) => {
+                    //             e.preventDefault(); 
+                    //             let removeTodo = e.target.textContent; 
+                    //             remove(ref(db, `public_collections/${colKey}/todos/${removeTodo}`))
+                    //             todoCont.removeChild(todo); 
+                    //             console.log(removeTodo); 
+                    //         })
+                    //     })
+                    // } )
                     //? open and style todolist 
                     let sharedKeyTitle = document.querySelector('.sharedKeyTitle'); 
                     todoList.style.display = 'inline-block'
@@ -499,22 +521,23 @@ auth.onAuthStateChanged((cred) => {
                                     let usersName = userNode.val().name; 
                                     let todoText = `${usersName}: ${todoInput.value} `
                                     set(ref(db, `public_collections/${colKey}/todos/${todoText}`), {
-                                        todoText: todoText
+                                        todoText: todoText, 
+                                        created_at: Date()
                                     })
                                     .then(() => {
-                                        let todoCont = document.querySelector('.todoCont'); 
-                                        let todo = document.createElement('h1'); 
-                                        todo.classList.add('todo'); 
-                                        todo.textContent = todoText; 
-                                        todoCont.appendChild(todo); 
-                                        todoInput.value = ''; 
-                                        todo.addEventListener('click', (e) => {
-                                            e.preventDefault(); 
-                                            let removeTodo = e.target.textContent; 
-                                            remove(ref(db, `public_collections/${colKey}/todos/${removeTodo}`))
-                                            todoCont.removeChild(todo); 
-                                            console.log(removeTodo); 
-                                        })
+                                        // let todoCont = document.querySelector('.todoCont'); 
+                                        // let todo = document.createElement('h1'); 
+                                        // todo.classList.add('todo'); 
+                                        // todo.textContent = todoText; 
+                                        // todoCont.appendChild(todo); 
+                                        // todoInput.value = ''; 
+                                        // todo.addEventListener('click', (e) => {
+                                        //     e.preventDefault(); 
+                                        //     let removeTodo = e.target.textContent; 
+                                        //     remove(ref(db, `public_collections/${colKey}/todos/${removeTodo}`))
+                                        //     todoCont.removeChild(todo); 
+                                        //     console.log(removeTodo); 
+                                        // })
                                     })
                                 })
                             })
