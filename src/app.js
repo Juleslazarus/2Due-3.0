@@ -51,6 +51,9 @@ userBtn.addEventListener('click', (e) => {
         })
     })
 })
+logOutBtn.addEventListener("click", () => {
+    auth.signOut(); 
+})
 closeUserMenu.addEventListener('click', (e) => {
     e.preventDefault(); 
     userMenu.style.display = 'none'; 
